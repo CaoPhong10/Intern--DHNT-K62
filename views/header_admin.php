@@ -5,8 +5,8 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ADMIN</title>
-
+    <title>AdminLTE 3 | Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.css">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -29,7 +29,9 @@
     <link rel="stylesheet" href="../../../Content/admin/plugins/summernote/summernote-bs4.min.css">
     <link href="../../../Content/admin/dist/css/styleAdmin.css" rel="stylesheet" />
     <link href="../../../Content/fonts/fontawesome/css/all.min.css" rel="stylesheet" />
-    <link href="../../../Content/admin.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../Content/admin.css">
+    <script src="../../../Content/admin/dist/js/app.js"></script>
+    <script src="../../../Content/admin/dist/js/app1.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -107,13 +109,14 @@
                         
                         <li class="nav-item">
                             <a href="../USERS/Index.php" class="nav-link">
-                                <i class="nav-icon fas fa-user"></i>
+                                <i class="nav-icon ion ion-ios-people"></i>
                                 <p>
                                     Quản lí người dùng
                                 </p>
                             </a>
 
                         </li>
+                        
                         <li class="nav-item">
                             <a href="../BRAND/Index.php" class="nav-link">
                                 <i class="nav-icon fas fa-star"></i>
