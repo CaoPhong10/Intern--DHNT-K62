@@ -31,9 +31,7 @@ include("../../../header_admin.php");
         </dt>
 
         <dd>
-        <?php
-            echo $row['DONGIA'];
-            ?>
+        <?php echo number_format($row['DONGIA']); ?>
         </dd>
 
         <dt>
