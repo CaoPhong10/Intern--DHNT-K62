@@ -15,6 +15,7 @@ if (isset($_GET['search'])) {
                 JOIN thuonghieu ON thuonghieu.MATH = sanpham.MATH 
             WHERE TENSP LIKE '%$input%'               
                 OR DONGIA = '$input' 
+                OR MASP = '$input' 
                 OR TENTHUONGHIEU LIKE '%$input%'               
             ORDER BY sanpham.MASP ASC";
 } else {
@@ -23,7 +24,7 @@ if (isset($_GET['search'])) {
             FROM (sanpham 
                 JOIN loaisanpham ON sanpham.MALOAISP = loaisanpham.MALOAISP) 
                 JOIN thuonghieu ON thuonghieu.MATH = sanpham.MATH 
-            ORDER BY sanpham.MASP ASC";
+            ORDER BY sanpham.MASP DESC";
 }
 
 $result = mysqli_query($conn, $sql);
@@ -44,7 +45,7 @@ $list = mysqli_fetch_all($result, MYSQLI_NUM);
     <h2 style="text-align:center">Danh sách sản phẩm</h2>
 
     <div class="d-flex justify-content-between">
-        <a href="Create.php" class="btn btn-primary m-2">Tạo mới</a>
+        <a href="Create.php" class="btn btn-primary m-2"> Thêm mới</a>
         <form action="" method="get">
             <input type="text" name="input" value="<?php echo isset($_GET['input']) ? $_GET['input'] : ''; ?>" placeholder="Tìm kiếm">
             <input type="submit" value="Tìm" name="search" class="btn btn-primary">
@@ -81,11 +82,11 @@ $list = mysqli_fetch_all($result, MYSQLI_NUM);
             </tr>
         </form>
 
-        <?php
-        for ($i = 0; $i < $rowsPerPage; $i++) {
-            if ($offset + $i == count($list)) break;
-            $row = $list[$offset + $i];
-        ?>
+            <?php
+            for ($i = 0; $i < $rowsPerPage; $i++) {
+                if ($offset + $i == count($list)) break;
+                $row = $list[$offset + $i];
+            ?>
             <tr align = "center">
                 <td>
                     <?php echo $row[0] ?>
@@ -94,7 +95,7 @@ $list = mysqli_fetch_all($result, MYSQLI_NUM);
                     <?php echo $row[1] ?>
                 </td>
                 <td>
-                    <?php echo $row[2] ?>
+                    <?php echo number_format($row[2]); ?>
                 </td>
                 <td>
                     <?php echo $row[3] ?>
@@ -110,17 +111,18 @@ $list = mysqli_fetch_all($result, MYSQLI_NUM);
                 <img class="" style="max-width: 100%; height: auto;" src="<?php $anh = $row[6]; echo "../../../Images/" . $anh ?>">
             </td>
 
-                <td style="min-width: 120px;">
-                    <a href="./Edit.php?maSP=<?php echo $row[0] ?>">
-                        <img src="../../../Images/edit.png" alt="Edit" class="icon" width="30px">
-                    </a>
-                    <a href="./Details.php?maSP=<?php echo $row[0] ?>">
-                        <img src="../../../Images/details.png" alt="Detail" class="icon" width="30px">
-                    </a>
-                    <a href="./Delete.php?maSP=<?php echo $row[0] ?>">
-                        <img src="../../../Images/delete.png" alt="Delete" class="icon" width="30px">
-                    </a>
-                </td>
+           <td style="min-width: 120px; display: flex; flex-direction: column;">
+                <a href="./Edit.php?maSP=<?php echo $row[0] ?>">
+                    <button class='btn btn-success btn-sm edit btn-flat'><i class='fa fa-edit'></i> Sửa</button>
+                </a>
+                <a href="./Details.php?maSP=<?php echo $row[0] ?>">
+                    <button class='btn btn-info btn-sm info btn-flat'><i class='fa fa-circle-info'></i> Chi tiết</button>
+                </a>
+                <a href="./Delete.php?maSP=<?php echo $row[0] ?>">
+                    <button class='btn btn-danger btn-sm delete btn-flat'><i class='fa fa-trash'></i> Xoá</button>
+                </a>
+            </td>
+
             </tr>
         <?php
         }
@@ -173,7 +175,12 @@ $list = mysqli_fetch_all($result, MYSQLI_NUM);
         ?>
     </div>
 </div>
-
+<style>
+    .btn-sm {
+    width: 70%; /* Điều chỉnh chiều rộng cố định cho các nút */
+    margin-bottom: 5px; /* Khoảng cách giữa các nút */
+}
+    </style>
 <?php
 include("../../../footer_admin.php");
 ?>

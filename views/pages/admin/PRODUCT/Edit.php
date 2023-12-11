@@ -67,7 +67,7 @@ include("../../../header_admin.php");
                                 <label class="control-label col-md-2">Đơn giá</label>
                                 <div class="col-md-10">
                                         <input type="text" class="form-control" name="DONGIA" 
-                                                value="<?php echo $row['DONGIA'] ?>">
+                                                value="<?php echo number_format($row['DONGIA']); ?>">
                                 </div>
                         </div>
 
@@ -160,3 +160,7 @@ include("../../../header_admin.php");
                 <a href="./Index.php" class="btn btn-primary">Trở về trang danh sách</a>
         </div>
 </div>
+
+<?php
+include("../../../footer_admin.php");
+?>

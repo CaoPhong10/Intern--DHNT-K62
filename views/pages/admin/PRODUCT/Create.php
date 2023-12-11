@@ -65,7 +65,7 @@ include("../../../header_admin.php");
                         </div>
 
                         <div class="form-group">
-                                <label class="control-label col-md-2">Mô tả </label>
+                                <label class="control-label col-md-2">Mô tả</label>
                                 <div class="col-md-10">
                                         <input type="text" class="form-control" name="MOTA" required>
                                 </div>
@@ -124,7 +124,7 @@ include("../../../header_admin.php");
 
                         <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Tạo mới" class="btn btn-primary" name="taomoi" />
+                                        <input type="submit" value="Thêm sản phẩm" class="btn btn-primary" name="taomoi" />
                                 </div>
                         </div>
                 </div>

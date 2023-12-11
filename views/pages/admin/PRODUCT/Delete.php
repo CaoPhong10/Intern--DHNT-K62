@@ -41,9 +41,7 @@ include("../../../header_admin.php");
                 </dt>
 
                 <dd>
-                        <?php
-                        echo $row['DONGIA'];
-                        ?>
+                <?php echo number_format($row['DONGIA']); ?>
                 </dd>
 
                 <dt>
@@ -115,3 +113,6 @@ include("../../../header_admin.php");
                 </div>
         </form>
 </div>
+<?php
+include("../../../footer_admin.php");
+?>
