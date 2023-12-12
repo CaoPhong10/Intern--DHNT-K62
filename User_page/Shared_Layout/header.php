@@ -90,13 +90,24 @@
                                 <a href="../GIOHANG/GioHang.php" class="widget-view">
                                     <div class="icon-area">
                                         <i class="fa fa-shopping-cart"></i>
+                                        <?php
+                                        if (isset($_SESSION["MAND"])) {
 
+                                            $query = "SELECT COUNT(MASP) AS SoLuong FROM giohang WHERE MAND = '{$_SESSION['MAND']}'";
+                                            $result = mysqli_query($conn, $query);
+                                            $row = mysqli_fetch_assoc($result);
+                                            $_SESSION['SLGH'] = $row['SoLuong'];
+                                            $_SESSION['SLGH'] == "" ? 0 : $_SESSION['SLGH'];
+                                            echo '<span class="notify" id="CartCount">' . $_SESSION['SLGH'] . '</span>';
+
+                                        }
+                                        ?>
                                     </div>
                                     <small class="text"> Giỏ hàng </small>
                                 </a>
                             </div>
                             <div class="widget-header mr-3">
-                                <a  href="#" class="widget-view">
+                                <a  href="../KHACHHANG/detail.php" class="widget-view">
                                     <div class="icon-area">
                                         <i class="fa fa-user"></i>
 
@@ -107,7 +118,7 @@
                             <?php if (isset($_SESSION["MAND"])): ?>
                                 <!-- Nếu đã đăng nhập -->
                                 <div class="widget-header mr-3">
-                                    <a href="#" class="widget-view">
+                                    <a href="../AUTHENTICATION/Dangxuat.php" class="widget-view">
                                         <div class="icon-area">
                                             <i class="fa fa-sign-out-alt"></i>
                                         </div>
@@ -117,7 +128,7 @@
                             <?php else: ?>
                                 <!-- Nếu chưa đăng nhập -->
                                 <div class="widget-header mr-3">
-                                    <a href="#" class="widget-view" id="DangNhapBtn">
+                                    <a href="../AUTHENTICATION/Dangnhap.php" class="widget-view" id="DangNhapBtn">
                                         <div class="icon-area">
                                             <i class="fa fa-sign-in-alt"></i>
                                         </div>
@@ -125,7 +136,7 @@
                                     </a>
                                 </div>
                                 <div class="widget-header mr-3">
-                                    <a href="#" class="widget-view" id="DangKyBtn">
+                                    <a href="../AUTHENTICATION/Dangky.php" class="widget-view" id="DangKyBtn">
                                         <div class="icon-area">
                                             <i class="fa fa-user-plus"></i>
                                         </div>
