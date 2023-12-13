@@ -32,6 +32,11 @@
     <link rel="stylesheet" href="../../../Content/admin.css">
     <script src="../../../Content/admin/dist/js/app.js"></script>
     <script src="../../../Content/admin/dist/js/app1.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.css">
+    <!-- Bootstrap 3.3.7 từ CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
