@@ -63,7 +63,7 @@ $totalRowsResult = mysqli_query($conn, $totalRowsQuery);
 $totalRowsData = mysqli_fetch_assoc($totalRowsResult);
 $numRows = $totalRowsData['totalRows'];
 
-$rowsPerPage = 5; // số hàng trên mỗi trang
+$rowsPerPage =1 ; // số hàng trên mỗi trang
 
 if (!isset($_GET['page'])) {
     $_GET['page'] = 1;
@@ -85,7 +85,7 @@ $list = mysqli_fetch_all($result, MYSQLI_NUM);
     <div class="d-flex justify-content-between">
         <a></a>
         <form action="" method="get">
-            <input type="text" name="input" value="<?php echo $input; ?>" placeholder="Tìm kiếm">
+            <input type="text" name="input" value="<?php echo isset($_GET['input']) ? $_GET['input'] : ''; ?>" placeholder="Tìm kiếm">
             <input type="submit" value="Tìm" name="search" class="btn btn-primary">
         </form>
     </div>
@@ -143,50 +143,58 @@ $list = mysqli_fetch_all($result, MYSQLI_NUM);
     </table>
 
     <div style="display: flex; width: 100%;">
-        <?php
-        // gắn thêm nút back
-        if ($_GET['page'] > 1)
-            echo "<a class='btn btn-primary' href='" . $_SERVER['PHP_SELF'] . "?page=" . ($_GET['page'] - 1) . "&input=" . $input . "'>Back</a> ";
-        else
-            echo "<button class='btn btn-default' disabled>Back</button>";
-        // Trang đầu
-        echo "<a class=' btn btn-primary' href='"
-            . $_SERVER['PHP_SELF'] . "?page=" . "1" . "&input=" . $input . "'>Trang đầu" . "</a> ";
-        // tổng số trang
-        $maxPage = ($numRows % $rowsPerPage) ? floor($numRows / $rowsPerPage) + 1 : floor($numRows / $rowsPerPage);
-        $delta = 3; // số lượng trang hiển thị 2 bên
-        echo "<div style='display: flex; justify-content: center; align-items: center; flex-grow: 1;'>";
-        if ($maxPage < 10) {
-            for ($i = 1; $i <= $maxPage; $i++) // tạo link tương ứng tới các trang
-            {
-                if ($i == $_GET['page'])
-                    echo '<b class="btn btn-default" >Trang ' . $i . '</b> '; // trang hiện tại
-                else
-                    echo "<a class=' btn btn-primary' href='"
-                        . $_SERVER['PHP_SELF'] . "?page=" . $i . "&input=" . $input . "'>" . $i . "</a> ";
-            }
-        } else {
-            for ($i = $_GET['page'] - $delta; $i <= $_GET['page'] + $delta; $i++) // tạo link tương ứng tới các trang
-            {
-                if ($i == $_GET['page'])
-                    echo '<b class="btn btn-default w-40" >Trang ' . $i . '</b> '; // trang hiện tại
-                else if ($i > 0 && $i <= $maxPage)
-                    echo "<a class=' btn btn-primary w-40' href='"
-                        . $_SERVER['PHP_SELF'] . "?page=" . $i . "&input=" . $input . "'>" . $i . "</a> ";
+    <?php
+
+
+    // gắn thêm nút back
+    if ($_GET['page'] > 1) {
+        echo "<a class='btn btn-primary' href='" . $_SERVER['PHP_SELF'] . "?page=" . ($_GET['page'] - 1) . "&search=true&input=" . urlencode($input) . "'>Back</a> ";
+    } else {
+        echo "<button class='btn btn-default' disabled>Back</button>";
+    }
+
+    // Trang đầu
+    echo "<a class='btn btn-primary' href='" . $_SERVER['PHP_SELF'] . "?page=1&search=true&input=" . urlencode($input) . "'>Trang đầu</a> ";
+
+    // Tổng số trang
+    $maxPage = ($numRows % $rowsPerPage) ? floor($numRows / $rowsPerPage) + 1 : floor($numRows / $rowsPerPage);
+    $delta = 3; // số lượng trang hiển thị 2 bên
+
+    echo "<div style='display: flex; justify-content: center; align-items: center; flex-grow: 1;'>";
+
+    if ($maxPage < 10) {
+        for ($i = 1; $i <= $maxPage; $i++) {
+            // tạo link tương ứng tới các trang
+            if ($i == $_GET['page']) {
+                echo '<b class="btn btn-default">Trang ' . $i . '</b> '; //trang hiện tại
+            } else {
+                echo "<a class='btn btn-primary' href='" . $_SERVER['PHP_SELF'] . "?page=" . $i . "&search=true&input=" . urlencode($input) . "'>" . $i . "</a> ";
             }
         }
-        echo "</div>";
-        // Trang cuối
-        echo "<a class=' btn btn-primary' href='"
-            . $_SERVER['PHP_SELF'] . "?page=" . $maxPage . "&input=" . $input . "'>Trang cuối" . "</a> ";
-        // gắn thêm nút Next
-        if ($_GET['page'] < $maxPage)
-            echo "<a class='btn btn-primary' href='" . $_SERVER['PHP_SELF'] . "?page="
-                . ($_GET['page'] + 1) . "&input=" . $input . "'>Next</a>";
-        else
-            echo "<button class='btn btn-default' disabled>Next</button>";
-        ?>
-    </div>
+    } else {
+        for ($i = $_GET['page'] - $delta; $i <= $_GET['page'] + $delta; $i++) {
+            // tạo link tương ứng tới các trang
+            if ($i == $_GET['page']) {
+                echo '<b class="btn btn-default w-40">Trang ' . $i . '</b> '; //trang hiện tại
+            } else if ($i > 0 && $i <= $maxPage) {
+                echo "<a class='btn btn-primary w-40' href='" . $_SERVER['PHP_SELF'] . "?page=" . $i . "&search=true&input=" . urlencode($input) . "'>" . $i . "</a> ";
+            }
+        }
+    }
+
+    echo "</div>";
+
+    // Trang cuối
+    echo "<a class='btn btn-primary' href='" . $_SERVER['PHP_SELF'] . "?page=" . $maxPage . "&search=true&input=" . urlencode($input) . "'>Trang cuối</a> ";
+
+    // gắn thêm nút Next
+    if ($_GET['page'] < $maxPage) {
+        echo "<a class='btn btn-primary' href='" . $_SERVER['PHP_SELF'] . "?page=" . ($_GET['page'] + 1) . "&search=true&input=" . urlencode($input) . "'>Next</a>";
+    } else {
+        echo "<button class='btn btn-default' disabled>Next</button>";
+    }
+    ?>
+</div>
 
 </div>
 <?php
