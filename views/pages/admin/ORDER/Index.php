@@ -63,7 +63,7 @@ $totalRowsResult = mysqli_query($conn, $totalRowsQuery);
 $totalRowsData = mysqli_fetch_assoc($totalRowsResult);
 $numRows = $totalRowsData['totalRows'];
 
-$rowsPerPage =1 ; // số hàng trên mỗi trang
+$rowsPerPage = 5 ; // số hàng trên mỗi trang
 
 if (!isset($_GET['page'])) {
     $_GET['page'] = 1;

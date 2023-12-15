@@ -28,7 +28,7 @@ if (isset($_GET['search'])) {
 }
 
 $result = mysqli_query($conn, $sql);
-$rowsPerPage = 1; //số mẩu tin trên mỗi trang
+$rowsPerPage = 10; //số mẩu tin trên mỗi trang
 
 if (!isset($_GET['page'])) {
     $_GET['page'] = 1;
