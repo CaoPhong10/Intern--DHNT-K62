@@ -22,6 +22,7 @@
     <link href="../../Content/css/ui.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/css/responsive.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/css/toast.css" rel="stylesheet" type="text/css" />
+    <link href="../../Content/snow.css" rel="stylesheet" type="text/css" />
 
     <!-- custom javascript -->
     <script>

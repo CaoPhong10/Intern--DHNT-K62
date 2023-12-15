@@ -1,5 +1,43 @@
 <?php include '../Shared_Layout/header.php' ?>
 <title>Trang chủ</title>
+<div class="snowflakes" aria-hidden="true">
+  <div class="snowflake">
+    <div class="inner">❅</div>
+  </div>
+  <div class="snowflake">
+    <div class="inner">❅</div>
+  </div>
+  <div class="snowflake">
+    <div class="inner">❅</div>
+  </div>
+  <div class="snowflake">
+    <div class="inner">❅</div>
+  </div>
+  <div class="snowflake">
+    <div class="inner">❅</div>
+  </div>
+  <div class="snowflake">
+    <div class="inner">❅</div>
+  </div>
+  <div class="snowflake">
+    <div class="inner">❅</div>
+  </div>
+  <div class="snowflake">
+    <div class="inner">❅</div>
+  </div>
+  <div class="snowflake">
+    <div class="inner">❅</div>
+  </div>
+  <div class="snowflake">
+    <div class="inner">❅</div>
+  </div>
+  <div class="snowflake">
+    <div class="inner">❅</div>
+  </div>
+  <div class="snowflake">
+    <div class="inner">❅</div>
+  </div>
+</div>
 <div class="container">
 
 
@@ -228,7 +266,7 @@
                                     <?= $rows['TENSP'] ?>
                                 </a>
                                 <div class="price mt-1">
-                                    <?= $rows['DONGIA'] ?>
+                                    <?= number_format($rows['DONGIA']) . '₫' ?>
                                 </div>
                             </figcaption>
                         </div>

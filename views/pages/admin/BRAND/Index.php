@@ -9,26 +9,18 @@ if (isset($_GET['search'])) {
         $input = '';
     }
 
-    $sql = "SELECT MASP, TENSP, DONGIA, SOLUONG, TENLOAISP, TENTHUONGHIEU , ANH
-            FROM (sanpham 
-                JOIN loaisanpham ON sanpham.MALOAISP = loaisanpham.MALOAISP) 
-                JOIN thuonghieu ON thuonghieu.MATH = sanpham.MATH 
-            WHERE TENSP LIKE '%$input%'               
-                OR DONGIA = '$input' 
-                OR MASP = '$input' 
-                OR TENTHUONGHIEU LIKE '%$input%'               
-            ORDER BY sanpham.MASP ASC";
+    $sql = "SELECT * FROM THUONGHIEU
+            WHERE TENTHUONGHIEU LIKE '%$input%'                               
+                OR QUOCGIA LIKE '%$input%'              
+            ORDER BY thuonghieu.math ASC";
+   
 } else {
     $input = '';
-    $sql = "SELECT MASP, TENSP, DONGIA, SOLUONG, TENLOAISP, TENTHUONGHIEU , ANH 
-            FROM (sanpham 
-                JOIN loaisanpham ON sanpham.MALOAISP = loaisanpham.MALOAISP) 
-                JOIN thuonghieu ON thuonghieu.MATH = sanpham.MATH 
-            ORDER BY sanpham.MASP DESC";
+    $sql = "SELECT * FROM THUONGHIEU ORDER BY thuonghieu.math";
 }
 
 $result = mysqli_query($conn, $sql);
-$rowsPerPage = 10; //số mẩu tin trên mỗi trang
+$rowsPerPage = 5; // số mẩu tin trên mỗi trang
 
 if (!isset($_GET['page'])) {
     $_GET['page'] = 1;
@@ -42,8 +34,6 @@ $list = mysqli_fetch_all($result, MYSQLI_NUM);
 ?>
 
 <div class="container">
-    <h2 style="text-align:center">Danh sách sản phẩm</h2>
-
     <div class="d-flex justify-content-between">
         <a href="Create.php" class="btn btn-primary m-2"> Thêm mới</a>
         <form action="" method="get">
@@ -52,83 +42,31 @@ $list = mysqli_fetch_all($result, MYSQLI_NUM);
         </form>
     </div>
     <table class="table">
-        <form action="" method="post">
-            <!-- Code để sắp xếp -->
-            <tr align = "center">
-                <th>
-                    Mã sản phẩm
-                </th>
-                <th>
-                    Tên sản phẩm
-                </th>
-                <th>
-                    Đơn giá
-                </th>
-                <th>
-                    Số lượng
-                </th>
-                <th>
-                    Loại sản phẩm
-                </th>
-                <th>
-                    Thương hiệu
-                </th>
-                <th>
-                    Ảnh
-                </th>
-                <th>
-                    Chức năng
-                </th>
-            </tr>
-        </form>
-
-            <?php
-            for ($i = 0; $i < $rowsPerPage; $i++) {
-                if ($offset + $i == count($list)) break;
-                $row = $list[$offset + $i];
+        <tr align="center">
+            <th>Mã thương hiệu</th>
+            <th>Tên thương hiệu</th>
+            <th>Quốc gia</th>
+            <th>Chức năng</th>
+        </tr>
+        <?php
+        for ($i = 0; $i < $rowsPerPage; $i++) {
+            if ($offset + $i == count($list)) break;
+            $row = $list[$offset + $i];
             ?>
-            <tr align = "center">
+            <tr align="center">
+                <td><?php echo $row[0] ?></td>
+                <td><?php echo $row[1] ?></td>
+                <td><?php echo $row[2] ?></td>
                 <td>
-                    <?php echo $row[0] ?>
+                    <a href="./Edit.php?maTH=<?php echo $row[0] ?>"><button class='btn btn-success btn-sm edit btn-flat'><i class='fa fa-edit'></i> Sửa</button></a>
+                    <a href="./Delete.php?maTH=<?php echo $row[0] ?>"><button class='btn btn-danger btn-sm delete btn-flat'><i class='fa fa-trash'></i> Xoá</button></a>
                 </td>
-                <td>
-                    <?php echo $row[1] ?>
-                </td>
-                <td>
-                    <?php echo number_format($row[2]); ?>
-                </td>
-                <td>
-                    <?php echo $row[3] ?>
-                </td>
-            
-                <td>
-                    <?php echo $row[4] ?>
-                </td>
-                <td>
-                    <?php echo $row[5] ?>
-                </td>
-                <td style="width: 10%;">
-                <img class="" style="max-width: 100%; height: auto;" src="<?php $anh = $row[6]; echo "../../../Images/" . $anh ?>">
-            </td>
-
-           <td style="min-width: 120px; display: flex; flex-direction: column;">
-                <a href="./Edit.php?maSP=<?php echo $row[0] ?>">
-                    <button class='btn btn-success btn-sm edit btn-flat'><i class='fa fa-edit'></i> Sửa</button>
-                </a>
-                <a href="./Details.php?maSP=<?php echo $row[0] ?>">
-                    <button class='btn btn-info btn-sm info btn-flat'><i class='fa fa-circle-info'></i> Chi tiết</button>
-                </a>
-                <a href="./Delete.php?maSP=<?php echo $row[0] ?>">
-                    <button class='btn btn-danger btn-sm delete btn-flat'><i class='fa fa-trash'></i> Xoá</button>
-                </a>
-            </td>
-
             </tr>
         <?php
         }
         ?>
     </table>
-   <!-- Hiển thị phân trang -->
+    <!-- Hiển thị phân trang -->
 <div style="display: flex; width: 100%;">
     <?php
     $numRows = count($list);
@@ -182,12 +120,8 @@ $list = mysqli_fetch_all($result, MYSQLI_NUM);
     }
     ?>
 </div>
-<style>
-    .btn-sm {
-    width: 70%; /* Điều chỉnh chiều rộng cố định cho các nút */
-    margin-bottom: 5px; /* Khoảng cách giữa các nút */
-}
-    </style>
+</div>
+
 <?php
 include("../../../footer_admin.php");
 ?>
