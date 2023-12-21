@@ -2,15 +2,17 @@
 require("../../../db_connect.php");
 
 $maSP = $_GET['maSP'];
-$sql = "SELECT TENSP, DONGIA, SOLUONG, MOTA, ANH, TENLOAISP, TENTHUONGHIEU, HEDIEUHANH
+$sql = "SELECT TENSP, DONGIA, SOLUONG, MOTA, ANH, TENLOAISP, TENTHUONGHIEU, HEDIEUHANH, thongsokythuat.MATSKT
 FROM ((sanpham join loaisanpham on sanpham.MALOAISP = loaisanpham.MALOAISP) join thuonghieu on
 sanpham.MATH = thuonghieu.MATH) join thongsokythuat on sanpham.MATSKT=thongsokythuat.MATSKT
 WHERE sanpham.MASP = '$maSP'";
-$result = mysqlI_query($conn, $sql);
+$result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
 if (isset($_POST["xoa"])) {
         $sql = "DELETE FROM sanpham WHERE MASP = '$maSP'";
+        $result = mysqli_query($conn, $sql);
+        $sql = "DELETE FROM thongsokythuat WHERE MATSKT = '{$row['MATSKT']}'";
         $result = mysqli_query($conn, $sql);
         header('Location:Index.php');
 

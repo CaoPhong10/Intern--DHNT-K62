@@ -14,11 +14,11 @@ $tenLoaiSP = $tenLoaiSP['TENLOAISP'];
             
             <div class="form-group">
                 <label>Mã loại sản phẩm</label>
-                <input type="text" class="form-control ml-2"  value="<?php echo $maLoaiSP ?>" disabled name="maLoaiSP" style="width:52%">
+                <input type="text" class="form-control textfile"  value="<?php echo $maLoaiSP ?>" disabled name="maLoaiSP" style="width:52%">
             </div>
             <div class="form-group">
                 <label>Tên loại</label>
-                <input type="text" class="form-control ml-2"name="tenLoaiSP" disabled value="<?php echo $tenLoaiSP?>" style="width:52%">
+                <input type="text" class="form-control textfile"name="tenLoaiSP" disabled value="<?php echo $tenLoaiSP?>" style="width:52%">
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10"> 
