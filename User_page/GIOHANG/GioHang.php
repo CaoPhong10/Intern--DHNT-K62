@@ -48,7 +48,6 @@ include '../Shared_Layout/header.php';
                                 <td>
                                     <input type="checkbox" class="col-9 sanpham-checkbox pt-4" style="height: 20px"
                                         id="sanpham" data-idsp="<?php echo $row['MASP']?>" onchange="calculateTotalPrice()" />
-
                                 </td>
                                 <td>
                                     <figure class="itemside">

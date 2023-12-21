@@ -24,6 +24,10 @@ if (isset($_POST['selectedProducts'])) {
         echo "Lỗi trong quá trình thực thi câu truy vấn.";
     }
 }
+
+$_SESSION['tongtien'] = $tongtien;
+
+
 ?>
 
 
@@ -128,4 +132,5 @@ if (isset($_POST['selectedProducts'])) {
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
-<?php include '../Shared_Layout/footer.php'; ?>
+<?php 
+include '../Shared_Layout/footer.php'; ?>

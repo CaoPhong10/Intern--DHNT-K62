@@ -1,4 +1,3 @@
-
 <?php 
 
 include("../../db_connect.php");
@@ -27,7 +26,7 @@ $mahd = LayMaHoaDon($conn);
 
 //Thêm vào bảng hóa đơn
 mysqli_query($conn,"INSERT INTO `hoadon` (`MAHOADON`, `MAND`, `NGAYTAO`, `TINHTRANGDONHANG`) 
-VALUES ('$mahd', '{$_SESSION['MAND']}', NOW(), 'Đang xử lí');");
+VALUES ('$mahd', '{$_SESSION['MAND']}', NOW(), 'Đang xử lý');");
 
 
 $selectedProducts = $_SESSION['selectedProducts'];
@@ -47,7 +46,7 @@ foreach ($selectedProducts as $product) {
     $tinhtrangdonhang = $row['TINHTRANGDONHANG'];
     
     // Nếu tình trạng đơn hàng là "Đã giao thành công" thì trừ số lượng sản phẩm
-    if ($tinhtrangdonhang == "Đã đặt hàng" || $tinhtrangdonhang == "Đang xử lý" || $tinhtrangdonhang == "Giao hàng thành công") {
+    if ($tinhtrangdonhang == "Đang giao hàng" || $tinhtrangdonhang == "Đang xử lý" || $tinhtrangdonhang == "Giao hàng thành công") {
         $soluongmoi = $soluonghientai - $soluong;
         
         // Cập nhật số lượng sản phẩm trong bảng SANPHAM
@@ -66,9 +65,26 @@ foreach ($selectedProducts as $product) {
     mysqli_query($conn,"INSERT INTO `chitiethoadon` (`MAHOADON`, `MASP`, `SOLUONG`, `DONGIAXUAT`) 
 VALUES ('$mahd', '$masp', $soluong,  $dongia)");
 }
-
-
+    // Xóa sản phẩm đã thanh toán khỏi bảng giỏ hàng
+foreach ($selectedProducts as $product) {
+    $masp = $product['MASP'];
+    mysqli_query($conn, "DELETE FROM giohang WHERE MASP = '$masp' AND MAND = '{$_SESSION['MAND']}'");
+}
 ?>
+<script>
+   // Xóa sản phẩm đã thanh toán khỏi danh sách sản phẩm được lưu trong localStorage
+var selectedProducts = JSON.parse(localStorage.getItem("selectedProducts"));
+var updatedProducts = selectedProducts.filter(function(product) {
+    return !isProductPaid(product.MASP);
+});
+localStorage.setItem("selectedProducts", JSON.stringify(updatedProducts));
+
+// Kiểm tra xem sản phẩm có được thanh toán hay không
+function isProductPaid(masp) {
+    // Thực hiện kiểm tra sản phẩm đã được thanh toán hay chưa
+    // Trả về true nếu sản phẩm đã được thanh toán, ngược lại trả về false
+}
+</script>
 <title>Đặt hàng thành công</title>
 
 <head>
