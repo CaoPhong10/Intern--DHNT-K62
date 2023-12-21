@@ -33,7 +33,7 @@
     <script src="../../../Content/admin/dist/js/app.js"></script>
     <script src="../../../Content/admin/dist/js/app1.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.css">
-    <!-- Bootstrap 3.3.7 từ CDN -->
+
     
 </head>
 
