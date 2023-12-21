@@ -41,7 +41,7 @@ if (isset($_POST['EMAIL']) && isset($_POST['MATKHAU'])) {
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION['SLGH'] = $row['total'];
 
-                header("Location: ../HOME/index.php");
+                header("Location: ../HOME/Index.php");
                 exit();
             } else {
                 header("Location: DangNhap.php?error=Sai tên đăng nhập hoặc mật khẩu&$user_data");

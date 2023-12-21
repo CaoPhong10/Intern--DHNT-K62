@@ -51,14 +51,12 @@ if (isset($_POST['selectedTinh'])) {
                     $rowMaHuyen = $resultMaHuyen->fetch_assoc();
                     $maHuyen = $rowMaHuyen['maHuyen'];
 
-                    $sqlXa = "SELECT tenXa, maXa FROM xa WHERE maHuyen = '$maHuyen'";
+                    $sqlXa = "SELECT tenXa FROM xa WHERE maHuyen = '$maHuyen'";
                     $resultXa = $conn->query($sqlXa);
 
                     $xaList = array();
                     if ($resultXa->num_rows > 0) {
                         while ($rowXa = $resultXa->fetch_assoc()) {
-                            $maXa = $rowXa["maXa"];
-                            $tenXa = $rowXa["tenXa"];
                             $xaList[] = $rowXa["tenXa"];
                         }
                     }
@@ -69,7 +67,7 @@ if (isset($_POST['selectedTinh'])) {
     }
 }
 
-$conn->close();
+
 ?>
 <title>Đăng ký</title>
 <div class="row justify-content-md-center mt-5 mb-5">
@@ -79,7 +77,7 @@ $conn->close();
                 <h4 class="text-center">Đăng ký</h4>
             </div>
             <div class="card-body">
-                <form method="post" action="DangKy_Check.php">
+                <form method="POST" action="DangKy_Check.php">
                     <?php if (isset($_GET['error'])) { ?>
                         <div class="alert alert-danger">
                             <?php echo $_GET['error']; ?>
@@ -131,15 +129,13 @@ $conn->close();
                             <!-- Validation message here -->
                         </div>
 
-                        
-
                         <div class="form-group">
                             <label for="EMAIL">Địa chỉ email</label>
                             <input type="email" class="form-control" name="EMAIL" id="EMAIL" value="<?php if (isset($_GET['EMAIL']))
                             echo $_GET['EMAIL'] ?>">
                             <!-- Validation message here -->
                         </div>
-          
+                        
                         <div class="form-group">
                             <label for="Tinh">Tỉnh</label>
                             <select class="form-control" id="selectTinh">
@@ -151,7 +147,7 @@ $conn->close();
                         </div>
 
                         <div class="form-group">
-                            <label for="Huyen">Huyện/Thành Phố</label>
+                            <label for="Huyen">Huyện</label>
                             <select class="form-control" id="selectHuyen">
                                 <option value="">-- Chọn Huyện --</option>
                                 <?php foreach ($huyenList as $huyen): ?>
@@ -161,14 +157,14 @@ $conn->close();
                         </div>
 
                         <div class="form-group">
-                            <label for="Xa">Xã/Phường</label>
+                            <label for="Xa">Xã</label>
                             <select class="form-control" id="selectXa" name="tenXa">
                                 <option value="">-- Chọn Xã --</option>
                                 <?php foreach ($xaList as $xa): ?>
                                     <option  id="tenXa" value="<?php echo $xa; ?>"><?php echo $xa; ?></option>
                                 <?php endforeach ?>
                             </select>
-                        </div>
+                        </div>  
 
                         <div class="form-group">
                             <input type="submit" value="Đăng ký" class="btn btn-primary btn-block" id="register-button">
