@@ -127,14 +127,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="../SPECIFICATIONS/Index.php" class="nav-link">
-                                <i class="nav-icon fas fa-info"></i>
-                                <p>
-                                    Quản lí thông số kỹ thuật
-                                </p>
-                            </a>
-                        </li>
+                        
                         <li class="nav-header">Thống kê</li>
                         <li class="nav-item">
                             <a href="../STATISTICSOFREVENUE/Index.php" class="nav-link">

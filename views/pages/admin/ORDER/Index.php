@@ -255,6 +255,7 @@ include("../../../footer_admin.php");
                 <option value="Đang xử lý">Đang xử lý</option>
                 <option value="Đang giao hàng">Đang giao hàng</option>
                 <option value="Giao hàng thành công">Giao hàng thành công</option>
+                <option value="Giao hàng thất bại">Giao hàng thất bại</option>
             </select>
         </div>
       </div>

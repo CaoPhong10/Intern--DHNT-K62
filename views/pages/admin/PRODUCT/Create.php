@@ -10,7 +10,7 @@ $maSP = $maSP + 1;
 $maSP = "SP" . str_pad($maSP, 6, "0", STR_PAD_LEFT);
 
 if (isset($_POST["taomoi"])) {
-        $target_dir = "../../Images/";
+        $target_dir = "../../../Images/";
         $target_file = $target_dir . basename($_FILES["Avatar"]["name"]);
         $check = getimagesize($_FILES["Avatar"]["tmp_name"]);
         if ($check !== false) {
