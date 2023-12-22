@@ -27,7 +27,7 @@ if (isset($_POST['EMAIL']) && isset($_POST['MATKHAU'])) {
 
         if (mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
-            if ($row['MATKHAU'] === $matkhau && $row['EMAIL'] === $email) {
+            if ($row['MATKHAU'] === $matkhau && $row['EMAIL'] === $email && $row['ISADMIN'] ==0) {
                 $_SESSION['TENND'] = $row['TENND'];
                 $_SESSION['MAND'] = $row['MAND'];
 				$_SESSION['GIOITINH'] = $row['GIOITINH'];
@@ -43,7 +43,17 @@ if (isset($_POST['EMAIL']) && isset($_POST['MATKHAU'])) {
 
                 header("Location: ../HOME/Index.php");
                 exit();
-            } else {
+            }elseif($row['MATKHAU'] === $matkhau && $row['EMAIL'] === $email && $row['ISADMIN'] ==1){
+                $_SESSION['TENND'] = $row['TENND'];
+                $_SESSION['MAAD'] = $row['MAND'];
+				$_SESSION['GIOITINH'] = $row['GIOITINH'];
+                $_SESSION['SDT'] = $row['SDT'];
+                $_SESSION['DIACHI'] = $row['DIACHI'];
+                $_SESSION['EMAIL'] = $row['EMAIL'];
+				$_SESSION['maXa'] = $row['maXa'];
+                header("Location: ../../views/pages/admin/HOME/Index.php");
+            } 
+            else {
                 header("Location: DangNhap.php?error=Sai tên đăng nhập hoặc mật khẩu&$user_data");
                 exit();
             }

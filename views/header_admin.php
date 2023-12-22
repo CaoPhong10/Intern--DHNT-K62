@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['MAAD']))
+{
+    header("Location: ../../../../User_page/AUTHENTICATION/DangNhap.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
