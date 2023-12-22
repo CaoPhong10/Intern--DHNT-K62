@@ -16,7 +16,7 @@ $maTSKT = (int) substr($row['MASP'], 4);
 $maTSKT = $maTSKT + 1;
 $maTSKT = "TSKT" . str_pad($maTSKT, 3, "0", STR_PAD_LEFT);
 if (isset($_POST["taomoi"])) {
-        $target_dir = "../../../Images";
+        $target_dir = "../../../Images/";
         $target_file = $target_dir . basename($_FILES["Avatar"]["name"]);
         $check = getimagesize($_FILES["Avatar"]["tmp_name"]);
         $ngayTao = date("Y-m-d H:i:s");
