@@ -19,6 +19,7 @@ if (isset($_POST["taomoi"])) {
         $target_dir = "../../../Images";
         $target_file = $target_dir . basename($_FILES["Avatar"]["name"]);
         $check = getimagesize($_FILES["Avatar"]["tmp_name"]);
+        $ngayTao = date("Y-m-d H:i:s");
         if ($check !== false) {
                 
                 $sql = "INSERT INTO thongsokythuat VALUES ('$maTSKT', '" . $_POST['HEDIEUHANH'] . "', '" . $_POST['RAM'] . "', 
@@ -26,9 +27,10 @@ if (isset($_POST["taomoi"])) {
         '" . $_POST['PIN'] . "', '" . $_POST['CAMERA']. "')";
         $result = mysqli_query($conn, $sql);
                 move_uploaded_file($_FILES["Avatar"]["tmp_name"], $target_file);
-                $sql = "INSERT INTO sanpham VALUES ('$maSP', '" . $_POST['TENSP'] . "', '" . $_POST['DONGIA'] . "', 
-        '" . $_POST['SOLUONG'] . "', '" . $_POST['MOTA'] . "', '" . $_FILES["Avatar"]["name"] . "', '" . $_POST['loaisp'] . "',
-        '" . $_POST['thuonghieu'] . "', '" . $maTSKT . "')";
+                $sql = "INSERT INTO sanpham (NGAYTAO, MASP, TENSP, DONGIA, SOLUONG, MOTA, ANH, MALOAISP, MATH, MATSKT)
+            VALUES ('$ngayTao', '$maSP', '" . $_POST['TENSP'] . "', '" . $_POST['DONGIA'] . "', 
+            '" . $_POST['SOLUONG'] . "', '" . $_POST['MOTA'] . "', '" . $_FILES["Avatar"]["name"] . "',
+            '" . $_POST['loaisp'] . "', '" . $_POST['thuonghieu'] . "', '" . $maTSKT . "')";   
         $result = mysqli_query($conn, $sql);
                 header('Location:index.php');
         }
