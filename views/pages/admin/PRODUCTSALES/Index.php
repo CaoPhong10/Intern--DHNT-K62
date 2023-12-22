@@ -64,8 +64,8 @@ include("../../../header_admin.php");
                        JOIN sanpham ON chitiethoadon.MASP = sanpham.MASP)
                        JOIN loaisanpham ON sanpham.MALOAISP = loaisanpham.MALOAISP
                        WHERE (sanpham.MALOAISP = '" . $_POST["loaisp"] . "') 
-                       AND (NGAYTAO <= '" . $_POST['ngayKetThuc'] . "') 
-                       AND (NGAYTAO >= '" . $_POST['ngayBatDau'] . "') 
+                       AND (hoadon.NGAYTAO <= '" . $_POST['ngayKetThuc'] . "') 
+                       AND (hoadon.NGAYTAO >= '" . $_POST['ngayBatDau'] . "') 
                        AND hoadon.TINHTRANGDONHANG = 'Giao hàng thành công'
                        GROUP BY sanpham.TENSP
                        ORDER BY TONGBANDUOC DESC";  // Thêm mệnh đề ORDER BY để sắp xếp giảm dần

@@ -48,7 +48,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
         $sql = "SELECT hoadon.MAHOADON, chitiethoadon.MASP, sanpham.TENSP, chitiethoadon.SOLUONG, 
                 chitiethoadon.DONGIAXUAT FROM (hoadon join chitiethoadon on hoadon.MAHOADON = chitiethoadon.MAHOADON)
                 JOIN sanpham ON chitiethoadon.MASP = sanpham.MASP WHERE 
-                (NGAYTAO <= '" . $_POST['ngayKetThuc'] . "') AND (NGAYTAO >= '" . $_POST['ngayBatDau'] . "') AND hoadon.TINHTRANGDONHANG = 'Giao hàng thành công'";;
+                (hoadon.NGAYTAO <= '" . $_POST['ngayKetThuc'] . "') AND (hoadon.NGAYTAO >= '" . $_POST['ngayBatDau'] . "') AND hoadon.TINHTRANGDONHANG = 'Giao hàng thành công'";;
         $result = mysqli_query($conn, $sql);
     
         // Hiển thị dữ liệu trong bảng
@@ -110,7 +110,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
         $sql = "SELECT hoadon.MAHOADON, chitiethoadon.MASP, sanpham.TENSP, chitiethoadon.SOLUONG, 
                 chitiethoadon.DONGIAXUAT FROM (hoadon join chitiethoadon on hoadon.MAHOADON = chitiethoadon.MAHOADON)
                 JOIN sanpham ON chitiethoadon.MASP = sanpham.MASP WHERE 
-                (NGAYTAO <= '" . $_POST['ngayKetThuc'] . "') AND (NGAYTAO >= '" . $_POST['ngayBatDau'] . "') AND hoadon.TINHTRANGDONHANG = 'Giao hàng thành công'";
+                (hoadon.NGAYTAO <= '" . $_POST['ngayKetThuc'] . "') AND (hoadon.NGAYTAO >= '" . $_POST['ngayBatDau'] . "') AND hoadon.TINHTRANGDONHANG = 'Giao hàng thành công'";
         $result = mysqli_query($conn, $sql);
     
         // Dòng bắt đầu để ghi dữ liệu vào file Excel
