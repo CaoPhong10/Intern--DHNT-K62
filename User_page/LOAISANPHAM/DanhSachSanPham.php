@@ -16,6 +16,7 @@ if (!isset($_GET['page'])) {
 $rowsPerPage = 7; //số mẩu tin trên mỗi trang, giả sử là 7
 
 $offset = ($_GET['page'] - 1) * $rowsPerPage;
+
 if(isset($_GET['querry'])) {
     $querry = $_GET['querry'];
 } 
@@ -299,7 +300,20 @@ $maxPage = ceil($numRows / $rowsPerPage);
                             <div class="row no-gutters">
                                 <aside class="col-md-4">
                                     <a href="../SANPHAM/Detail.php?id=<?php echo $row['MASP']; ?>" class="img-wrap">
-                                        <span class="badge badge-danger"> NEW </span>
+                                         <?PHP 
+                                      // Giả sử $row['NGAYTAO'] chứa giá trị ngày từ cột 'NGAYTAO' trong cơ sở dữ liệu
+                                            $ngaytao_str = $row['NGAYTAO'];
+
+                                            // Chuyển đổi chuỗi ngày thành số nguyên thời gian
+                                            $ngaytao_timestamp = strtotime($ngaytao_str);
+
+                                            // Lấy timestamp của ngày hiện tại
+                                            $now_timestamp = time();
+
+                                            // So sánh với 7 ngày
+                                            if ($now_timestamp - $ngaytao_timestamp <= 7 * 24 * 60 * 60) {
+                                                echo '<span class="badge badge-danger">new</span>';
+                                            }?> 
                                         <img src="../../Images/<?php echo $row['ANH']; ?>">
                                     </a>
                                 </aside> <!-- col.// -->
@@ -308,21 +322,7 @@ $maxPage = ceil($numRows / $rowsPerPage);
                                         <a href="../SANPHAM/Detail.php?id=<?php echo $row['MASP']; ?>" class="h5 title">
                                             <?php echo $row['TENSP']; ?>
                                         </a>
-                                        <div class="rating-wrap mb-2">
-                                            <ul class="rating-stars">
-                                                <li style="width:100%" class="stars-active">
-                                                    <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </li>
-                                            </ul>
-                                            <div class="label-rating">9/10</div>
-                                        </div> <!-- rating-wrap.// -->
+                                    
 
                                         <p class="mb-3">
                                             <span class="tag">

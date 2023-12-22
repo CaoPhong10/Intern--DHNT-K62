@@ -1,3 +1,4 @@
+<title>Chi tiết sản phẩm</title>
 <?php
 include '../Shared_Layout/header.php';
 $id = "";
@@ -37,23 +38,133 @@ LIMIT 1"
                     <h2 class="title mt-3"> <?php echo $row['TENSP']; ?></h2>
 
                     <div class="rating-wrap my-3">
-                        <ul class="rating-stars">
-                            <li style="width:80%" class="stars-active">
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </li>
-                            <li>
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </li>
-                        </ul>
-                        <small class="label-rating text-success"> <i class="fa fa-clipboard-check"></i> 154 orders </small>
+                    <?php
+                    if(isset($_SESSION['MAND'])){
+                        $userId = $_SESSION['MAND'];
+
+                        $sql2 = "SELECT * FROM danhgia";
+                        $result2 = mysqli_query($conn, $sql2);
+                        $row2 = mysqli_fetch_assoc($result2);
+
+                        $maSP = $_GET['id'];
+
+                        // Lấy giá trị trung bình từ cơ sở dữ liệu (nếu có đánh giá)
+                        $average_rating = null;
+                        $total_reviews = 0;
+
+                        if ($maSP) {
+                            // Lấy giá trung bình
+                            $sql_average = "SELECT AVG(rating) as average_rating FROM danhgia WHERE MASP = '$maSP'";
+                            $result_average = mysqli_query($conn, $sql_average);
+                            $row_average = mysqli_fetch_assoc($result_average);
+                            $average_rating = $row_average['average_rating'];
+
+                            // Lấy tổng số đánh giá
+                            $sql_count_reviews = "SELECT COUNT(*) as total_reviews FROM danhgia WHERE MASP = '$maSP'";
+                            $result_count_reviews = mysqli_query($conn, $sql_count_reviews);
+                            $row_count_reviews = mysqli_fetch_assoc($result_count_reviews);
+                            $total_reviews = $row_count_reviews['total_reviews'];
+                        }
+                        
+                        $sql_check_review = "SELECT COUNT(*) as user_reviews FROM danhgia WHERE MASP = '$maSP' AND MAND = '$userId'";
+                        $result_check_review = mysqli_query($conn, $sql_check_review);
+                        $row_check_review = mysqli_fetch_assoc($result_check_review);
+                        if ($row_check_review['user_reviews'] > 0) {
+                            echo '<ul class="list-inline" id="starRating" style="list-style-type: none; padding: 0;">';
+                            for ($count = 1; $count <= 5; $count++) {
+                                if ($average_rating !== null && $count <= $average_rating) {
+                                    $color = "color:#FFFF00;";
+                                } else {
+                                    $color = "color:#ccc;";
+                                }
+    
+                                echo "<li title='Đánh giá sao' 
+                                           
+                                            style='cursor:pointer; $color font-size: 30px; display: inline-block;'> &#9733;
+                                        </li>";
+                            }
+                            echo '</ul>';
+    
+                            // Hiển thị tổng số đánh giá
+                            echo "Tổng số đánh giá: $total_reviews";
+                        
+                        } else {
+
+                        // Hiển thị ngôi sao
+                        echo '<ul class="list-inline" id="starRating" style="list-style-type: none; padding: 0;">';
+                        for ($count = 1; $count <= 5; $count++) {
+                            if ($average_rating !== null && $count <= $average_rating) {
+                                $color = "color:#FFFF00;";
+                            } else {
+                                $color = "color:#ccc;";
+                            }
+                            echo "<li title='Đánh giá sao' 
+                                        id='" . $maSP . "_" . $count . "'
+                                        data-index='$count'
+                                        data-product_id='$maSP'
+                                        data-rating='$average_rating'
+                                        data-user_id='$userId'
+                                        class='rating'
+                                        style='cursor:pointer; $color font-size: 30px; display: inline-block;'> &#9733;
+                                    </li>";
+                        }
+                        echo '</ul>';
+
+                        // Hiển thị tổng số đánh giá
+                        echo "Tổng số đánh giá: $total_reviews";
+                    }
+                }
+                    else{
+                        $sql2 = "SELECT * FROM danhgia";
+                        $result2 = mysqli_query($conn, $sql2);
+                        $row2 = mysqli_fetch_assoc($result2);
+
+                        $maSP = $_GET['id'];
+
+                        // Lấy giá trị trung bình từ cơ sở dữ liệu (nếu có đánh giá)
+                        $average_rating = null;
+                        $total_reviews = 0;
+
+                        if ($maSP) {
+                            // Lấy giá trung bình
+                            $sql_average = "SELECT AVG(rating) as average_rating FROM danhgia WHERE MASP = '$maSP'";
+                            $result_average = mysqli_query($conn, $sql_average);
+                            $row_average = mysqli_fetch_assoc($result_average);
+                            $average_rating = $row_average['average_rating'];
+
+                            // Lấy tổng số đánh giá
+                            $sql_count_reviews = "SELECT COUNT(*) as total_reviews FROM danhgia WHERE MASP = '$maSP'";
+                            $result_count_reviews = mysqli_query($conn, $sql_count_reviews);
+                            $row_count_reviews = mysqli_fetch_assoc($result_count_reviews);
+                            $total_reviews = $row_count_reviews['total_reviews'];
+                        }
+
+                        echo '<ul class="list-inline" id="starRating" style="list-style-type: none; padding: 0;">';
+                        for ($count = 1; $count <= 5; $count++) {
+                            if ($average_rating !== null && $count <= $average_rating) {
+                                $color = "color:#FFFF00;";
+                            } else {
+                                $color = "color:#ccc;";
+                            }
+
+                            echo "<li title='Đánh giá sao' 
+                                       
+                                        style='cursor:pointer; $color font-size: 30px; display: inline-block;'> &#9733;
+                                    </li>";
+                        }
+                        echo '</ul>';
+
+                        // Hiển thị tổng số đánh giá
+                        echo "Tổng số đánh giá: $total_reviews";
+                    }
+                        ?>
+
+
+                        <small class="label-rating text-success"></small>
                     </div> <!-- rating-wrap.// -->
 
                     <div class="mb-3">
-                        <var class="price h4"><?php echo formatCurrencyVND($row['DONGIA']); ?>"</var>
+                        <var class="price h4"><?php echo formatCurrencyVND($row['DONGIA']); ?></var>
 
                     </div> <!-- price-detail-wrap .// -->
 
@@ -66,7 +177,7 @@ LIMIT 1"
                         <dd class="col-sm-8"><?php echo $row['MASP']; ?></dd>
 
                         <dt class="col-sm-4">Bảo hành</dt>
-                        <dd class="col-sm-8">2 năm</dd>
+                        <dd class="col-sm-8">1 năm</dd>
 
                         <dt class="col-sm-4">Thời gian giao hàng</dt>
                         <dd class="col-sm-8">3-4 ngày</dd>
@@ -85,6 +196,37 @@ LIMIT 1"
                                 <div class="input-group-prepend">
                                     <button class="btn btn-light" type="button" id="button-plus"> + </button>
                                 </div>
+                                <script>
+                                    var inputQuantity = document.getElementById("ipQuantity");
+                                    var buttonPlus = document.getElementById("button-plus");
+                                    var minValue = 1;
+                                    var maxValue = <?php echo $row['SOLUONG']; ?> -1;
+                                    
+                                    buttonPlus.addEventListener("click", function() {
+                                        var value = parseInt(inputQuantity.value);
+                                        
+                                        if (value < maxValue) {
+                                            inputQuantity.value = value ;
+                                        }
+                                        
+                                        checkValue();
+                                    });
+                                    
+                                    function checkValue() {
+                                        var value = parseInt(inputQuantity.value);
+                                        
+                                        if (isNaN(value) || value <= maxValue) {
+                                            buttonPlus.disabled = false;
+                                        } else if (value > maxValue) {
+                                            buttonPlus.disabled = false;
+                                            inputQuantity.value = maxValue;
+                                        } else {
+                                            buttonPlus.disabled = true;
+                                        }
+                                    }
+                                    
+                                    checkValue();
+                                </script>
 
 
                             </div>
@@ -179,9 +321,10 @@ LIMIT 1"
                 </div> <!-- box.// -->
             </aside> <!-- col.// -->
         </div> <!-- row.// -->
-
-    </div> <!-- container .//  -->
+       
+                                </div> <!-- container .//  -->
 </section>
+</div>
 <?php endwhile; ?>
                 <?php endif; ?>
 <script>
@@ -245,4 +388,57 @@ LIMIT 1"
         });
     });
 </script>
+
+<script>
+    function remove_background(product_id) {
+    for (var count = 1; count <= 5; count++) {
+        $('#' + product_id + '_' + count).css('color', '#ccc');
+    }
+}
+  $(document).on('mouseenter', '.rating', function() {
+    var index = $(this).data("index");
+    var product_id = $(this).data('product_id');
+    remove_background(product_id);
+    
+    for (var count = 1; count <= index; count++) {
+        $('#' + product_id + '_' + count).css('color', '#ffcc00');
+    }
+});
+
+// Nhả chuột khi không đánh giá
+$(document).on('mouseleave', '.rating', function() {
+    var index = $(this).data("index");
+    var product_id = $(this).data('product_id');
+    var rating = $(this).data("rating");
+    remove_background(product_id);
+
+    for (var count = 1; count <= rating; count++) {
+        $('#' + product_id + '_' + count).css('color', '#ffcc00');
+    }
+});
+$(document).on('click', '.rating', function(){
+    var index = $(this).data("index");
+    var product_id = $(this).data('product_id');
+    var user_id = $(this).data('user_id');
+    $.ajax({
+        url: 'danhgia.php', 
+        method: "POST",
+        data: { index: index, product_id: product_id, user_id: user_id },
+       
+        success: function(data) {
+            if (data.trim() === "Đánh giá của bạn đã được gửi thành công!") {
+                alert("Bạn đã đánh giá " + index + " trên 5");
+                location.reload();
+            } else {
+                console.log("Lỗi đánh giá: " + data);
+                alert("Lỗi đánh giá: " + data);
+            }
+        },
+        error: function() {
+            alert("Lỗi kết nối");
+        }
+    });
+});
+</script>
+
 <?php include '../Shared_Layout/footer.php' ?>

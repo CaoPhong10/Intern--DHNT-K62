@@ -15,11 +15,11 @@ $maLoaiSP = "LSP" . str_pad($maLoaiSP, 2, "0", STR_PAD_LEFT);
             
             <div class="form-group">
                 <label>Mã loại sản phẩm</label>
-                <input type="text" name="maLoaiSP" class="form-control ml-2"  value="<?php echo $maLoaiSP ?>" disabled  style="width:52%">
+                <input type="text" name="maLoaiSP" class="form-control textfile"  value="<?php echo $maLoaiSP ?>" disabled  style="width:52%">
             </div>
             <div class="form-group">
                 <label>Tên loại</label>
-                <input type="text" id="tenloai" class="form-control ml-2" name="tenLoaiSP" style="width:52%">
+                <input type="text" id="tenloai" class="form-control textfile" name="tenLoaiSP" style="width:52%">
                 <span class="error_message"></span>
             </div>
             <div class="form-group">

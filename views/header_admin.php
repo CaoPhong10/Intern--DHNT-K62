@@ -33,6 +33,7 @@
     <script src="../../../Content/admin/dist/js/app.js"></script>
     <script src="../../../Content/admin/dist/js/app1.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.css">
+
     
 </head>
 
@@ -127,7 +128,6 @@
                                 </p>
                             </a>
                         </li>
-                        
                         <li class="nav-header">Thống kê</li>
                         <li class="nav-item">
                             <a href="../STATISTICSOFREVENUE/Index.php" class="nav-link">

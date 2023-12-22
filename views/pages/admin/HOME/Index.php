@@ -68,7 +68,7 @@ require("../../../db_connect.php");
             </div>
             <!-- ./col -->
             <div class="col-lg-3 col-6">
-                <!-- small box -->
+<!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
                     <?php 
@@ -138,12 +138,12 @@ for ($m = 1; $m <= 12; $m++) {
 }
 
 // Sử dụng một truy vấn để lấy tổng cho từng tháng trong năm được chọn
-$stmt = $conn->prepare("SELECT MONTH(NGAYTAO) AS month, SUM(chitiethoadon.DONGIAXUAT * chitiethoadon.SOLUONG) AS total
+$stmt = $conn->prepare("SELECT MONTH(hoadon.NGAYTAO) AS month, SUM(chitiethoadon.DONGIAXUAT * chitiethoadon.SOLUONG) AS total
                         FROM chitiethoadon
                         LEFT JOIN hoadon ON hoadon.MAHOADON=chitiethoadon.MAHOADON 
                         LEFT JOIN sanpham ON sanpham.MASP=chitiethoadon.MASP 
-                        WHERE YEAR(NGAYTAO)=? AND hoadon.TINHTRANGDONHANG='Giao hàng thành công'
-                        GROUP BY MONTH(NGAYTAO)");
+                        WHERE YEAR(hoadon.NGAYTAO)=? AND hoadon.TINHTRANGDONHANG='Giao hàng thành công'
+                        GROUP BY MONTH(hoadon.NGAYTAO)");
 $stmt->bind_param("s", $_GET['year']);
 $stmt->execute();
 
@@ -211,7 +211,7 @@ $sales = json_encode($sales);
             //Boolean - Whether to show horizontal lines (except X axis)
             scaleShowHorizontalLines: true,
             //Boolean - Whether to show vertical lines (except Y axis)
-            scaleShowVerticalLines: true,
+scaleShowVerticalLines: true,
             //Boolean - If there is a stroke on each bar
             barShowStroke: true,
             //Number - Pixel width of the bar stroke
@@ -279,7 +279,7 @@ $sales = json_encode($sales);
         $('#select_year').val(selectedYear);
     } else {
         // Nếu không có giá trị năm trong localStorage, thì kiểm tra trên URL
-        var urlParams = new URLSearchParams(window.location.search);
+var urlParams = new URLSearchParams(window.location.search);
         var yearFromURL = urlParams.get('year');
         
         if (yearFromURL) {
