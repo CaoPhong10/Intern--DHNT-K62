@@ -8,15 +8,14 @@ $order = 'asc';
 
 if (isset($_GET["order"])) {
     $order = $_GET["order"];
-} // Kiểm tra thứ tự sắp xếp sản phẩm theo giá
-
+} 
+// Kiểm tra thứ tự sắp xếp sản phẩm theo giá
 if (!isset($_GET['page'])) {
     $_GET['page'] = 1;
 }
 $rowsPerPage = 7; //số mẩu tin trên mỗi trang, giả sử là 7
 
 $offset = ($_GET['page'] - 1) * $rowsPerPage;
-
 if(isset($_GET['querry'])) {
     $querry = $_GET['querry'];
 } 
@@ -58,7 +57,7 @@ if (isset($_GET["filter"])) {
         }
 
         if (!empty($giamin) && !empty($giamax)) {
-        $querry .= " AND (sanpham.DONGIA BETWEEN $giamin AND $giamax)";
+        $querry .= "  AND (IF(sanpham.SALE > 0, sanpham.SALE, sanpham.DONGIA) BETWEEN $giamin AND $giamax)";
         }
         if (!empty($ram)) {
             $querry .= " AND thongsokythuat.RAM = '$ram'";
@@ -71,7 +70,7 @@ if (isset($_GET["filter"])) {
     
 }
 
-$listSanPham = mysqli_query($conn, $querry . " order by DONGIA $order LIMIT $offset , $rowsPerPage");
+$listSanPham = mysqli_query($conn, $querry . " order by if(SALE > 0, SALE, DONGIA) $order LIMIT $offset , $rowsPerPage");
 $re = mysqli_query($conn, $querry);
 $numRows = mysqli_num_rows($re);
 //tổng số trang
@@ -299,7 +298,7 @@ $maxPage = ceil($numRows / $rowsPerPage);
                         <article class="card card-product-list">
                             <div class="row no-gutters">
                                 <aside class="col-md-4">
-                                    <a href="../SANPHAM/Detail.php?id=<?php echo $row['MASP']; ?>" class="img-wrap">
+                                <a href="../SANPHAM/Detail.php?id=<?php echo $row['MASP']; ?>" class="img-wrap">
                                          <?PHP 
                                       // Giả sử $row['NGAYTAO'] chứa giá trị ngày từ cột 'NGAYTAO' trong cơ sở dữ liệu
                                             $ngaytao_str = $row['NGAYTAO'];
@@ -314,7 +313,7 @@ $maxPage = ceil($numRows / $rowsPerPage);
                                             if ($now_timestamp - $ngaytao_timestamp <= 7 * 24 * 60 * 60) {
                                                 echo '<span class="badge badge-danger">new</span>';
                                             }?> 
-                                        <img src="../../Images/<?php echo $row['ANH']; ?>">
+                                        <img src="../../views/Images/<?php echo $row['ANH']; ?>">
                                     </a>
                                 </aside> <!-- col.// -->
                                 <div class="col-md-5">
@@ -322,7 +321,7 @@ $maxPage = ceil($numRows / $rowsPerPage);
                                         <a href="../SANPHAM/Detail.php?id=<?php echo $row['MASP']; ?>" class="h5 title">
                                             <?php echo $row['TENSP']; ?>
                                         </a>
-                                    
+                                        
 
                                         <p class="mb-3">
                                             <span class="tag">
@@ -347,21 +346,37 @@ $maxPage = ceil($numRows / $rowsPerPage);
                                 </div> <!-- col.// -->
                                 <aside class="col-sm-3">
                                     <div class="info-aside">
-                                        <div class="price-wrap">
-                                            <span class="h5 price">
+                                    <div class="price-wrap">
+                                        <?php if ($row['SALE'] > 0) { ?>
+                                            <span class="h5 sale-price" style="color: red">
+                                                <?php echo formatCurrencyVND($row['SALE']); ?>
+                                            </span><br>
+                                            <span class="h6 original-price"><del style="color: gray">
+                                                <?php echo formatCurrencyVND($row['DONGIA']); ?>
+                                                </del>
+                                                </span>
+                                                <?php
+                                                $phanTramGiamGia = round((($row['DONGIA'] - $row['SALE']) / $row['DONGIA']) * 100);
+                                                if ($phanTramGiamGia > 0) {
+                                                    echo '<span class="badge badge-danger discount-badge">' . $phanTramGiamGia . '% giảm giá</span>';
+                                                }
+                                            } else { ?>
+                                                <span class="h5 price">
                                                 <?php echo formatCurrencyVND($row['DONGIA']); ?>
                                             </span>
-                                        </div> <!-- price-wrap.// -->
+                                        <?php } ?>
+                                    </div> <!-- price-wrap.// -->
                                         <small class="text-success">Free ship</small>
-
                                         <p class="text-muted mt-3">
                                             <?php echo $row['TENLOAISP']; ?>
                                         </p>
                                         <p class="mt-3">
-                                            <a href="javascript:void(0)" class="btn btn-outline-primary"
-                                                onclick="addToCart('<?php echo $row['MASP']; ?>')">
-                                                <i class="fa fa-cart-arrow-down"></i>
-                                                Thêm vào giỏ hàng
+                                            <a <?php if (!isset($_SESSION['MAND'])) { ?> 
+                                                href="../AUTHENTICATION/DangNhap.php" <?php } else { ?> href="javascript:void(0)" 
+                                                onclick="addToCart('<?php echo $row['MASP']; ?>');" <?php } ?> 
+                                                class="btn btn-outline-primary">
+                                                <i class="fa fa-cart-arrow-down" ></i>
+                                                    Thêm vào giỏ hàng
                                             </a>
                                         </p>
 
@@ -484,7 +499,8 @@ $maxPage = ceil($numRows / $rowsPerPage);
                         showSuccessToast("Đã thêm sản phẩm vào giỏ hàng");
                     } else {
                         // Chuyển sang trang đăng nhập nếu chưa đăng nhập
-                        window.location.href = "../Authentication/DangNhap.php";
+                        window.location.href = "../AUTHENTICATION/DangNhap.php";
+                       
                     }
                 },
                 error: function () {

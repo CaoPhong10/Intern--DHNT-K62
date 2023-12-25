@@ -20,7 +20,7 @@ include '../Shared_Layout/header.php';
                 <div class="card">
                     <?php
                  
-                 $result = mysqli_query($conn, "SELECT sanpham.*, thuonghieu.*, thongsokythuat.*, giohang.SOLUONG as SLGH, sanpham.DONGIA as DGSP, sanpham.SOLUONG as SLSP
+                 $result = mysqli_query($conn, "SELECT sanpham.*, thuonghieu.*, thongsokythuat.*, giohang.SOLUONG as SLGH, sanpham.DONGIA as DGSP, sanpham.SALE as sale,sanpham.SOLUONG as SLSP
                  FROM giohang
                  JOIN sanpham ON giohang.MASP = sanpham.MASP 
                  JOIN thongsokythuat ON sanpham.MATSKT = thongsokythuat.MATSKT
@@ -53,7 +53,7 @@ include '../Shared_Layout/header.php';
                                     <figure class="itemside">
                                         <div class="aside">
                                             <a href="../SANPHAM/Detail.php?id=<?php echo $row['MASP']?>">
-                                                <img src="../../Images/<?php echo $row['ANH']?>" class="img-sm"></a>
+                                                <img src="../../views/Images/<?php echo $row['ANH']?>" class="img-sm"></a>
                                         </div>
                                         <figcaption class="info">
                                             <a href="#" class="title text-dark"><?php echo $row['TENSP']?></a>
@@ -81,18 +81,28 @@ include '../Shared_Layout/header.php';
                                 </div>
                                 </td>
                                 <td>
-                                    <div class="price-wrap">
+                                <div class="price-wrap">
+                                    <?php if ($row['SALE'] > 0) { ?>
+                                        <var class="price pt-2 sale-price"
+                                            id="giaSP_<?php echo $row['MASP']?>">  <?php echo formatCurrencyVND($row['sale']); ?></var>
+                                    <?php } else { ?>
                                         <var class="price pt-2"
                                             id="giaSP_<?php echo $row['MASP']?>">  <?php echo formatCurrencyVND($row['DGSP']); ?></var>
-                                    </div>
+                                    <?php } ?>
+                                </div>
                                 </td>
                                 <td>
-                                    <div class="price-wrap">
+                                <div class="price-wrap">
+                                    <?php if ($row['SALE'] > 0) { ?>
                                         <var id="subtotal_<?php echo $row['MASP']?>" class="price pt-2 item-total">
-                                        <?php echo formatCurrencyVND($row['DGSP']*$row['SLGH']); ?>
+                                            <?php echo formatCurrencyVND($row['SALE'] * $row['SLGH']); ?>
                                         </var>
-
-                                    </div>
+                                    <?php } else { ?>
+                                        <var id="subtotal_<?php echo $row['MASP']?>" class="price pt-2 item-total">
+                                            <?php echo formatCurrencyVND($row['DGSP'] * $row['SLGH']); ?>
+                                        </var>
+                                    <?php } ?>
+                                </div>
                                 </td>
                                 <td class="text-right">
 
