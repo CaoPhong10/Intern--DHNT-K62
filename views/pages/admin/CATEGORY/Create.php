@@ -1,12 +1,47 @@
 <?php
 include("../../../header_admin.php");
 include("../../../db_connect.php");
+
+function isCategoryExists($conn, $tenLSP) {
+    $tenLSP = mysqli_real_escape_string($conn, $tenLSP);
+    $sql = "SELECT COUNT(*) as count FROM loaisanpham WHERE TENLOAISP = '$tenLSP'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    return $row['count'] > 0;
+}
+
 $sql = "SELECT MALOAISP from loaisanpham ORDER BY MALOAISP DESC LIMIT 1";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $maLoaiSP = (int) substr($row['MALOAISP'], 3);
 $maLoaiSP = $maLoaiSP + 1;
 $maLoaiSP = "LSP" . str_pad($maLoaiSP, 2, "0", STR_PAD_LEFT);
+if (isset($_POST['tenLSP'])) $tenLSP = $_POST["tenLSP"]; else $tenLSP = "";
+if (isset($_POST["create"])) {
+    $tenLSP  = mysqli_real_escape_string($conn, $tenLSP);
+    if (!isCategoryExists($conn, $tenLSP)) {    
+    $sql = "INSERT INTO loaisanpham (MALOAISP, TENLOAISP) VALUES ('$maLoaiSP', '$tenLSP')";
+    mysqli_query($conn, $sql);
+    echo "
+    <div class='alert alert-success alert-dismissible'>
+        <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+        <h4><i class='icon fa fa-check'></i> Thành công!</h4>
+        Thêm dữ liệu thành công
+    </div>
+    <script>
+        setTimeout(function() {
+            window.location.href = 'Index.php';
+        }, 2000); // Chuyển hướng sau 2 giây
+    </script>
+    ";
+} else {
+    echo '<div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-warning"></i> Lỗi !</h4>
+            Loại sản phẩm đã tồn tại
+        </div>';
+}
+}
 ?>
 <div class="container">
     <h2>Thêm loại sản phẩm</h2>
@@ -19,7 +54,7 @@ $maLoaiSP = "LSP" . str_pad($maLoaiSP, 2, "0", STR_PAD_LEFT);
             </div>
             <div class="form-group">
                 <label>Tên loại</label>
-                <input type="text" id="tenloai" class="form-control textfile" name="tenLoaiSP" style="width:52%">
+                <input type="text" id="tenloai" class="form-control textfile" name="tenLSP" style="width:52%">
                 <span class="error_message"></span>
             </div>
             <div class="form-group">
@@ -30,28 +65,7 @@ $maLoaiSP = "LSP" . str_pad($maLoaiSP, 2, "0", STR_PAD_LEFT);
             </div>
     </form>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Mong muốn của chúng ta
-        Validator({
-            form: '#form-3',
-            formGroupSelector: '.form-group',
-            errorSelector: '.error_message',
-            rules: [
-                Validator.isRequired('#tenloai', 'Vui lòng nhập tên loại!'),
-            ],
-            onSubmit: function (data) {
-                // Call API
-                //console.log(data);
-            }
-        });
-    });
-</script>
+
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $sql = "INSERT INTO loaisanpham VALUES ('$maLoaiSP', '{$_POST['tenLoaiSP']}')";
-    mysqli_query($conn, $sql);
-    echo '<script>window.location.href = "../CATEGORY";</script>'; 
-}
 include("../../../footer_admin.php");
 ?>

@@ -1,5 +1,6 @@
 <?php
 require("../../../db_connect.php");
+include("../../../header_admin.php");
 $maSP = $_GET['maSP'];
 $sql_sanpham = "SELECT TENSP, DONGIA, SOLUONG, MOTA, ANH, TENLOAISP, TENTHUONGHIEU, HEDIEUHANH , RAM, ROM, KICHCOMANHINH , VIXULY, PIN,CAMERA
 FROM ((sanpham join loaisanpham on sanpham.MALOAISP = loaisanpham.MALOAISP) join thuonghieu on
@@ -7,7 +8,7 @@ sanpham.MATH = thuonghieu.MATH) join thongsokythuat on sanpham.MATSKT=thongsokyt
 WHERE sanpham.MASP = '$maSP'";
 $result = mysqlI_query($conn,$sql_sanpham);
 $row = mysqli_fetch_assoc($result);
-include("../../../header_admin.php");
+
 ?>
 
 <h2 style="text-align:center">Thông tin chi tiết</h2>
@@ -149,8 +150,8 @@ include("../../../header_admin.php");
 
     </dl>
     <p>
-    <a href="./Edit.php?maSP=<?php echo $maSP ?>" class="btn btn-primary">Chỉnh sửa</a> 
-    <a href="./index.php" class="btn btn-primary">Trở về trang danh sách</a>
+    <a href="./Edit.php?maSP=<?php echo $maSP ?>" class="btn btn-success">Chỉnh sửa</a> 
+    <a href="./index.php" class="btn btn-success">Trở về trang danh sách</a>
 </p>
 </div>
 

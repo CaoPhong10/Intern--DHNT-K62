@@ -6,6 +6,23 @@ $sql = "SELECT TENLOAISP FROM loaisanpham WHERE MALOAISP = '{$maLoaiSP}'";
 $kq = mysqli_query($conn, $sql);
 $tenLoaiSP = mysqli_fetch_assoc($kq);
 $tenLoaiSP = $tenLoaiSP['TENLOAISP'];
+
+if (isset($_POST['delete'])) {
+    $sql = "DELETE FROM loaisanpham WHERE MALOAISP = '$maLoaiSP'";
+    mysqli_query($conn, $sql);
+    echo "
+    <div class='alert alert-success alert-dismissible'>
+        <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+        <h4><i class='icon fa fa-check'></i> Thành công!</h4>
+        Xoá thành công
+    </div>
+    <script>
+        setTimeout(function() {
+            window.location.href = 'Index.php';
+        }, 2000); // Chuyển hướng sau 2 giây
+    </script>
+    ";
+}
 ?>
 <div class="container">
     <h2>BẠN CÓ MUỐN XÓA LOẠI SẢN PHẨM NÀY?</h2>
@@ -30,10 +47,5 @@ $tenLoaiSP = $tenLoaiSP['TENLOAISP'];
 </div>
 
 <?php
-if (isset($_POST['delete'])) {
-    $sql = "DELETE FROM loaisanpham WHERE MALOAISP = '$maLoaiSP'";
-    mysqli_query($conn, $sql);
-    echo '<script>window.location.href = "../CATEGORY";</script>'; 
-}
 include("../../../footer_admin.php");
 ?>

@@ -6,6 +6,22 @@ $sql = "SELECT MAND, TENND FROM nguoidung WHERE MAND = '{$maND}'";
 $kq = mysqli_query($conn, $sql);
 $tenND = mysqli_fetch_assoc($kq);
 $tenND = $tenND['TENND'];
+if (isset($_POST["delete"])) {
+        $sql = "DELETE FROM nguoidung  WHERE MAND = '$maND'";
+        mysqli_query($conn, $sql);
+        echo "
+    <div class='alert alert-success alert-dismissible'>
+        <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+        <h4><i class='icon fa fa-check'></i> Thành công!</h4>
+        Xoá thành công
+    </div>
+    <script>
+        setTimeout(function() {
+            window.location.href = 'Index.php';
+        }, 2000); // Chuyển hướng sau 2 giây
+    </script>
+    ";
+}
 ?>
 <div class="container">
         <h2>Xóa người dùng này?</h2>
@@ -32,10 +48,6 @@ $tenND = $tenND['TENND'];
         </form>
 </div>
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $sql = "DELETE FROM nguoidung  WHERE MAND = '$maND'";
-        mysqli_query($conn, $sql);
-        echo '<script>window.location.href = "../USERS";</script>';
-}
+
 include("../../../footer_admin.php");
 ?>

@@ -53,27 +53,29 @@ if (isset($_POST["create"])) {
         <div class="form-horizontal">
         <div class="form-group">
                 <label class="control-label col-md-2">Mã thương hiệu </label>
-                <input type="text" class="form-control ml-2" readonly value="<?php echo $maTH ?>"
-                        name="maTH" style="width:82%">
+                <div class="col-md-10">
+                <input type="text" class="form-control textfile" readonly value="<?php echo $maTH ?>"
+                        name="maTH">
+                </div>
         </div>
 
         <div class="form-group">
                 <label class="control-label col-md-2">Tên thương hiệu </label>
                 <div class="col-md-10">
-                        <input type="text" class="form-control" name="tenTH" required>
+                        <input type="text" class="form-control textfile" name="tenTH" required>
                 </div>
         </div>
 
         <div class="form-group">
                 <label class="control-label col-md-2">Quốc gia </label>
                 <div class="col-md-10">
-                        <input type="text" class="form-control" name="quocGia" required>
+                        <input type="text" class="form-control textfile" name="quocGia" required>
                 </div>
         </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Tạo mới" class="btn btn-success" name="create" />
-                    <a class="btn btn-primary" href="Index.php">Trở về trang danh sách</a>
+                    <a class="btn btn-success" href="Index.php">Trở về trang danh sách</a>
                 </div>
             </div>
     </form>
