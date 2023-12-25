@@ -1,6 +1,6 @@
 <?php
-include("../../../header_admin.php");
 include("../../../db_connect.php");
+include("../../../header_admin.php");
 $maND = $_GET['maND'];
 $sql_nguoidung = "SELECT EMAIL, TENND, GIOITINH, SDT, DIACHI, maXa FROM nguoidung WHERE MAND = '{$maND}'";
 $kq_nguoidung = mysqli_query($conn, $sql_nguoidung);
@@ -14,6 +14,25 @@ $get_huyen = "SELECT huyen.maHuyen, huyen.tenHuyen FROM huyen JOIN tinh ON huyen
 $kq_huyen = mysqli_query($conn, $get_huyen);
 $get_xa = "SELECT xa.maXa, xa.tenXa FROM xa JOIN huyen ON xa.maHuyen = huyen.maHuyen WHERE xa.maHuyen ='{$row_diachi['maHuyen']}'";
 $kq_xa = mysqli_query($conn, $get_xa);
+
+if (isset($_POST["edit"])) {
+        $sql = "UPDATE nguoidung SET EMAIL = '{$_POST['EMAIL']}', TENND = '{$_POST['hoTen']}', SDT = '{$_POST['sdt']}',
+        DIACHI = '{$_POST['diachi']}', maXa = '{$_POST['maXa']}' WHERE MAND = '$maND'";
+        mysqli_query($conn, $sql);
+        echo "
+        <div class='alert alert-success alert-dismissible'>
+            <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+            <h4><i class='icon fa fa-check'></i> Thành công!</h4>
+            Sửa dữ liệu thành công
+        </div>
+        <script>
+            setTimeout(function() {
+                window.location.href = 'Index.php';
+            }, 2000); // Chuyển hướng sau 2 giây
+        </script>
+        ";
+    } 
+
 ?>
 <div class="container">
         <h2>Chỉnh sửa thông tin người dùng</h2>
@@ -160,11 +179,6 @@ $kq_xa = mysqli_query($conn, $get_xa);
         </form>
 </div>
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $sql = "UPDATE nguoidung SET EMAIL = '{$_POST['EMAIL']}', TENND = '{$_POST['hoTen']}', SDT = '{$_POST['sdt']}',
-        DIACHI = '{$_POST['diachi']}', maXa = '{$_POST['maXa']}' WHERE MAND = '$maND'";
-        mysqli_query($conn, $sql);
-        echo '<script>window.location.href = "../USERS";</script>'; 
-    }
+
 include("../../../footer_admin.php");
 ?>

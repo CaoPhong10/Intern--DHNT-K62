@@ -1,11 +1,45 @@
 <?php
-include("../../../header_admin.php");
 include("../../../db_connect.php");
+include("../../../header_admin.php");
 $maLoaiSP = $_GET['id'];
 $sql = "SELECT TENLOAISP FROM loaisanpham WHERE MALOAISP = '{$maLoaiSP}'";
 $kq = mysqli_query($conn, $sql);
-$tenLoaiSP = mysqli_fetch_assoc($kq);
-$tenLoaiSP = $tenLoaiSP['TENLOAISP'];
+$tenLSP = mysqli_fetch_assoc($kq);
+$tenLSP = $tenLSP['TENLOAISP'];
+
+function isCategoryExists($conn, $tenLSP) {
+    $tenLSP = mysqli_real_escape_string($conn, $tenLSP);
+    $sql = "SELECT COUNT(*) as count FROM loaisanpham WHERE TENLOAISP = '$tenLSP'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    return $row['count'] > 0;
+}
+if (isset($_POST['tenLSP'])) $tenLSP = $_POST["tenLSP"]; 
+if (isset($_POST["edit"])) {
+    if (!isCategoryExists($conn, $tenLSP)) {
+        $sql = "UPDATE loaisanpham SET TENLOAISP = '{$_POST['tenLSP']}' WHERE MALOAISP = '$maLoaiSP'";
+
+    $result = mysqli_query($conn, $sql);
+    echo "
+    <div class='alert alert-success alert-dismissible'>
+        <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+        <h4><i class='icon fa fa-check'></i> Thành công!</h4>
+        Sửa dữ liệu thành công
+    </div>
+    <script>
+        setTimeout(function() {
+            window.location.href = 'Index.php';
+        }, 2000); // Chuyển hướng sau 2 giây
+    </script>
+    ";
+} else {
+    echo '<div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-warning"></i> Lỗi !</h4>
+            Loại sản phẩm đang tồn tại không thể chỉnh sửa
+        </div>';
+}
+}
 ?>
 <div class="container">
     <h2>Chỉnh sửa loại sản phẩm</h2>
@@ -18,7 +52,7 @@ $tenLoaiSP = $tenLoaiSP['TENLOAISP'];
             </div>
             <div class="form-group">
                 <label>Tên loại</label>
-                <input type="text" class="form-control textfile"name="tenLoaiSP" id="tenloai" value="<?php echo $tenLoaiSP?>" >
+                <input type="text" class="form-control textfile"name="tenLSP" id="tenLSP" value="<?php echo $tenLSP?>" >
                 <span class="error_message"></span>
             </div>
             <div class="form-group">
@@ -29,28 +63,7 @@ $tenLoaiSP = $tenLoaiSP['TENLOAISP'];
             </div>
     </form>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Mong muốn của chúng ta
-        Validator({
-            form: '#form-3',
-            formGroupSelector: '.form-group',
-            errorSelector: '.error_message',
-            rules: [
-                Validator.isRequired('#tenloai', 'Vui lòng nhập tên loại!'),
-            ],
-            onSubmit: function (data) {
-                // Call API
-                //console.log(data);
-            }
-        });
-    });
-</script>
+
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $sql = "UPDATE loaisanpham SET TENLOAISP = '{$_POST['tenLoaiSP']}' WHERE MALOAISP = '$maLoaiSP'";
-    mysqli_query($conn, $sql);
-    echo '<script>window.location.href = "../CATEGORY";</script>'; 
-}
 include("../../../footer_admin.php");
 ?>

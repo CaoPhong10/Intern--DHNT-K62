@@ -1,6 +1,14 @@
 <?php
 require("../../../db_connect.php");
+include("../../../header_admin.php");
 
+function isProductsExists($conn, $TENSP) {
+        $TENSP = mysqli_real_escape_string($conn, $TENSP);
+        $sql = "SELECT COUNT(*) as count FROM sanpham WHERE TENSP = '$TENSP'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row['count'] > 0;
+    }
 
 $sql = "SELECT MASP from sanpham ORDER BY MASP DESC LIMIT 1";
 $result = mysqli_query($conn, $sql);
@@ -15,7 +23,10 @@ $row1 = mysqli_fetch_assoc($result);
 $maTSKT = (int) substr($row['MASP'], 4);
 $maTSKT = $maTSKT + 1;
 $maTSKT = "TSKT" . str_pad($maTSKT, 3, "0", STR_PAD_LEFT);
+if (isset($_POST['TENSP'])) $TENSP = $_POST["TENSP"]; else $TENSP = "";
 if (isset($_POST["taomoi"])) {
+        $TENSP  = mysqli_real_escape_string($conn, $TENSP);
+    if (!isProductsExists($conn, $TENSP)) { 
         $target_dir = "../../../Images/";
         $target_file = $target_dir . basename($_FILES["Avatar"]["name"]);
         $check = getimagesize($_FILES["Avatar"]["tmp_name"]);
@@ -32,16 +43,29 @@ if (isset($_POST["taomoi"])) {
             '" . $_POST['SOLUONG'] . "', '" . $_POST['MOTA'] . "', '" . $_FILES["Avatar"]["name"] . "',
             '" . $_POST['loaisp'] . "', '" . $_POST['thuonghieu'] . "', '" . $maTSKT . "')";   
         $result = mysqli_query($conn, $sql);
-                header('Location:index.php');
+                
         }
-        ?>
-        <script>
-                window.alert("Tệp ảnh không hợp lệ");
-        </script>
-        <?php
-
+         echo "
+    <div class='alert alert-success alert-dismissible'>
+        <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+        <h4><i class='icon fa fa-check'></i> Thành công!</h4>
+        Thêm dữ liệu thành công
+    </div>
+    <script>
+        setTimeout(function() {
+            window.location.href = 'Index.php';
+        }, 2000); // Chuyển hướng sau 2 giây
+    </script>
+    ";
+} else {
+    echo '<div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-warning"></i> Lỗi !</h4>
+            Sản phẩm đã tồn tại
+        </div>';
 }
-include("../../../header_admin.php");
+}
+
 ?>
 <div class="container">
 

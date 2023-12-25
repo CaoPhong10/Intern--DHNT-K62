@@ -1,5 +1,14 @@
 <?php
 require("../../../db_connect.php");
+include("../../../header_admin.php");
+
+function isProductsExists($conn, $TENSP, $maSP) {
+    $TENSP = mysqli_real_escape_string($conn, $TENSP);
+    $sql = "SELECT COUNT(*) as count FROM sanpham WHERE TENSP = '$TENSP' AND MASP != '$maSP'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    return $row['count'] > 0;
+}
 
 $maSP = $_GET['maSP'];
 $sql_sanpham = "SELECT TENSP, DONGIA, SOLUONG, MOTA, ANH, TENLOAISP, TENTHUONGHIEU, HEDIEUHANH, sanpham.MATSKT,
@@ -12,28 +21,29 @@ $row = mysqli_fetch_assoc($result);
 $maTSKT = $row['MATSKT'];
 
 if (isset($_POST["luu"])) {
-        $target_dir = "../../../Images/";
+    $target_dir = "../../../Images/";
 
-        // Kiểm tra xem người dùng đã chọn ảnh mới hay chưa
-        if (!empty($_FILES["Avatar"]["name"])) {
-                $target_file = $target_dir . basename($_FILES["Avatar"]["name"]);
-                $check = getimagesize($_FILES["Avatar"]["tmp_name"]);
+    // Kiểm tra xem người dùng đã chọn ảnh mới hay chưa
+    if (!empty($_FILES["Avatar"]["name"])) {
+        $target_file = $target_dir . basename($_FILES["Avatar"]["name"]);
+        $check = getimagesize($_FILES["Avatar"]["tmp_name"]);
 
-                if ($check !== false) {
-                        move_uploaded_file($_FILES["Avatar"]["tmp_name"], $target_file);
-                        $anh_moi = $_FILES["Avatar"]["name"];
-                } else {
-                        ?>
-                        <script>
-                                window.alert("Tệp ảnh không hợp lệ");
-                        </script>
-                        <?php
-                }
+        if ($check !== false) {
+            move_uploaded_file($_FILES["Avatar"]["tmp_name"], $target_file);
+            $anh_moi = $_FILES["Avatar"]["name"];
         } else {
-                // Nếu không có ảnh mới, sử dụng ảnh cũ
-                $anh_moi = $row['ANH'];
+            ?>
+            <script>
+                window.alert("Tệp ảnh không hợp lệ");
+            </script>
+            <?php
         }
+    } else {
+        // Nếu không có ảnh mới, sử dụng ảnh cũ
+        $anh_moi = $row['ANH'];
+    }
 
+    if (!isProductsExists($conn, $_POST['TENSP'], $maSP)) {
         $sql = "UPDATE sanpham SET TENSP = '" . $_POST['TENSP'] . "', DONGIA = '" . $_POST['DONGIA'] . "',
             SOLUONG = '" . $_POST['SOLUONG'] . "', MOTA = '" . $_POST['MOTA'] . "', ANH = '$anh_moi',
             MALOAISP = '" . $_POST['loaisp'] . "', MATH = '" . $_POST['thuonghieu'] . "'
@@ -44,10 +54,26 @@ if (isset($_POST["luu"])) {
             VIXULY = '" . $_POST['VIXULY'] . "', PIN = '" . $_POST['PIN'] . "', CAMERA = '" . $_POST['CAMERA'] . "'
             WHERE MATSKT = '" . $maTSKT . "'";
         $result = mysqli_query($conn, $sql);
-        header('Location:index.php');
+        echo "
+        <div class='alert alert-success alert-dismissible'>
+            <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+            <h4><i class='icon fa fa-check'></i> Thành công!</h4>
+            Sửa dữ liệu thành công
+        </div>
+        <script>
+            setTimeout(function() {
+                window.location.href = 'Index.php';
+            }, 2000); // Chuyển hướng sau 2 giây
+        </script>
+        ";
+    } else {
+        echo '<div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-warning"></i> Lỗi !</h4>
+            Sản phẩm đã tồn tại
+        </div>';
+    }
 }
-
-include("../../../header_admin.php");
 ?>
 <h2 style="text-align:center">Chỉnh sửa</h2>
 
@@ -98,7 +124,7 @@ include("../../../header_admin.php");
                         <div class="form-group">
                                 <label class="control-label">Ảnh</label>
                                 <div class="col-md-10">
-                                        <input required type="file" class="textfile" value="Chọn File" name="Avatar"
+                                        <input  type="file" class="textfile" value="Chọn File" name="Avatar"
                                                 accept="image/*" />
                                 </div>
                         </div>

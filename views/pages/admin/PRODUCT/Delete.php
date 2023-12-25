@@ -1,6 +1,6 @@
 <?php
 require("../../../db_connect.php");
-
+include("../../../header_admin.php");
 $maSP = $_GET['maSP'];
 $sql = "SELECT TENSP, DONGIA, SOLUONG, MOTA, ANH, TENLOAISP, TENTHUONGHIEU, HEDIEUHANH, thongsokythuat.MATSKT
 FROM ((sanpham join loaisanpham on sanpham.MALOAISP = loaisanpham.MALOAISP) join thuonghieu on
@@ -14,10 +14,20 @@ if (isset($_POST["xoa"])) {
         $result = mysqli_query($conn, $sql);
         $sql = "DELETE FROM thongsokythuat WHERE MATSKT = '{$row['MATSKT']}'";
         $result = mysqli_query($conn, $sql);
-        header('Location:Index.php');
+        echo "
+        <div class='alert alert-success alert-dismissible'>
+            <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+            <h4><i class='icon fa fa-check'></i> Thành công!</h4>
+            Xoá thành công
+        </div>
+        <script>
+            setTimeout(function() {
+                window.location.href = 'Index.php';
+            }, 2000); // Chuyển hướng sau 2 giây
+        </script>
+        ";
+    }
 
-}
-include("../../../header_admin.php");
 ?>
 
 
