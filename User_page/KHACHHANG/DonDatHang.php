@@ -100,6 +100,7 @@ include '../Shared_Layout/header.php';
                                                         <img src="../../Images/<?php echo $row["ANH"]?>" class="img-xs border">
                                                     </td>
                                                     <td>
+                                                    <a href="../SANPHAM/Detail.php?id=<?php echo $row['MASP']?>">
                                                         <p class="title mb-0"><?php echo $row["TENSP"]?> </p>
                                                         <var
 class="price text-muted"><?php echo formatCurrencyVND($row['DGSP']); ?></var>

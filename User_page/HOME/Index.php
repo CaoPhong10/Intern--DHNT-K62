@@ -246,12 +246,20 @@
     <section class="padding-bottom-sm">
 
         <header class="section-heading heading-line">
-            <h4 class="title-section text-uppercase">Sản phẩm đang hot</h4>
+            <h4 class="title-section text-uppercase">Sản phẩm được đánh giá tốt</h4>
         </header>
 
         <div class="row row-sm">
             <?php
-            $result = mysqli_query($conn, "SELECT * FROM sanpham  LIMIT 12");
+            $result = mysqli_query($conn, "SELECT sp.MASP, sp.ANH, sp.TENSP, sp.DONGIA
+            FROM sanpham sp
+            JOIN (
+                SELECT MASP, AVG(rating) AS avg_rating
+                FROM danhgia
+                GROUP BY MASP
+            ) dg ON sp.MASP = dg.MASP
+            ORDER BY dg.avg_rating DESC
+            LIMIT 12;");
 
             if (mysqli_num_rows($result) <> 0) {
                 while ($rows = mysqli_fetch_assoc($result)) {
@@ -279,6 +287,7 @@
 
         </div> <!-- row.// -->
     </section>
+
 
 
     <section class="padding-bottom">

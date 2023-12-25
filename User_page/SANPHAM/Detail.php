@@ -65,33 +65,19 @@ LIMIT 1"
                             $row_count_reviews = mysqli_fetch_assoc($result_count_reviews);
                             $total_reviews = $row_count_reviews['total_reviews'];
                         }
+
+                        $sql_check_purchase = "SELECT COUNT(*) as user_purchases FROM chitiethoadon cthd
+                        JOIN hoadon hd ON cthd.MAHOADON = hd.MAHOADON
+                        WHERE cthd.MASP = '$maSP' AND hd.MAND = '$userId' and hd.TINHTRANGDONHANG = 'Giao hàng thành công'";
+                        $result_check_purchase = mysqli_query($conn, $sql_check_purchase);
+                        $row_check_purchase = mysqli_fetch_assoc($result_check_purchase);
                         
                         $sql_check_review = "SELECT COUNT(*) as user_reviews FROM danhgia WHERE MASP = '$maSP' AND MAND = '$userId'";
                         $result_check_review = mysqli_query($conn, $sql_check_review);
                         $row_check_review = mysqli_fetch_assoc($result_check_review);
-                        if ($row_check_review['user_reviews'] > 0) {
+                        if ($row_check_purchase['user_purchases'] > 0) {
+                        if ($row_check_review['user_reviews'] == 0) {
                             echo '<ul class="list-inline" id="starRating" style="list-style-type: none; padding: 0;">';
-                            for ($count = 1; $count <= 5; $count++) {
-                                if ($average_rating !== null && $count <= $average_rating) {
-                                    $color = "color:#FFFF00;";
-                                } else {
-                                    $color = "color:#ccc;";
-                                }
-    
-                                echo "<li title='Đánh giá sao' 
-                                           
-                                            style='cursor:pointer; $color font-size: 30px; display: inline-block;'> &#9733;
-                                        </li>";
-                            }
-                            echo '</ul>';
-    
-                            // Hiển thị tổng số đánh giá
-                            echo "Tổng số đánh giá: $total_reviews";
-                        
-                        } else {
-
-                        // Hiển thị ngôi sao
-                        echo '<ul class="list-inline" id="starRating" style="list-style-type: none; padding: 0;">';
                         for ($count = 1; $count <= 5; $count++) {
                             if ($average_rating !== null && $count <= $average_rating) {
                                 $color = "color:#FFFF00;";
@@ -112,8 +98,49 @@ LIMIT 1"
 
                         // Hiển thị tổng số đánh giá
                         echo "Tổng số đánh giá: $total_reviews";
+                        
+                        } else {
+
+                        // Hiển thị ngôi sao
+                        echo '<ul class="list-inline" id="starRating" style="list-style-type: none; padding: 0;">';
+                            for ($count = 1; $count <= 5; $count++) {
+                                if ($average_rating !== null && $count <= $average_rating) {
+                                    $color = "color:#FFFF00;";
+                                } else {
+                                    $color = "color:#ccc;";
+                                }
+    
+                                echo "<li title='Đánh giá sao' 
+                                           
+                                            style='cursor:pointer; $color font-size: 30px; display: inline-block;'> &#9733;
+                                        </li>";
+                            }
+                            echo '</ul>';
+    
+                            // Hiển thị tổng số đánh giá
+                            echo "Tổng số đánh giá: $total_reviews";
                     }
                 }
+                else{
+                    echo '<ul class="list-inline" id="starRating" style="list-style-type: none; padding: 0;">';
+                            for ($count = 1; $count <= 5; $count++) {
+                                if ($average_rating !== null && $count <= $average_rating) {
+                                    $color = "color:#FFFF00;";
+                                } else {
+                                    $color = "color:#ccc;";
+                                }
+    
+                                echo "<li title='Đánh giá sao' 
+                                           
+                                            style='cursor:pointer; $color font-size: 30px; display: inline-block;'> &#9733;
+                                        </li>";
+                            }
+                            echo '</ul>';
+    
+                            // Hiển thị tổng số đánh giá
+                            echo "Tổng số đánh giá: $total_reviews";
+                }
+            }
                     else{
                         $sql2 = "SELECT * FROM danhgia";
                         $result2 = mysqli_query($conn, $sql2);
@@ -157,6 +184,7 @@ LIMIT 1"
                         // Hiển thị tổng số đánh giá
                         echo "Tổng số đánh giá: $total_reviews";
                     }
+                
                         ?>
 
 
