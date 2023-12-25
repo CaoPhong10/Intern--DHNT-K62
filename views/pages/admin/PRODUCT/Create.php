@@ -170,11 +170,11 @@ include("../../../header_admin.php");
                                         <input type="text" class="form-control textfile" name="CAMERA">
                                 </div>
                         </div>
-                        <div class="form-group">
-                                <div >
-                                        <input type="submit" value="Thêm sản phẩm" class="btn btn-primary"
+                        <div class="form-group mt">
+                                <div>
+                                        <input type="submit" value="Thêm sản phẩm" class="btn btn-success"
                                                 name="taomoi" />
-                                        <a href="./index.php" class="btn btn-primary">Trở về trang danh sách</a>
+                                        <a href="./index.php" class="btn btn-success">Trở về trang danh sách</a>
                                 </div>
                         </div>
 

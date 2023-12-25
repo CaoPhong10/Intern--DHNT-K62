@@ -149,8 +149,8 @@ include("../../../header_admin.php");
 
     </dl>
     <p>
-    <a href="./Edit.php?maSP=<?php echo $maSP ?>" class="btn btn-primary">Chỉnh sửa</a> 
-    <a href="./index.php" class="btn btn-primary">Trở về trang danh sách</a>
+    <a href="./Edit.php?maSP=<?php echo $maSP ?>" class="btn btn-success">Chỉnh sửa</a> 
+    <a href="./index.php" class="btn btn-success">Trở về trang danh sách</a>
 </p>
 </div>
 

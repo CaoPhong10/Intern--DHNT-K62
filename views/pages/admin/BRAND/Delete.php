@@ -28,43 +28,26 @@ if (isset($_POST["xoa"])) {
 
 ?>
 
-<h2 style="text-align:center">Xóa sản phẩm</h2>
-
-
 <div class="container">
-        <h3>Bạn có chắc muốn xóa?</h3>
-        <hr />
-
-        <dl class="dl-horizontal">
-                <dt>
-                        Tên sản phẩm
-                </dt>
-
-                <dd>
-                        <?php
-                        echo $row['TENTHUONGHIEU'];
-                        ?>
-                </dd>
-
-                <dt>
-                        Quốc gia
-                </dt>
-
-                <dd>
-                        <?php
-                        echo $row['QUOCGIA'];
-                        ?>
-                </dd>
-
-        </dl>
-
-
-        <form action="" method="post">
-                <div class="form-actions no-color">
-                        <input type="submit" value="Xóa" name="xoa" class="btn btn-danger" /> |
-                        <a href="./Index.php" class="btn btn-primary"   >Trở về trang danh sách</a>
+    <h2>BẠN CÓ MUỐN XÓA THƯƠNG HIỆU NÀY?</h2>
+    <form action="" method="POST">
+        <div class="form-horizontal">
+            
+            <div class="form-group">
+                <label>Tên thương hiệu</label>
+                <input type="text" class="form-control textfile"  value="<?php echo $row['TENTHUONGHIEU'] ?>" disabled name="maLoaiSP" style="width:52%">
+            </div>
+            <div class="form-group">
+                <label>Quốc gia</label>
+                <input type="text" class="form-control textfile"name="tenLoaiSP" disabled value="<?php echo $row['QUOCGIA']?>" style="width:52%">
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10"> 
+                    <input type="submit" value="Xóa" class="btn btn-danger" name="xoa" />
+                    <a href="javascript:history.go(-1);"><input type="button" value="Quay lại" class="btn btn-success" name="Quay lại" /></a>
                 </div>
-        </form>
+            </div>
+    </form>
 </div>
 <?php
 include("../../../footer_admin.php");

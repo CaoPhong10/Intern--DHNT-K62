@@ -66,7 +66,7 @@ include("../../../header_admin.php");
                         <div class="form-group">
                                 <label class="control-label ">Tên sản phẩm </label>
                                 <div class="col-md-10">
-                                        <input type="text" class="form-control textfile" name="TENSP"
+                                        <input required type="text" class="form-control textfile" name="TENSP"
                                                 value="<?php echo $row['TENSP'] ?>">
                                 </div>
                         </div>
@@ -74,7 +74,7 @@ include("../../../header_admin.php");
                         <div class="form-group">
                                 <label class="control-label">Đơn giá</label>
                                 <div class="col-md-10">
-                                        <input type="text" class="form-control textfile" name="DONGIA"
+                                        <input required type="text" class="form-control textfile" name="DONGIA"
                                                 value="<?php echo number_format($row['DONGIA']); ?>">
                                 </div>
                         </div>
@@ -82,7 +82,7 @@ include("../../../header_admin.php");
                         <div class="form-group">
                                 <label class="control-label ">Số lượng</label>
                                 <div class="col-md-10">
-                                        <input type="number" class="form-control textfile" name="SOLUONG"
+                                        <input required type="number" class="form-control textfile" name="SOLUONG"
                                                 value="<?php echo $row['SOLUONG'] ?>">
                                 </div>
                         </div>
@@ -98,7 +98,7 @@ include("../../../header_admin.php");
                         <div class="form-group">
                                 <label class="control-label">Ảnh</label>
                                 <div class="col-md-10">
-                                        <input type="file" class="textfile" value="Chọn File" name="Avatar"
+                                        <input required type="file" class="textfile" value="Chọn File" name="Avatar"
                                                 accept="image/*" />
                                 </div>
                         </div>
@@ -147,7 +147,7 @@ include("../../../header_admin.php");
                         <div class="form-group">
                                 <label class="control-label">Hệ điều hành </label>
                                 <div class="col-md-10">
-                                        <input type="text" class="form-control textfile" name="HEDIEUHANH"
+                                        <input required type="text" class="form-control textfile" name="HEDIEUHANH"
                                                 value="<?php echo $row['HEDIEUHANH'] ?>">
                                 </div>
                         </div>
@@ -155,7 +155,7 @@ include("../../../header_admin.php");
                         <div class="form-group">
                                 <label class="control-label">Ram</label>
                                 <div class="col-md-10">
-                                        <input type="text" class="form-control textfile" name="RAM"
+                                        <input required type="text" class="form-control textfile" name="RAM"
                                                 value="<?php echo number_format($row['RAM']); ?>">
                                 </div>
                         </div>
@@ -163,7 +163,7 @@ include("../../../header_admin.php");
                         <div class="form-group">
                                 <label class="control-label">Rom</label>
                                 <div class="col-md-10">
-                                        <input type="text" class="form-control textfile" name="ROM"
+                                        <input required type="text" class="form-control textfile" name="ROM"
                                                 value="<?php echo $row['ROM'] ?>">
                                 </div>
                         </div>
@@ -171,7 +171,7 @@ include("../../../header_admin.php");
                         <div class="form-group">
                                 <label class="control-label">Kích cỡ màn hình</label>
                                 <div class="col-md-10">
-                                        <input type="text" class="form-control textfile" name="KICHCOMANHINH"
+                                        <input required type="text" class="form-control textfile" name="KICHCOMANHINH"
                                                 value="<?php echo $row['KICHCOMANHINH'] ?>">
                                 </div>
                         </div>
@@ -179,29 +179,29 @@ include("../../../header_admin.php");
                         <div class="form-group">
                                 <label class="control-label">Vi xử lý</label>
                                 <div class="col-md-10">
-                                        <input type="text" class="form-control textfile" name="VIXULY"
+                                        <input required type="text" class="form-control textfile" name="VIXULY"
                                                 value="<?php echo $row['VIXULY'] ?>">
                                 </div>
                         </div>
                         <div class="form-group">
                                 <label class="control-label">Pin</label>
                                 <div class="col-md-10">
-                                        <input type="number" class="form-control textfile" name="PIN"
+                                        <input required type="number" class="form-control textfile" name="PIN"
                                                 value="<?php echo $row['PIN'] ?>">
                                 </div>
                         </div>
                         <div class="form-group">
                                 <label class="control-label">Camera</label>
                                 <div class="col-md-10">
-                                        <input type="text" class="form-control textfile" name="CAMERA"
+                                        <input required type="text" class="form-control textfile" name="CAMERA"
                                                 value="<?php echo $row['CAMERA'] ?>">
                                 </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group mt">
                                 <div>
-                                        <input type="submit" value="Lưu" class="btn btn-primary" name="luu" />
-                                        <a href="./Index.php" class="btn btn-primary">Trở về trang danh sách</a>
+                                        <input type="submit" value="Lưu" class="btn btn-success" name="luu" />
+                                        <a href="./Index.php" class="btn btn-success">Trở về trang danh sách</a>
                                 </div>
                         </div>
                 </div>
