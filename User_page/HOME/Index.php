@@ -104,6 +104,48 @@
 
     <!-- ========================= SECTION MAIN END// ========================= -->
     <!-- =============== SECTION 1 =============== -->
+    <section class="padding-bottom-sm">
+
+        <header class="section-heading heading-line">
+            <h4 class="title-section text-uppercase">Sản phẩm đang ưu đãi</h4>
+        </header>
+
+        <div class="row row-sm">
+        <?php
+        $result = mysqli_query($conn, "SELECT * FROM sanpham WHERE SALE > 0 LIMIT 12");
+
+        if (mysqli_num_rows($result) <> 0) {
+            while ($rows = mysqli_fetch_assoc($result)) {
+        ?>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+            <div class="card card-sm card-product-grid">
+                <a href="../SANPHAM/Detail.php?id=<?php echo $rows['MASP']?>" class="img-wrap">
+                    <img src="../../Images/<?= $rows['ANH'] ?>">
+                </a>
+                <figcaption class="info-wrap">
+                    <a href="../SANPHAM/Detail.php?id=<?php echo $rows['MASP']?>" class="title">
+                        <?= $rows['TENSP'] ?>
+                    </a>
+                    <?php if ($rows['SALE'] > 0) { ?>
+                        <div class="price mt-1">
+                            <span class="sale-price" style="color: red;"><?= number_format($rows['SALE']) ?></span>
+                            <span class="h6 original-price"><del style="color:gray;">
+                                <?= number_format($rows['DONGIA']) ?></del></span>
+                        </div>
+                    <?php } else { ?>
+                        <div class="price mt-1">
+                            <?= $rows['DONGIA'] ?>
+                        </div>
+                    <?php } ?>
+                </figcaption>
+            </div>
+        </div>
+        <?php
+    }
+}
+?>
+        </div> <!-- row.// -->
+    </section>
     <section class="padding-bottom">
         <header class="section-heading heading-line">
             <h4 class="title-section text-uppercase">Điện thoại</h4>
