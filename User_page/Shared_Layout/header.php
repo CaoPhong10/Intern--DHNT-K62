@@ -43,7 +43,37 @@
             timer2 = setTimeout(function () {
                 $(".progress").removeClass("active");
             }, 5300);
-        }</script>
+        }
+    </script>
+    <style>
+        .category-list 
+        {
+            list-style-type: none; 
+            padding: 0; 
+            margin: 0;
+        } 
+        .category-item 
+        {
+            margin-right: 10px; 
+            padding: 5px 10px; 
+            float: left;
+        }
+        header {
+            position: relative;
+            z-index: 1;
+        }
+        header.header-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+        }
+        #toast_updateCart {
+            position: fixed;
+            z-index: 999;
+        }
+    </style>
 </head>
 
 <body>
@@ -200,18 +230,18 @@
         <div class="progress"></div>
     </div>
     
-<style>
-   .category-list 
-   {
-    list-style-type: none; 
-    padding: 0; 
-    margin: 0;
-    } 
-    .category-item 
-    {
-        margin-right: 10px; 
-        padding: 5px 10px; 
-        float: left;
-    }
-   
-</style>
+<script>
+  window.addEventListener('scroll', function() {
+    var header = document.querySelector('header');
+    header.classList.toggle('header-fixed', window.scrollY > 0);
+  });
+</script>
+<script>
+  window.addEventListener('scroll', function() {
+    var header = document.querySelector('.header');
+    var toast = document.querySelector('#toast_updateCart');
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    header.style.transform = 'translateY(' + scrollTop + 'px)';
+    toast.classList.toggle('show', scrollTop > header.offsetHeight);
+  });
+</script>
