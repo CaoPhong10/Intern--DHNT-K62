@@ -53,7 +53,7 @@ foreach ($selectedProducts as $product) {
         mysqli_query($conn,"UPDATE sanpham SET SOLUONG = $soluongmoi WHERE MASP = '$masp'");
     }
     else if($tinhtrangdonhang == "Giao hàng thất bại"){
-        $soluongmoi = $soluonghientai;
+        $soluongmoi = $soluonghientai+$soluong;
         // Cập nhật số lượng sản phẩm trong bảng SANPHAM
         mysqli_query($conn,"UPDATE sanpham SET SOLUONG = $soluongmoi WHERE MASP = '$masp'");
         }

@@ -14,9 +14,15 @@ if (isset($_POST['selectedProducts'])) {
         $statement .= "'" . $masp . "',";
     }
     $statement = rtrim($statement, ","); // Loại bỏ dấu phẩy cuối cùng
-    $query = "SELECT SUM(SOLUONG*DONGIA) AS total FROM giohang WHERE MASP IN ($statement) AND MAND = '{$_SESSION['MAND']}'";
+    $query = "SELECT SUM(CASE
+                WHEN sanpham.SALE > 0 THEN giohang.SOLUONG * sanpham.SALE
+                ELSE giohang.SOLUONG * sanpham.DONGIA
+            END) AS total
+            FROM giohang
+            JOIN sanpham ON giohang.MASP = sanpham.MASP
+            WHERE giohang.MASP IN ($statement) AND giohang.MAND = '{$_SESSION['MAND']}'";
     $result = mysqli_query($conn, $query);
-    $ctdh = mysqli_query($conn, "SELECT *,giohang.SOLUONG as slgh,giohang.DONGIA as dggh FROM giohang join sanpham on giohang.MASP=sanpham.MASP WHERE giohang.MASP IN ($statement) AND giohang.MAND = '{$_SESSION['MAND']}'");
+    $ctdh = mysqli_query($conn, "SELECT *, giohang.SOLUONG AS slgh, giohang.DONGIA AS dggh FROM giohang JOIN sanpham ON giohang.MASP = sanpham.MASP WHERE giohang.MASP IN ($statement) AND giohang.MAND = '{$_SESSION['MAND']}'");
     if ($result) {
         $row = mysqli_fetch_assoc($result);
         $tongtien = $row["total"];
@@ -26,8 +32,6 @@ if (isset($_POST['selectedProducts'])) {
 }
 
 $_SESSION['tongtien'] = $tongtien;
-
-
 ?>
 
 
@@ -93,24 +97,32 @@ $_SESSION['tongtien'] = $tongtien;
                     <table class="table table-hover">
                         <tbody>
 
-                            <?php if (mysqli_num_rows($ctdh) <> 0): ?>
-                                <?php while ($row = mysqli_fetch_assoc($ctdh)): ?>
-                                    <tr>
-                                        <td width="65">
-                                            <img src="../..//Images/<?php echo $row['ANH'] ?>" class="img-xs border">
-                                        </td>
-                                        <td>
-                                            <p class="title mb-0"><?php echo $row['TENSP'] ?> </p>
-                                            <var
-                                                class="price text-muted"><?php echo formatCurrencyVND($row['dggh']) ?></var>
-                                        </td>
-                                        <td> Số lượng <br> <?php echo $row['slgh'] ?> </td>
-                                        <td width="250"> Thành tiền <br>
-                                        <?php echo formatCurrencyVND($row['slgh']*$row['dggh']) ?> </td>
-                                    </tr>
-                                <?php endwhile; ?>
-                            <?php endif; ?>
-
+                        <?php if (mysqli_num_rows($ctdh) <> 0): ?>
+                            <?php while ($row = mysqli_fetch_assoc($ctdh)): ?>
+                                <tr>
+                                    <td width="65">
+                                        <img src="../../views/Images/<?php echo $row['ANH'] ?>" class="img-xs border">
+                                    </td>
+                                    <td>
+                                        <p class="title mb-0"><?php echo $row['TENSP'] ?> </p>
+                                        <?php if ($row['SALE'] > 0): ?>
+                                            <var class="price text-muted" style="text-decoration: line-through;"><?php echo formatCurrencyVND($row['DONGIA']) ?></var>
+                                            <var class="price text-danger"><?php echo formatCurrencyVND($row['SALE']) ?></var>
+                                        <?php else: ?>
+                                            <var class="price text-muted"><?php echo formatCurrencyVND($row['DONGIA']) ?></var>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td> Số lượng <br> <?php echo $row['slgh'] ?> </td>
+                                    <td width="250"> Thành tiền <br>
+                                        <?php if ($row['SALE'] > 0): ?>
+                                            <?php echo formatCurrencyVND($row['slgh'] * $row['SALE']) ?>
+                                        <?php else: ?>
+                                            <?php echo formatCurrencyVND($row['slgh'] * $row['DONGIA']) ?>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        <?php endif; ?>
 
                         </tbody>
                     </table>

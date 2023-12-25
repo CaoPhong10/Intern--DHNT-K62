@@ -26,7 +26,7 @@ LIMIT 1"
                 <div class="card">
                     <article class="gallery-wrap">
                         <div class="img-big-wrap">
-                            <div> <a href="#"><img src="../../Images/<?php echo $row['ANH']; ?>"></a></div>
+                            <div> <a href="#"><img src="../../views/Images/<?php echo $row['ANH']; ?>"></a></div>
                         </div> <!-- slider-product.// -->
 
                     </article> <!-- gallery-wrap .end// -->
@@ -183,17 +183,23 @@ LIMIT 1"
 
                         // Hiển thị tổng số đánh giá
                         echo "Tổng số đánh giá: $total_reviews";
-                    }
-                
+                    }               
                         ?>
-
-
                         <small class="label-rating text-success"></small>
                     </div> <!-- rating-wrap.// -->
 
                     <div class="mb-3">
-                        <var class="price h4"><?php echo formatCurrencyVND($row['DONGIA']); ?></var>
-
+                        <?php if ($row['SALE'] > 0) { ?>
+                            <var class="price h4" style="color: red;"><?php echo formatCurrencyVND($row['SALE']); ?></var>
+                            <span class="h6 original-price"><del style="color: gray;"><?php echo formatCurrencyVND($row['DONGIA']); ?></del></span>
+                            <?php
+                            $phanTramGiamGia = round((($row['DONGIA'] - $row['SALE']) / $row['DONGIA']) * 100);
+                            if ($phanTramGiamGia > 0) {
+                                echo '<span class="badge badge-danger discount-badge">-' . $phanTramGiamGia . '%</span>';
+                            }
+                        } else { ?>
+                            <var class="price h4"><?php echo formatCurrencyVND($row['DONGIA']); ?></var>
+                        <?php } ?>
                     </div> <!-- price-detail-wrap .// -->
 
 
