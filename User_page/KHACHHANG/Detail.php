@@ -157,6 +157,7 @@ $result = mysqli_query($conn, "SELECT * FROM nguoidung
                                                             <?php echo $row['NGAYTAO']; ?>
                                                         </time>
                                                         <p>
+                                                        <a href="../SANPHAM/Detail.php?id=<?php echo $row['MASP']?>">
                                                             <?php echo $row['TENSP']; ?>
                                                         </p>
                                                         <span class="text-success">
