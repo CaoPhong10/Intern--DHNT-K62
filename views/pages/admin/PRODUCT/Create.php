@@ -23,25 +23,26 @@ $row1 = mysqli_fetch_assoc($result);
 $maTSKT = (int) substr($row['MASP'], 4);
 $maTSKT = $maTSKT + 1;
 $maTSKT = "TSKT" . str_pad($maTSKT, 3, "0", STR_PAD_LEFT);
-if (isset($_POST['TENSP'])) $TENSP = $_POST["TENSP"]; else $TENSP = "";
+
 if (isset($_POST["taomoi"])) {
-        $TENSP  = mysqli_real_escape_string($conn, $TENSP);
-    if (!isProductsExists($conn, $TENSP)) { 
-        $target_dir = "../../../Images/";
-        $target_file = $target_dir . basename($_FILES["Avatar"]["name"]);
-        $check = getimagesize($_FILES["Avatar"]["tmp_name"]);
-        $ngayTao = date("Y-m-d H:i:s");
-        if ($check !== false) {
-                
-                $sql = "INSERT INTO thongsokythuat VALUES ('$maTSKT', '" . $_POST['HEDIEUHANH'] . "', '" . $_POST['RAM'] . "', 
+$target_dir = "../../../Images/";
+$target_file = $target_dir . basename($_FILES["Avatar"]["name"]);
+$check = getimagesize($_FILES["Avatar"]["tmp_name"]);
+$ngayTao = date("Y-m-d H:i:s");
+if ($check !== false) {
+        $sale = isset($_POST['SALE']) ? $_POST['SALE'] : 0;
+
+        $sql = "INSERT INTO thongsokythuat VALUES ('$maTSKT', '" . $_POST['HEDIEUHANH'] . "', '" . $_POST['RAM'] . "', 
         '" . $_POST['ROM'] . "', '" . $_POST['KICHCOMANHINH'] . "', '" . $_POST['VIXULY'] . "',
         '" . $_POST['PIN'] . "', '" . $_POST['CAMERA']. "')";
         $result = mysqli_query($conn, $sql);
-                move_uploaded_file($_FILES["Avatar"]["tmp_name"], $target_file);
-                $sql = "INSERT INTO sanpham (NGAYTAO, MASP, TENSP, DONGIA, SOLUONG, MOTA, ANH, MALOAISP, MATH, MATSKT)
-            VALUES ('$ngayTao', '$maSP', '" . $_POST['TENSP'] . "', '" . $_POST['DONGIA'] . "', 
-            '" . $_POST['SOLUONG'] . "', '" . $_POST['MOTA'] . "', '" . $_FILES["Avatar"]["name"] . "',
-            '" . $_POST['loaisp'] . "', '" . $_POST['thuonghieu'] . "', '" . $maTSKT . "')";   
+
+        move_uploaded_file($_FILES["Avatar"]["tmp_name"], $target_file);
+
+        $sql = "INSERT INTO sanpham (NGAYTAO, MASP, TENSP, DONGIA, SALE, SOLUONG, MOTA, ANH, MALOAISP, MATH, MATSKT)
+        VALUES ('$ngayTao', '$maSP', '" . $_POST['TENSP'] . "', '" . $_POST['DONGIA'] . "', '$sale', 
+        '" . $_POST['SOLUONG'] . "', '" . $_POST['MOTA'] . "', '" . $_FILES["Avatar"]["name"] . "',
+        '" . $_POST['loaisp'] . "', '" . $_POST['thuonghieu'] . "', '" . $maTSKT . "')";   
         $result = mysqli_query($conn, $sql);
                 
         }
@@ -64,7 +65,7 @@ if (isset($_POST["taomoi"])) {
             Sản phẩm đã tồn tại
         </div>';
 }
-}
+
 
 ?>
 <div class="container">
@@ -91,6 +92,13 @@ if (isset($_POST["taomoi"])) {
                                 </div>
                         </div>
 
+                        <div class="form-group">
+                                <label class="control-label ">Sale</label>
+                                <div class="col-md-10">
+                                        <input type="text" class="form-control textfile" name="SALE" required>
+                                </div>
+                        </div>
+                        
                         <div class="form-group">
                                 <label class="control-label ">Số lượng </label>
                                 <div class="col-md-10">
@@ -209,3 +217,6 @@ if (isset($_POST["taomoi"])) {
 <?php
 include("../../../footer_admin.php");
 ?>
+
+
+

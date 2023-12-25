@@ -9,18 +9,19 @@ if (isset($_GET['search'])) {
         $input = '';
     }
 
-    $sql = "SELECT MASP, TENSP, DONGIA, SOLUONG, TENLOAISP, TENTHUONGHIEU , ANH
+    $sql = "SELECT MASP, TENSP, DONGIA, SALE, SOLUONG, TENLOAISP, TENTHUONGHIEU , ANH
             FROM (sanpham 
                 JOIN loaisanpham ON sanpham.MALOAISP = loaisanpham.MALOAISP) 
                 JOIN thuonghieu ON thuonghieu.MATH = sanpham.MATH 
             WHERE TENSP LIKE '%$input%'               
                 OR DONGIA = '$input' 
+                OR SALE = '$input'
                 OR MASP = '$input' 
                 OR TENTHUONGHIEU LIKE '%$input%'               
             ORDER BY sanpham.MASP ASC";
 } else {
     $input = '';
-    $sql = "SELECT MASP, TENSP, DONGIA, SOLUONG, TENLOAISP, TENTHUONGHIEU , ANH 
+    $sql = "SELECT MASP, TENSP, DONGIA, SALE, SOLUONG, TENLOAISP, TENTHUONGHIEU , ANH 
             FROM (sanpham 
                 JOIN loaisanpham ON sanpham.MALOAISP = loaisanpham.MALOAISP) 
                 JOIN thuonghieu ON thuonghieu.MATH = sanpham.MATH 
@@ -65,6 +66,9 @@ $list = mysqli_fetch_all($result, MYSQLI_NUM);
                     Đơn giá
                 </th>
                 <th>
+                    Sale
+                </th>
+                <th>
                     Số lượng
                 </th>
                 <th>
@@ -98,17 +102,20 @@ $list = mysqli_fetch_all($result, MYSQLI_NUM);
                     <?php echo number_format($row[2]); ?>
                 </td>
                 <td>
-                    <?php echo $row[3] ?>
+                    <?php echo number_format($row[3]); ?>
                 </td>
-            
                 <td>
                     <?php echo $row[4] ?>
                 </td>
+            
                 <td>
                     <?php echo $row[5] ?>
                 </td>
+                <td>
+                    <?php echo $row[6] ?>
+                </td>
                 <td style="width: 10%;">
-                <img class="" style="max-width: 100%; height: auto;" src="<?php $anh = $row[6]; echo "../../../Images/" . $anh ?>">
+                <img class="" style="max-width: 100%; height: auto;" src="<?php $anh = $row[7]; echo "../../../Images/" . $anh ?>">
             </td>
 
            <td style="min-width: 120px; display: flex; flex-direction: column;">
