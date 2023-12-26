@@ -11,7 +11,7 @@ function isProductsExists($conn, $TENSP, $maSP) {
 }
 
 $maSP = $_GET['maSP'];
-$sql_sanpham = "SELECT TENSP, DONGIA, SOLUONG, MOTA, ANH, TENLOAISP, TENTHUONGHIEU, HEDIEUHANH, sanpham.MATSKT,
+$sql_sanpham = "SELECT TENSP, DONGIA, SALE, SOLUONG, MOTA, ANH, TENLOAISP, TENTHUONGHIEU, HEDIEUHANH, sanpham.MATSKT,
 RAM, ROM, KICHCOMANHINH, VIXULY, PIN, CAMERA
 FROM ((sanpham join loaisanpham on sanpham.MALOAISP = loaisanpham.MALOAISP) join thuonghieu on
 sanpham.MATH = thuonghieu.MATH) join thongsokythuat on sanpham.MATSKT=thongsokythuat.MATSKT
@@ -44,8 +44,8 @@ if (isset($_POST["luu"])) {
     }
 
     if (!isProductsExists($conn, $_POST['TENSP'], $maSP)) {
-        $sql = "UPDATE sanpham SET TENSP = '" . $_POST['TENSP'] . "', DONGIA = '" . $_POST['DONGIA'] . "',
-            SOLUONG = '" . $_POST['SOLUONG'] . "', MOTA = '" . $_POST['MOTA'] . "', ANH = '$anh_moi',
+        $sql = "UPDATE sanpham SET TENSP = '" . $_POST['TENSP'] . "', DONGIA = '" . $_POST['DONGIA'] . "',SALE = '" . $_POST['SALE'] . "',
+        SOLUONG = '" . $_POST['SOLUONG'] . "', MOTA = '" . $_POST['MOTA'] . "', ANH = '$anh_moi',
             MALOAISP = '" . $_POST['loaisp'] . "', MATH = '" . $_POST['thuonghieu'] . "'
             WHERE MASP = '" . $maSP . "'";
         $result = mysqli_query($conn, $sql);
@@ -102,6 +102,13 @@ if (isset($_POST["luu"])) {
                                 <div class="col-md-10">
                                         <input required type="text" class="form-control textfile" name="DONGIA"
                                                 value="<?php echo number_format($row['DONGIA']); ?>">
+                                </div>
+                        </div>
+                        <div class="form-group">
+                                <label class="control-label">Sale</label>
+                                <div class="col-md-10">
+                                        <input required type="text" class="form-control textfile" name="SALE"
+                                                value="<?php echo number_format($row['SALE']); ?>">
                                 </div>
                         </div>
 

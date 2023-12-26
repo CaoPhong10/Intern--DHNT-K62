@@ -52,7 +52,7 @@ if (isset($_POST["edit"])) {
             </div>
             <div class="form-group">
                 <label>Tên loại</label>
-                <input type="text" class="form-control textfile"name="tenLSP" id="tenLSP" value="<?php echo $tenLSP?>" >
+                <input required type="text" class="form-control textfile"name="tenLSP" id="tenLSP" value="<?php echo $tenLSP?>" >
                 <span class="error_message"></span>
             </div>
             <div class="form-group">

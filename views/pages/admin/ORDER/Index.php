@@ -16,11 +16,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
                 (c.DONGIAXUAT * c.SOLUONG) AS 'TONGCONG',
                 h.NGAYTAO,
                 h.TINHTRANGDONHANG,
-                c.SOLUONG as SOLUONG
+                c.SOLUONG as SOLUONG,
+                nd.SDT,
+                nd.DIACHI,
+                xa.tenXa, huyen.tenHuyen, tinh.tenTinh
             FROM
                 hoadon h
             JOIN
                 nguoidung nd ON h.MAND = nd.MAND
+            JOIN xa ON nd.maXa = xa.maXa
+            JOIN huyen ON xa.maHuyen = huyen.maHuyen
+            JOIN tinh on huyen.maTinh = tinh.maTinh
             JOIN
                 chitiethoadon c ON h.MAHOADON = c.MAHOADON
             WHERE
@@ -40,11 +46,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
                     (c.DONGIAXUAT * c.SOLUONG) AS 'TONGCONG',
                     h.NGAYTAO,
                     h.TINHTRANGDONHANG,
-                    c.SOLUONG as SOLUONG
+                    c.SOLUONG as SOLUONG,
+                    nd.SDT,
+                    nd.DIACHI,
+                    xa.tenXa, huyen.tenHuyen, tinh.tenTinh
                 FROM
                     hoadon h
                 JOIN
-                    nguoidung nd ON h.MAND = nd.MAND
+                nguoidung nd ON h.MAND = nd.MAND
+                JOIN xa ON nd.maXa = xa.maXa
+                JOIN huyen ON xa.maHuyen = huyen.maHuyen
+                JOIN tinh on huyen.maTinh = tinh.maTinh
                 JOIN
                     chitiethoadon c ON h.MAHOADON = c.MAHOADON
                 GROUP BY
@@ -94,6 +106,8 @@ $list = mysqli_fetch_all($result, MYSQLI_NUM);
             <th>Mã hóa đơn</th>
             <th>Ngày tạo</th>
             <th>Tên khách hàng</th>
+            <th>SDT</th>
+            <th>Địa chỉ</th>
             <th>Tình trạng đơn hàng</th>
             <th>Tổng tiền</th>
             <th>Chức năng</th>
@@ -107,6 +121,8 @@ $list = mysqli_fetch_all($result, MYSQLI_NUM);
                 <td><?php echo $row[0] ?></td>
                 <td><?php echo date('d \t\h\á\n\g m \n\ă\m Y', strtotime($row[3])); ?></td>
                 <td><?php echo $row[1] ?></td>
+                <td><?php echo $row[6] ?></td>
+                <td><?php echo $row[7]. ', '.$row[8].', '.$row[9].', '.$row[10] ?></td>
                 <td><?php echo $row[4] ?></td>
                 <td>
                     <?php
@@ -126,6 +142,8 @@ $list = mysqli_fetch_all($result, MYSQLI_NUM);
                     echo number_format($total);
                     ?>
                 </td>
+                
+
                 <td width="120px">
                     <button type="button" class="btn btn-primary chitiethoadon" data-id="<?php echo $row[0]; ?>"
                             data-toggle="modal" data-target="#chitiethoadonModal">

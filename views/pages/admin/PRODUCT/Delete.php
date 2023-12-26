@@ -10,6 +10,7 @@ $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
 if (isset($_POST["xoa"])) {
+    try{
         $sql = "DELETE FROM sanpham WHERE MASP = '$maSP'";
         $result = mysqli_query($conn, $sql);
         $sql = "DELETE FROM thongsokythuat WHERE MATSKT = '{$row['MATSKT']}'";
@@ -26,6 +27,15 @@ if (isset($_POST["xoa"])) {
             }, 2000); // Chuyển hướng sau 2 giây
         </script>
         ";
+    }
+    catch (Exception $e) {
+        echo '<div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-warning"></i> Lỗi !</h4>
+            Đang có các hóa đơn liên kết với sản phẩm này
+        </div>';
+    }
+        
     }
 
 ?>

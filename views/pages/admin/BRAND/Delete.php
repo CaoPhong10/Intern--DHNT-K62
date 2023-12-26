@@ -9,6 +9,7 @@ $result = mysqlI_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
 if (isset($_POST["xoa"])) {
+    try{
         $sql = "DELETE FROM thuonghieu WHERE MATH = '$maTH'";
         $result = mysqli_query($conn, $sql);
         echo "
@@ -23,6 +24,15 @@ if (isset($_POST["xoa"])) {
             }, 2000); // Chuyển hướng sau 2 giây
         </script>
         ";
+    }
+    catch (Exception $e) {
+        echo '<div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-warning"></i> Lỗi !</h4>
+            Đang có các sản phẩm liên kết với thương hiệu này
+        </div>';
+    }
+        
        
     } 
 
