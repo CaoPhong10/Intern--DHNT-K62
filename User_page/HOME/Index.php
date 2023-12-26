@@ -105,46 +105,46 @@
     <!-- ========================= SECTION MAIN END// ========================= -->
     <!-- =============== SECTION 1 =============== -->
     <section class="padding-bottom-sm">
-
-        <header class="section-heading heading-line">
-            <h4 class="title-section text-uppercase">Sản phẩm đang ưu đãi</h4>
-        </header>
-
-        <div class="row row-sm">
+    <header class="section-heading heading-line">
+        <h4 class="title-section text-uppercase">Sản phẩm đang ưu đãi</h4>
+    </header>
+    <div class="row row-sm">
         <?php
         $result = mysqli_query($conn, "SELECT * FROM sanpham WHERE SALE > 0 LIMIT 12");
-
         if (mysqli_num_rows($result) <> 0) {
             while ($rows = mysqli_fetch_assoc($result)) {
+                $phangiamgia = ((($rows['DONGIA'] - $rows['SALE']) / $rows['DONGIA']) * 100);
+                ?>
+                <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                    <div class="card card-sm card-product-grid">
+                        <a href="../SANPHAM/Detail.php?id=<?php echo $rows['MASP'] ?>" class="img-wrap">
+                        <span class="badge badge-danger discount-badge">-<?= number_format($phangiamgia) ?>%</span>
+                            <img src="../../views/Images/<?= $rows['ANH'] ?>">
+                        </a>
+                        <figcaption class="info-wrap">
+                            <a href="../SANPHAM/Detail.php?id=<?php echo $rows['MASP'] ?>" class="title">
+                                <?= $rows['TENSP'] ?>
+                            </a>
+                            <?php if ($rows['SALE'] > 0) { ?>
+                                <div class="price mt-1">
+                                    <span class="sale-price" style="color: red;"><?= number_format($rows['SALE']) . '₫'?></span>
+                                    <span class="h6 original-price"><del style="color:gray;">
+                                        <?= number_format($rows['DONGIA']) . '₫'?></del></span>
+                                    
+                                </div>
+                            <?php } else { ?>
+                                <div class="price mt-1">
+                                    <?= $rows['DONGIA'] . '₫'?>
+                                </div>
+                            <?php } ?>
+                        </figcaption>
+                    </div>
+                </div>
+            <?php
+            }
+        }
         ?>
-        <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-            <div class="card card-sm card-product-grid">
-                <a href="../SANPHAM/Detail.php?id=<?php echo $rows['MASP']?>" class="img-wrap">
-                    <img src="../../Images/<?= $rows['ANH'] ?>">
-                </a>
-                <figcaption class="info-wrap">
-                    <a href="../SANPHAM/Detail.php?id=<?php echo $rows['MASP']?>" class="title">
-                        <?= $rows['TENSP'] ?>
-                    </a>
-                    <?php if ($rows['SALE'] > 0) { ?>
-                        <div class="price mt-1">
-                            <span class="sale-price" style="color: red;"><?= number_format($rows['SALE']) ?></span>
-                            <span class="h6 original-price"><del style="color:gray;">
-                                <?= number_format($rows['DONGIA']) ?></del></span>
-                        </div>
-                    <?php } else { ?>
-                        <div class="price mt-1">
-                            <?= $rows['DONGIA'] ?>
-                        </div>
-                    <?php } ?>
-                </figcaption>
-            </div>
-        </div>
-        <?php
-    }
-}
-?>
-        </div> <!-- row.// -->
+    </div> <!-- row.// -->
     </section>
     <section class="padding-bottom">
         <header class="section-heading heading-line">
@@ -176,7 +176,7 @@
                                 echo '<li class="col-6 col-lg-4 col-md-4">';
                                 echo "<a href='../SANPHAM/Detail.php?id={$rows['MASP']} ' class='item'>";
                                 echo '<div class="card-body">';
-                                echo "<img class='img-sm float-right' src=../../Images/{$rows['ANH']}> ";
+                                echo "<img class='img-sm float-right' src=../../views/Images/{$rows['ANH']}> ";
                                 echo "<p class='text-muted'><i class='fa fa-mobile'></i> {$rows['TENSP']}</p>";
                                 echo '</div>';
                                 echo '</a>';
@@ -221,7 +221,7 @@
                                 echo '<li class="col-6 col-lg-4 col-md-4">';
                                 echo "<a href='../SANPHAM/Detail.php?id={$rows['MASP']} ' class='item'>";
                                 echo '<div class="card-body">';
-                                echo "<img class='img-sm float-right' src=../../Images/{$rows['ANH']}> ";
+                                echo "<img class='img-sm float-right' src=../../views/Images/{$rows['ANH']}> ";
                                 echo "<p class='text-muted'><i class='fa fa-laptop'></i> {$rows['TENSP']}</p>";
                                 echo '</div>';
                                 echo '</a>';
@@ -267,7 +267,7 @@
                                 echo '<li class="col-6 col-lg-4 col-md-4">';
                                 echo "<a href='../SANPHAM/Detail.php?id={$rows['MASP']} ' class='item'>";
                                 echo '<div class="card-body">';
-                                echo "<img class='img-sm float-right' src=../../Images/{$rows['ANH']}> ";
+                                echo "<img class='img-sm float-right' src=../../views/Images/{$rows['ANH']}> ";
                                 echo "<p class='text-muted'><i class='fa fa-tablet'></i> {$rows['TENSP']}</p>";
                                 echo '</div>';
                                 echo '</a>';
@@ -292,8 +292,8 @@
         </header>
 
         <div class="row row-sm">
-            <?php
-            $result = mysqli_query($conn, "SELECT sp.MASP, sp.ANH, sp.TENSP, sp.DONGIA
+        <?php
+            $result = mysqli_query($conn, "SELECT sp.MASP, sp.ANH, sp.TENSP, sp.DONGIA, sp.SALE
             FROM sanpham sp
             JOIN (
                 SELECT MASP, AVG(rating) AS avg_rating
@@ -305,19 +305,38 @@
 
             if (mysqli_num_rows($result) <> 0) {
                 while ($rows = mysqli_fetch_assoc($result)) {
+                    if($rows['SALE'] > 0){
+                        $phangiamgia = round((($rows['DONGIA'] - $rows['SALE']) / $rows['DONGIA']) * 100);                      
+                    }
+                    else echo " ";
                     ?>
                     <div class="col-xl-2 col-lg-3 col-md-4 col-6">
                         <div class="card card-sm card-product-grid">
                             <a href="../SANPHAM/Detail.php?id=<?php echo $rows['MASP']?>" class="img-wrap">
-                                <img src="../../Images/<?= $rows['ANH'] ?>">
+                            <?php 
+                        if ($rows['SALE'] > 0) {
+                            $phangiamgia = round((($rows['DONGIA'] - $rows['SALE']) / $rows['DONGIA']) * 100);
+                            echo '<span class="badge badge-danger discount-badge">-' . $phangiamgia . '% </span>';
+                                }                                  
+                            ?>                             
+                                <img src="../../views/Images/<?= $rows['ANH'] ?>">
                             </a>
                             <figcaption class="info-wrap">
                                 <a href="../SANPHAM/Detail.php?id=<?php echo $rows['MASP']?>" class="title">
                                     <?= $rows['TENSP'] ?>
                                 </a>
+                                <?php if ($rows['SALE'] > 0) { ?>
                                 <div class="price mt-1">
-                                    <?= number_format($rows['DONGIA']) . '₫' ?>
+                                    <span class="sale-price" style="color: red;"><?= number_format($rows['SALE']) . '₫'?></span>
+                                    <span class="h6 original-price"><del style="color:gray;">
+                                        <?= number_format($rows['DONGIA']). '₫' ?></del></span>
+                                    
                                 </div>
+                            <?php } else { ?>
+                                <div class="price mt-1">
+                                    <?= $rows['DONGIA'] . '₫'?>
+                                </div>
+                            <?php } ?>
                             </figcaption>
                         </div>
                     </div>
