@@ -13,7 +13,7 @@ require_once("./config.php");
 $vnp_TxnRef = $_POST['order_id']; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
 $vnp_OrderInfo = $_POST['order_desc'];
 $vnp_OrderType = "billpayment";
-$vnp_Amount = $_POST['amount'] * 100;
+$vnp_Amount = $_POST['amount'] ;
 $vnp_Locale = $_POST['language'];
 $vnp_BankCode = $_POST['bank_code'];
 $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];

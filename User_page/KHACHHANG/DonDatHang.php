@@ -25,9 +25,14 @@ include '../Shared_Layout/header.php';
             </aside> <!-- col.// -->
             <main class="col-md-9">
                 <?php
-                $tt_hd = mysqli_query($conn, "SELECT * FROM hoadon 
-                JOIN nguoidung on hoadon.MAND = nguoidung.MAND 
-                where hoadon.MAND = '{$_SESSION['MAND']}'ORDER BY hoadon.MAHOADON DESC") ;
+                $tt_hd = mysqli_query($conn, "SELECT hoadon.*, nguoidung.*, xa.tenXa, huyen.tenHuyen, tinh.tenTinh
+                FROM hoadon
+                JOIN nguoidung ON hoadon.MAND = nguoidung.MAND
+                JOIN xa ON nguoidung.maXA = xa.maXa
+                JOIN huyen ON xa.maHuyen = huyen.maHuyen
+                JOIN tinh ON huyen.maTinh = tinh.maTinh
+                WHERE hoadon.MAND = '{$_SESSION['MAND']}'
+                ORDER BY hoadon.MAHOADON DESC");
 
                 ?>
                 <?php if (mysqli_num_rows($tt_hd) <> 0): ?>
@@ -55,10 +60,9 @@ include '../Shared_Layout/header.php';
                                         <h6 class="text-muted">Giao hàng đến</h6>
                                         <p>
                                             <?php echo $row['TENND'] ?> <br>
-                                            SĐT:
-                                            <?php echo $row['SDT'] ?><br> Email:
-<?php echo $row['EMAIL'] ?> <br>
-                                            Địa chỉ:
+                                            SĐT: <?php echo $row['SDT'] ?><br> 
+                                            Email: <?php echo $row['EMAIL'] ?> <br>
+                                            Địa chỉ: <?php echo $row['DIACHI']  . ', ' . $row['tenXa'] . ', ' . $row['tenHuyen'] . ', ' . $row['tenTinh']; ?>
                                             <br>
 
                                         </p>
@@ -87,7 +91,7 @@ include '../Shared_Layout/header.php';
                                 <table class="table table-hover">
                                     <tbody>
                                         <?php 
-                                        $tt_cthd = mysqli_query($conn, "SELECT chitiethoadon.*, hoadon.*, sanpham.*, chitiethoadon.SOLUONG as SLCTHD, sanpham.DONGIA as DGSP
+                                        $tt_cthd = mysqli_query($conn, "SELECT chitiethoadon.*, hoadon.*, sanpham.*, chitiethoadon.SOLUONG as SLCTHD, chitiethoadon.DONGIAXUAT as DGX, sanpham.DONGIA as DGSP, sanpham.SALE as SALE
                                         FROM chitiethoadon
                                         JOIN hoadon ON chitiethoadon.MAHOADON = hoadon.MAHOADON
                                         JOIN sanpham ON sanpham.MASP = chitiethoadon.MASP
@@ -97,18 +101,27 @@ include '../Shared_Layout/header.php';
                                             <?php while ($row = mysqli_fetch_assoc($tt_cthd)): ?>
                                                 <tr>
                                                     <td width="65">
-                                                        <img src="../../Images/<?php echo $row["ANH"]?>" class="img-xs border">
+                                                        <img src="../../views/Images/<?php echo $row["ANH"]?>" class="img-xs border">
                                                     </td>
                                                     <td>
-                                                    <a href="../SANPHAM/Detail.php?id=<?php echo $row['MASP']?>">
+                                                        <a href="../SANPHAM/Detail.php?id=<?php echo $row['MASP']?>">
                                                         <p class="title mb-0"><?php echo $row["TENSP"]?> </p>
-                                                        <var
-class="price text-muted"><?php echo formatCurrencyVND($row['DGSP']); ?></var>
+                                                        <?php if ($row['SALE'] > 0) { ?>
+                                                            <var class="price h6" ><?php echo formatCurrencyVND($row['DONGIAXUAT']); ?></var>
+                                                            <span class="h6 original-price"><del style="color: gray;"><?php echo formatCurrencyVND($row['DONGIA']); ?></del></span>
+                                                            <?php
+                                                            
+                                                        } else { ?>
+                                                            <var class="price h6"><?php echo formatCurrencyVND($row['DONGIA']); ?></var>
+                                                        <?php } ?>
                                                     </td>
                                                     <td> Số lượng <br> <?php echo $row['SLCTHD']; ?> </td>
                                                     <td width="250">
                                                         Thành tiền <br> Thanh toán:
-                                                        <?php echo formatCurrencyVND($row['DGSP']*$row['SLCTHD']); ?>
+                                                        <?php 
+                                                            $thanh_tien = $row['DONGIAXUAT'] * $row['SLCTHD'];
+                                                            echo formatCurrencyVND($thanh_tien);
+                                                        ?>
                                                     </td>
                                                 </tr>
                                             <?php endwhile; ?>
