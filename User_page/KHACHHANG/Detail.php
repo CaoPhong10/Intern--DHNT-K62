@@ -9,7 +9,10 @@ if (!isset($_SESSION['MAND'])) {
 }
 include '../Shared_Layout/header.php';
 
-$result = mysqli_query($conn, "SELECT * FROM nguoidung  
+$result = mysqli_query($conn, "SELECT nguoidung.*, xa.tenXa, huyen.tenHuyen, tinh.tenTinh FROM nguoidung 
+    JOIN xa ON nguoidung.maXA = xa.maXa
+    JOIN huyen ON xa.maHuyen = huyen.maHuyen
+    JOIN tinh ON huyen.maTinh = tinh.maTinh
     WHERE nguoidung.MAND = '{$_SESSION['MAND']}'");
 ?>
 <title>Thông tin cá nhân</title>
@@ -37,26 +40,83 @@ $result = mysqli_query($conn, "SELECT * FROM nguoidung
 
                         <article class="card mb-3">
                             <div class="card-body">
-                                <figure class="icontext">
-                                    <div class="icon">
-                                        <img class="rounded-circle img-sm border"
-                                            src="../../Content/images/avatars/avatar3.jpg">
-                                    </div>
-                                    <div class="text">
-                                        <strong>
-                                            <?php echo $row['TENND']; ?>
-                                        </strong> <br>
-                                        <p class="mb-2">
-                                            <?php echo $row['EMAIL']; ?>
-                                        </p>
-                                        <a href="CaiDatThongTin.php" class="btn btn-light btn-sm">Chỉnh sửa</a>
-                                    </div>  
-                                </figure>
+                            <?php
+                            // Kiểm tra xem người dùng đã chọn ảnh đại diện mới hay chưa
+                            if (isset($_FILES['avatar'])) {
+                                $file = $_FILES['avatar'];
+                                $uploadDir = '../../views/Content/images/avatars/'; // Đường dẫn tới thư mục lưu trữ ảnh đại diện
+
+                                // Kiểm tra và di chuyển tệp tin tải lên vào thư mục lưu trữ
+                                if ($file['error'] === UPLOAD_ERR_OK) {
+                                    $fileName = 'avatar.jpg'; // Tên tệp tin cố định
+                                    $filePath = $uploadDir . $fileName;
+                                    move_uploaded_file($file['tmp_name'], $filePath);
+
+                                    // Lưu đường dẫn ảnh đã chọn vào tệp tin
+                                    file_put_contents('../../views/Content/images/avatars/file.txt', $filePath);
+                                }
+                            }
+                            ?>
+
+                            <figure class="icontext">
+                                <div class="icon">
+                                    <img class="rounded-circle img-sm border avatar-img" src="<?php echo $row['ANHDAIDIEN'] ? $row['ANHDAIDIEN'] : 'Content/images/avatars/avatar3.jpg'; ?>" data-id="<?php echo $row['MAND']; ?>">
+                                </div>
+                                <div class="text">
+                                    <strong>
+                                        <?php echo $row['TENND']; ?>
+                                    </strong> <br>
+                                    <p class="mb-2">
+                                        <?php echo $row['EMAIL']; ?>
+                                    </p>
+                                    <form method="POST" enctype="multipart/form-data">
+                                        <input type="file" accept="image/*" class="d-none" name="avatar" id="avatar-input">
+                                        <label for="avatar-input" class="btn btn-light btn-sm edit-avatar">Chỉnh sửa</label>
+                                        <button type="submit" class="btn btn-primary btn-sm">Lưu</button>
+                                    </form>
+                                </div>
+                            </figure>
+                            <script>
+                                $(document).ready(function() {
+                                    var avatarImg = $('.icontext .avatar-img');
+                                    var avatarInput = $('#avatar-input');
+                                    var MAND = '<?php echo $row['MAND']; ?>';
+
+                                    // Kiểm tra nếu đã có ảnh được chọn từ trước
+                                    if (localStorage.getItem('selectedAvatar_' + MAND)) {
+                                        avatarImg.attr('src', localStorage.getItem('selectedAvatar_' + MAND));
+                                    }
+
+                                    avatarInput.change(function() {
+                                        var input = this;
+
+                                        if (input.files && input.files[0]) {
+                                            var reader = new FileReader();
+                                            reader.onload = function(e) {
+                                                var newAvatarUrl = e.target.result;
+                                                avatarImg.attr('src', newAvatarUrl);
+                                                localStorage.setItem('selectedAvatar_' + MAND, newAvatarUrl);
+
+                                                // Gửi đường dẫn ảnh đã chọn lên máy chủ để lưu vào tệp tin
+                                                $.ajax({
+                                                    url: 'avatar.php', // Đường dẫn đến file PHP xử lý việc lưu ảnh
+                                                    type: 'POST',
+                                                    data: { avatarUrl: newAvatarUrl },
+                                                    success: function(response) {
+                                                        // Xử lý kết quả sau khi lưu ảnh thành công
+                                                    }
+                                                });
+                                            };
+                                            reader.readAsDataURL(input.files[0]);
+                                        }
+                                    });
+                                });
+                            </script>
                                 <hr>
                                 <p>
                                     <i class="fa fa-map-marker text-muted"></i> &nbsp; Địa chỉ của tôi:
                                     <br>
-                                    <?php echo $row['DIACHI']; ?>
+                                    <?php echo $row['DIACHI']. ', ' . $row['tenXa'] . ', ' . $row['tenHuyen'] . ', ' . $row['tenTinh']; ?>
 
                                 </p>
 
@@ -149,7 +209,7 @@ $result = mysqli_query($conn, "SELECT * FROM nguoidung
                                         <?php while ($row = mysqli_fetch_assoc($result)): ?>
                                             <div class="col-md-6">
                                                 <figure class="itemside  mb-3">
-                                                    <div class="aside"><img src="../../Images/<?php echo $row['ANH']; ?>"
+                                                    <div class="aside"><img src="../../views/Images/<?php echo $row['ANH']; ?>"
                                                             class="border img-sm">
                                                     </div>
                                                     <figcaption class="info">

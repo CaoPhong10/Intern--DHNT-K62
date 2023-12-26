@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 25, 2023 lúc 05:28 AM
--- Phiên bản máy phục vụ: 10.4.27-MariaDB
--- Phiên bản PHP: 8.0.25
+-- Thời gian đã tạo: Th12 26, 2023 lúc 05:40 AM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -39,29 +39,30 @@ CREATE TABLE `chitiethoadon` (
 --
 
 INSERT INTO `chitiethoadon` (`MAHOADON`, `MASP`, `SOLUONG`, `DONGIAXUAT`) VALUES
-('HD0001', 'SP000001', 2, '55980000'),
-('HD0001', 'SP000003', 4, '111960000'),
-('HD0002', 'SP000002', 2, '39980000'),
-('HD0002', 'SP000007', 1, '19990000'),
-('HD0003', 'SP000007', 2, '39980000'),
-('HD0003', 'SP000047', 1, '19990000'),
-('HD0004', 'SP000001', 4, '75960000'),
-('HD0004', 'SP000004', 1, '18990000'),
-('HD0005', 'SP000005', 3, '20997000'),
-('HD0005', 'SP000051', 2, '13998000'),
-('HD0006', 'SP000013', 1, '14990000'),
-('HD0007', 'SP000007', 1, '19990000'),
-('HD0008', 'SP000008', 2, '35980000'),
-('HD0009', 'SP000009', 3, '11997000'),
-('HD0010', 'SP000016', 3, '44970000'),
-('HD0011', 'SP000025', 6, '3490000'),
-('HD0011', 'SP000026', 1, '25990000'),
-('HD0012', 'SP000026', 1, '25990000'),
-('HD0013', 'SP000001', 1, '27990000'),
-('HD0014', 'SP000032', 1, '25990000'),
-('HD0015', 'SP000001', 2, '27990000'),
-('HD0015', 'SP000002', 2, '19990000'),
-('HD0016', 'SP000001', 1, '26000000');
+('HD0001', 'SP000001', 2, 55980000),
+('HD0001', 'SP000003', 4, 111960000),
+('HD0002', 'SP000002', 2, 39980000),
+('HD0002', 'SP000007', 1, 19990000),
+('HD0003', 'SP000007', 2, 39980000),
+('HD0003', 'SP000047', 1, 19990000),
+('HD0004', 'SP000001', 4, 75960000),
+('HD0004', 'SP000004', 1, 18990000),
+('HD0005', 'SP000005', 3, 20997000),
+('HD0005', 'SP000051', 2, 13998000),
+('HD0006', 'SP000013', 1, 14990000),
+('HD0007', 'SP000007', 1, 19990000),
+('HD0008', 'SP000008', 2, 35980000),
+('HD0009', 'SP000009', 3, 11997000),
+('HD0010', 'SP000016', 3, 44970000),
+('HD0011', 'SP000025', 6, 3490000),
+('HD0011', 'SP000026', 1, 25990000),
+('HD0012', 'SP000026', 1, 25990000),
+('HD0013', 'SP000001', 1, 27990000),
+('HD0014', 'SP000032', 1, 25990000),
+('HD0015', 'SP000001', 2, 27990000),
+('HD0015', 'SP000002', 2, 19990000),
+('HD0016', 'SP000001', 1, 26000000),
+('HD0017', 'SP000015', 1, 50990000);
 
 -- --------------------------------------------------------
 
@@ -90,7 +91,8 @@ INSERT INTO `danhgia` (`id`, `MASP`, `MAND`, `rating`) VALUES
 (54, 'SP000041', 'ND002', 1),
 (55, 'SP000051', 'ND003', 5),
 (56, 'SP000060', 'ND003', 5),
-(57, 'SP000006', 'ND003', 3);
+(57, 'SP000006', 'ND003', 3),
+(58, 'SP000015', 'ND003', 5);
 
 -- --------------------------------------------------------
 
@@ -110,9 +112,9 @@ CREATE TABLE `giohang` (
 --
 
 INSERT INTO `giohang` (`MAND`, `MASP`, `SOLUONG`, `DONGIA`) VALUES
-('ND001', 'SP000004', 1, '18990000'),
-('ND001', 'SP000005', 3, '6999000'),
-('ND001', 'SP000025', 5, '3490000');
+('ND001', 'SP000004', 1, 18990000),
+('ND001', 'SP000005', 3, 6999000),
+('ND001', 'SP000025', 5, 3490000);
 
 -- --------------------------------------------------------
 
@@ -132,22 +134,23 @@ CREATE TABLE `hoadon` (
 --
 
 INSERT INTO `hoadon` (`MAHOADON`, `MAND`, `NGAYTAO`, `TINHTRANGDONHANG`) VALUES
-('HD0001', 'ND001', '2019-12-08 00:00:00', 'Hẹn ngày giao'),
-('HD0002', 'ND001', '2020-10-31 00:00:00', 'Đang giao hàng'),
-('HD0003', 'ND001', '2018-03-17 00:00:00', 'Giao hàng thành công'),
+('HD0001', 'ND002', '2022-12-15 00:00:00', 'Giao hàng thành công'),
+('HD0002', 'ND004', '2023-10-10 00:00:00', 'Đang giao hàng'),
+('HD0003', 'ND003', '2022-03-19 00:00:00', 'Giao hàng thành công'),
 ('HD0004', 'ND001', '2021-06-12 00:00:00', 'Giao hàng thất bại'),
-('HD0005', 'ND001', '2019-07-28 00:00:00', 'Chờ xác nhận'),
+('HD0005', 'ND003', '2023-11-24 00:00:00', 'Giao hàng thành công'),
 ('HD0006', 'ND001', '2023-02-14 00:00:00', 'Giao hàng thất bại'),
-('HD0007', 'ND001', '2022-09-09 00:00:00', 'Chờ xác nhận'),
-('HD0008', 'ND003', '2020-04-02 00:00:00', 'Đang giao hàng'),
-('HD0009', 'ND003', '2021-12-25 00:00:00', 'Hẹn ngày giao'),
-('HD0010', 'ND003', '2018-08-17 00:00:00', 'Giao hàng thất bại'),
-('HD0011', 'ND003', '2023-11-08 13:54:33', 'Đã đặt hàng'),
-('HD0012', 'ND003', '2023-11-08 13:54:43', 'Đã đặt hàng'),
-('HD0013', 'ND003', '2023-11-21 19:43:16', 'Đã đặt hàng'),
+('HD0007', 'ND001', '2022-09-09 00:00:00', 'Giao hàng thành công'),
+('HD0008', 'ND003', '2020-04-02 00:00:00', 'Giao hàng thành công'),
+('HD0009', 'ND003', '2021-12-25 00:00:00', 'Đang giao hàng'),
+('HD0010', 'ND004', '2021-08-24 00:00:00', 'Giao hàng thành công'),
+('HD0011', 'ND003', '2023-11-08 13:54:33', 'Giao hàng thành công'),
+('HD0012', 'ND003', '2023-11-08 13:54:43', 'Đang giao hàng'),
+('HD0013', 'ND003', '2023-11-21 19:43:16', 'Đang giao hàng'),
 ('HD0014', 'ND003', '2023-12-15 09:20:09', 'Giao hàng thất bại'),
 ('HD0015', 'ND003', '2023-12-25 09:48:32', 'Đang xử lý'),
-('HD0016', 'ND003', '2023-12-25 10:01:52', 'Đang xử lý');
+('HD0016', 'ND003', '2023-12-25 10:01:52', 'Đang xử lý'),
+('HD0017', 'ND003', '2023-12-26 09:30:23', 'Giao hàng thành công');
 
 -- --------------------------------------------------------
 
@@ -925,67 +928,67 @@ CREATE TABLE `sanpham` (
 --
 
 INSERT INTO `sanpham` (`MASP`, `TENSP`, `DONGIA`, `SALE`, `SOLUONG`, `MOTA`, `ANH`, `NGAYTAO`, `MALOAISP`, `MATH`, `MATSKT`) VALUES
-('SP000001', 'iPhone 13', '27990000', '26000000', 7, 'iPhone 13: Màn hình OLED 6,1 inch, camera kép 12MP, hỗ trợ 5G. Trải nghiệm chụp ảnh, xem video chất lượng cao và truy cập các ứng dụng mới nhất.', 'iphone-13-bh-org.jpg', '2023-11-29', 'LSP07', 'TH006', 'TSKT002'),
-('SP000002', 'Samsung Galaxy S21', '19990000', '19000000', 2, 'Samsung Galaxy S21: Màn hình Dynamic AMOLED 6,2 inch, camera chính 64MP, hỗ trợ 5G, pin 4000mAh. Trải nghiệm chụp ảnh và quay video chất lượng cao, xem video và chơi game mượt mà', 'samsung-galaxy-s21-trang-bbh-org.jpg', '2023-12-13', 'LSP07', 'TH005', 'TSKT001'),
-('SP000003', 'OnePlus 9 Pro', '19990000', '0', 2, 'Màn hình Fluid AMOLED 6,7 inch, camera chính 48MP, hỗ trợ 5G, pin 4500mAh. Trải nghiệm chụp ảnh và quay video chất lượng cao, xem video và chơi game mượt mà, hỗ trợ sạc nhanh Warp Charge 65T.', 'oneplus-9-pro-600x600-1-600x600.jpg', '2023-12-13', 'LSP07', 'TH011', 'TSKT003'),
-('SP000004', 'Xiaomi Mi 11', '18990000', '18090000', 1, 'Xiaomi Mi 11 là một sản phẩm cao cấp của Xiaomi với nhiều tính năng hiện đại. Màn hình AMOLED 6,81 inch cho trải nghiệm xem video và chơi game đỉnh cao, với độ phân giải 2K+ và tốc độ làm mới 120Hz', 'xiaomi-mi-11-xanhduong-1-org.jpg', '2023-12-13', 'LSP07', 'TH011', 'TSKT004'),
-('SP000005', 'Google Pixel 6', '6999000', '0', 5, 'Trải nghiệm chụp ảnh và quay video chất lượng cao, xem video và chơi game mượt mà, hỗ trợ sạc nhanh.', 'google-pixel-6-600x600.jpg', '2023-12-13', 'LSP07', 'TH009', 'TSKT006'),
-('SP000006', 'Sony Xperia 1 III', '14990000', '14090000', 8, 'Màn hình OLED 6,5 inch, chip Snapdragon 888, camera chính 12MP, hỗ trợ 5G, pin 4500mAh. Trải nghiệm chụp ảnh và quay video chất lượng cao, xem video và chơi game mượt mà, hỗ trợ sạc nhanh.', 'sony-xperia-1-iii-1-600x600.jpg', '2023-12-13', 'LSP07', 'TH017', 'TSKT007'),
-('SP000007', 'Huawei P50 Pro', '19990000', '0', 4, ' Màn hình OLED 6,6 inch, chip Kirin 9000, camera chính 50MP, hỗ trợ 5G, pin 4360mAh. Trải nghiệm chụp ảnh và quay video chất lượng cao, xem video và chơi game mượt mà, hỗ trợ sạc nhanh.', 'huawei-p50-pro-600x600.jpg', '2023-12-13', 'LSP07', 'TH002', 'TSKT008'),
-('SP000008', 'Oppo Find X3 Pro', '17990000', '0', 5, 'Màn hình AMOLED 6,7 inch, chip Snapdragon 888,camera chính 50MP, hỗ trợ 5G, pin 4500mAh. Trải nghiệm chụp ảnh và quay video chất lượng cao, xem video và chơi game mượt mà, hỗ trợ sạc nhanh.', 'oppo-find-x3-pro-bh-org-1-org.jpg', '2023-12-03', 'LSP07', 'TH012', 'TSKT009'),
-('SP000009', 'Realme Q3 Pro', '3999000', '0', 8, 'Màn hình IPS 6,43 inch, chip Dimensity 1100, camera chính 64MP, hỗ trợ 5G, pin 4500mAh. Trải nghiệm chụp ảnh và quay video chất lượng cao, xem video và chơi game mượt mà, hỗ trợ sạc nhanh.', 'realme-q3-pro-1-600x600.jpg', '2023-12-05', 'LSP07', 'TH010', 'TSKT005'),
-('SP000010', 'Nokia X50', '14990000', '0', 5, 'Nokia X50: Màn hình AMOLED 6,67 inch, camera 108MP, pin 4470mAh, hỗ trợ 5G. Trải nghiệm chụp ảnh, xem video trực tiếp và sử dụng các ứng dụng mới nhất.', 'nokia-x50-600x600.jpg', '2023-12-13', 'LSP07', 'TH013', 'TSKT010'),
-('SP000011', 'Dell XPS 13', '29990000', '0', 8, 'Dell XPS 13: Màn hình 13 inch, Intel Core i7, RAM 16GB. Thiết kế siêu mỏng và nhẹ, thời lượng pin lâu, xử lý tốt các tác vụ đa nhiệm.', 'dell-xps-13-plus_1280x720-800-resize.jpg', '2023-12-04', 'LSP06', 'TH004', 'TSKT011'),
-('SP000012', 'HP Spectre x360', '26990000', '26090000', 6, 'HP Spectre x360: Màn hình 13,3 inch, Intel Core i7, RAM 16GB. Thiết kế 2 trong 1, xoay màn hình dễ dàng, thời lượng pin lâu, âm thanh tốt.', 'hp-spectre-x360-13-ac028tu-i7-7500u-nau-1-org.jpg', '2023-12-13', 'LSP06', 'TH009', 'TSKT013'),
-('SP000013', 'Lenovo ThinkPad X1 Carbon', '35990000', '0', 5, 'Lenovo ThinkPad X1 Carbon: Màn hình 14 inch, Intel Core i7, RAM16GB. Thiết kế bền bỉ và chắc chắn, kết nối internet nhanh chóng, xử lý tốt các tác vụ đa nhiệm.', 'lenovo-thinkpad-x1-carbon-gen-10-i7-21cb00a8vn-2-1.jpg', '2023-12-09', 'LSP06', 'TH007', 'TSKT014'),
-('SP000014', 'Asus ZenBook UX425', '22990000', '21990000', 9, 'Asus ZenBook UX425: Màn hình 14 inch, Intel Core i7, RAM 16GB. Thiết kế sang trọng và tinh tế, thời lượng pin lâu, xử lý tốt các tác vụ đa nhiệm.', 'asus-zenbook-ux425ea-i5-bm069t-2-org.jpg', '2023-12-13', 'LSP06', 'TH003', 'TSKT015'),
-('SP000015', 'MacBook Pro 16-inch', '52990000', '50990000', 7, 'MacBook Pro 16-inch: Màn hình Retina 16 inch, Intel Core i9, RAM 64GB. Thiết kế tinh tế, màn hình đẹp mắt, thời lượng pin lâu, xử lý tốt các tác vụ đa nhiệm.', 'apple-macbook-pro-16-m1-pro-2021-10-core-cpu-2.jpg', '2023-12-13', 'LSP06', 'TH006', 'TSKT012'),
-('SP000016', 'Acer Swift 5', '20990000', '0', 1, 'Acer Swift 5: Màn hình 14 inch, Intel Core i7, RAM 16GB. Thiết kế siêu mỏng và nhẹ, khả năng xử lý tốt các tác vụ thông thường.', 'acer-swift-sf5-i7-8565u-8gb-256gb-win10-xanh-duong-2-org.jpg', '2023-12-09', 'LSP06', 'TH001', 'TSKT016'),
-('SP000017', 'Dell VOSTRO 3558', '9990000', '0', 6, 'Dell VOSTRO 3558: Màn hình 15,6 inch, Intel Core i3, RAM 4GB. Thiết kế đơn giản, xử lý tốt cáctác vụ thông thường, phù hợp cho học tập và làm việc văn phòng.', 'dell-vostro-3558-i3-4005u-4gb-500gb-win81-org-1.jpg', '2023-12-13', 'LSP06', 'TH004', 'TSKT017'),
-('SP000018', 'Razer Blade Stealth 13', '39990000', '0', 8, 'Razer Blade Stealth 13: Màn hình 13,3 inch, Intel Core i7, RAM 16GB. Thiết kế đẹp mắt, khả năng xử lý tốt các tác vụ đa nhiệm và đồ họa, phù hợp cho chơi game máy tính.', 'gturqbjdmvvqbmfc7jczm-1366-80-_1366x768-800-resize.jpg', '2023-12-04', 'LSP06', 'TH002', 'TSKT018'),
-('SP000019', 'MSI Prestige 14', '31990000', '0', 1, 'MSI Prestige 14: Màn hình 14 inch, Intel Core i7, RAM 16GB. Thiết kế đẹp mắt, màn hình đẹp, khả năng xử lý tốt các tác vụ đa nhiệm và đồ họa, phù hợp cho làm việc và sáng tạo.', 'msi-prestige-14-a11sc-i7-202vn-2-2.jpg', '2023-12-02', 'LSP06', 'TH003', 'TSKT019'),
-('SP000020', 'LG Gram 17', '39990000', '0', 6, 'LG Gram 17: Màn hình 17 inch, Intel Core i7, RAM 16GB. Thiết kế siêu mỏng và nhẹ, thời lượng pin lâu, khả năng xử lý tốt các tác vụ đa nhiệm. Trải nghiệm làm việc và giải trí tuyệt vời.', 'lg-gram-2023-i7-14z90rgah75a5-1.jpg', '2023-12-03', 'LSP06', 'TH008', 'TSKT020'),
-('SP000021', 'Samsung Galaxy Tab S7', '14990000', '0', 3, 'Màn hình 11 inch, RAM 6GB, bút S Pen đi kèm. Khả năng xử lý tốt các tác vụ đa nhiệm, chơi game và làm việc trên màn hình lớn, hỗ trợ bút S Pen cho trải nghiệm viết và vẽ tuyệt vời.', 'samsung-galaxy-tab-s7-vang-dong-1-org.jpg', '2023-12-01', 'LSP08', 'TH005', 'TSKT021'),
-('SP000022', 'Apple iPad Pro (2021)', '23990000', '0', 7, 'Thiết kế tinh tế, khả năng xử lý tốt các tác vụ đa nhiệm, trải nghiệm viết, vẽ và gõ phím tuyệt vời với bút Apple Pencil và bàn phím Magic Keyboard.', 'ipad-pro-m1-11-inch-wifi-2-1.jpg', '2023-12-05', 'LSP08', 'TH006', 'TSKT022'),
-('SP000023', 'Microsoft Surface Pro 7', '29990000', '0', 3, 'Thiết kế 2 trong 1, xoay màn hình dễ dàng, khả năng xử lý tốt các tác vụ đa nhiệm và đồ họa, hỗ trợ bút Surface Pen cho trải nghiệm viết và vẽ tuyệt vời.', 'surface-pro-7-i5-puv00001-den-1.jpg', '2023-12-04', 'LSP08', 'TH015', 'TSKT023'),
-('SP000024', 'Lenovo Tab P11 Pro', '11990000', '0', 9, 'bút Lenovo Precision Pen đi kèm. Thiết kế đẹp mắt, khả năng xử lý tốt các tác vụ đa nhiệm, hỗ trợ bút Lenovo Precision Pen cho trải nghiệm viết và vẽ tuyệt vời.', 'lenovo-tab-p11-pro-073820-043835-600x600.jpg', '2023-12-13', 'LSP08', 'TH007', 'TSKT024'),
-('SP000025', 'iPad 10', '3490000', '0', 7, 'Thiết kế đơn giản và dễ sử dụng, khả năng xử lý tốt các tác vụ đa nhiệm, trải nghiệm viết, vẽ và gõ phím tuyệt vời với bút Apple Pencil và bàn phím Smart Keyboard.', 'ipad-10-vang-glr-1.jpg', '2023-12-05', 'LSP08', 'TH016', 'TSKT025'),
-('SP000026', 'Huawei MatePad Pro 12.6', '25990000', '0', 7, 'hỗ trợ M-Pencil và bàn phím thông minh. Thiết kế đẹp mắt, khả năng xử lý tốt các tác vụ đa nhiệm, trải nghiệm viết, vẽ và gõ phím tuyệt vời với bút M-Pencil và bàn phím thông minh.', 'huawei-matepad-pro-129-2021-600x600.jpg', '2023-12-13', 'LSP08', 'TH012', 'TSKT026'),
-('SP000027', 'ASUS ZenPad 3S 10', '8990000', '0', 2, ' Màn hình IPS 9,7 inch, chip MediaTek MT8176, RAM 4GB. Thiết kế đẹp mắt và nhẹ, khả năng xử lý tốt các tác vụ thông thường, phù hợp cho giải trí và làm việc văn phòng.', 'asus-zenpad-3s-10-z500kl_m-1-300x300.jpg', '2023-12-13', 'LSP08', 'TH003', 'TSKT027'),
-('SP000028', 'Samsung Galaxy Tab A8', '27990000', '26990000', 10, 'Màn hình 8 inch, RAM 2GB. Thiết kế đơn giản và dễ sử dụng, khả năng xử lý tốt các tác vụ thông thường, phùhợp cho giải trí và đọc sách, trải nghiệm xem video và chơi game cơ bản.', 'samsung-galaxy-tab-a8-1-1.jpg', '2023-12-13', 'LSP08', 'TH015', 'TSKT028'),
-('SP000029', 'Xiaomi Mi Pad 5 Pro', '9990000', '0', 5, 'Màn hình 11 inch, RAM 8GB, hỗ trợ bút điện tử Xiaomi. Thiết kế đẹp mắt, khả năng xử lý tốt các tác vụ đa nhiệm và đồ họa, hỗ trợ bút điện tử Xiaomi cho trải nghiệm viết và vẽ tuyệt vời.', 'xiaomi-mi-pad-5-pro-600x600.jpg', '2023-12-13', 'LSP08', 'TH011', 'TSKT029'),
-('SP000030', 'LG G Pad 5 10.1', '6990000', '0', 10, 'Màn hình IPS 10,1 inch, chip Snapdragon 821, RAM 4GB. Thiết kế đẹp mắt và nhẹ, khả năng xử lý tốt các tác vụ thông thường, phù hợp cho giải trí và làm việc văn phòng.', 'lg4_800x450.jpg', '2023-12-13', 'LSP08', 'TH008', 'TSKT030'),
-('SP000031', 'Samsung Galaxy Note 20 Ultra', '27790000', '0', 3, 'Samsung Galaxy Note 20 Ultra: Một trong những chiếc điện thoại cao cấp nhất của Samsung, với màn hình Dynamic AMOLED 2X 6.9 inch, camera sau 108 MP và hỗ trợ bút S Pen.', 'samsung-galaxy-s21-ultra-bac-1-org.jpg', '2023-12-13', 'LSP07', 'TH005', 'TSKT031'),
-('SP000032', 'Apple iPhone 12 Mini', '25990000', '0', 10, 'Apple iPhone 12 Mini: Phiên bản nhỏ gọn nhất của iPhone 12, với màn hình Super Retina XDR 5.4 inch, camera sau kép 12 MP và hỗ trợ sạc nhanh MagSafe.', 'iphone-12-mini-tim-gc-1-org.jpg', '2023-12-13', 'LSP07', 'TH006', 'TSKT032'),
-('SP000033', 'Google Pixel 5a', '16190000', '0', 9, 'Google Pixel 5a: Chiếc điện thoại mới nhất của Google, được trang bị chip Snapdragon 765G, camera sau kép 12.2 MP và hỗ trợ 5G.', 'google-pixel-5a-040921-051453-600x600.jpg', '2023-12-13', 'LSP07', 'TH014', 'TSKT033'),
-('SP000034', 'OnePlus Nord 2', '22590000', '0', 9, 'OnePlus Nord 2: Chiếc điện thoại tầm trung của OnePlus, với màn hình Fluid AMOLED 6.43 inch, camera sau 50 MP và hỗ trợ sạc nhanh Warp Charge 65.', 'oneplus-nord-2-5g-600x600.jpg', '2023-12-13', 'LSP07', 'TH011', 'TSKT034'),
-('SP000035', 'Xiaomi Poco X3 Pro', '18990000', '0', 2, 'Xiaomi Poco X3 Pro: Chiếc điện thoại tầm trung của Xiaomi, với màn hình IPS LCD 6.67 inch, camera sau 48 MP và hỗ trợ sạc nhanh 33W.', 'xiaomi-poco-x3-pro-600x600-1-600x600.jpg', '2023-12-13', 'LSP07', 'TH011', 'TSKT035'),
-('SP000036', 'Sony Xperia 5 II', '31990000', '0', 9, 'Sony Xperia 5 II: Một trong những chiếc điện thoại cao cấp nhất của Sony, với màn hình OLED 6.1 inch, camera sau 12 MP và hỗ trợ chụp ảnh RAW.', 'sony-xperia-5-ii-215020-015023-600x600.jpg', '2023-12-13', 'LSP07', 'TH016', 'TSKT036'),
-('SP000037', 'Huawei P40 Pro Plus', '25990000', '0', 9, 'Huawei P40 Pro Plus: Chiếc điện thoại cao cấp của Huawei, với màn hình OLED 6.58 inch, camera sau 50 MP và hỗ trợ sạc nhanh 40W.', 'huawei-p40-pro-plus-600x600-1-600x600.jpg', '2023-12-13', 'LSP07', 'TH017', 'TSKT037'),
-('SP000038', 'Oppo Reno 6 Pro+', '24490000', '0', 3, 'Oppo Reno 6 Pro+: Chiếc điện thoại cao cấp của Oppo, với màn hình AMOLED 6.55 inch, camera sau 50 MP và hỗ trợ sạc nhanh 65W.', 'oppo-reno6-pro-plus-600x600.jpg', '2023-12-13', 'LSP07', 'TH012', 'TSKT038'),
-('SP000039', 'Motorola Moto G Power (2021)', '23990000', '0', 9, 'Motorola Moto G Power (2021): Chiếc điện thoại tầm trung của Motorola, với màn hình IPS LCD 6.6 inch, camera sau 48 MP và pin dung lượng lớn 5000 mAh.', 'motorola-moto-g8-power-600x600-600x600.jpg', '2023-12-13', 'LSP07', 'TH011', 'TSKT039'),
-('SP000040', 'LG Wing 5G', '12990000', '0', 7, 'LG Wing 5G: Chiếc điện thoại độc đáo của LG, với màn hình OLED 6.8 inch, camera sau kép 64 MP và màn hình phụ OLED 3.9 inch xoay dọc, cho phép sử dụng 2 ứng dụng cùng lúc và trải nghiệm độc đáo.', '600-lg-wing-600x600.jpg', '2023-12-13', 'LSP07', 'TH008', 'TSKT040'),
-('SP000041', 'itel ABLE 1S N4020 (71006300027)', '6990000', '0', 9, 'laptop học tập - văn phòng sử dụng hiệu quả cho các tác vụ cơ bản, thiết kế thanh lịch, gọn nhẹ, đáp ứng nhu cầu về hiệu năng và giá thành cho các khách hàng trong phân khúc.', 'itel-able-1s-n4020-71006300027-2-2.jpg', '2023-12-13', 'LSP06', 'TH014', 'TSKT041'),
-('SP000042', 'Lenovo Ideapad 5 Pro 14ITL6 i5 1155G7 (82L300M9VN)', '24490000', '0', 7, 'Ngoại hình hiện đại, thanh lịch, hiệu năng mạnh mẽ cùng màn hình 2.2K sắc nét sẽ là những ưu điểm mà bạn nên lựa chọn laptop Lenovo Ideapad 5 Pro 14ITL6 i5 (82L300M9VN) làm trợ thủ đắc lực trong phân khúc laptop học tập - văn phòng.', 'lenovo-ideapad-5-pro-14itl6-i5-82l300m9vn-xy-2.jpg', '2023-12-13', 'LSP06', 'TH007', 'TSKT042'),
-('SP000043', 'Asus Gaming TUF Dash F15 FX517ZC i5 12450H (HN077W)', '31990000', '0', 7, 'Sở hữu ngoại hình ấn tượng thu hút mọi ánh nhìn cùng hiệu năng mạnh mẽ đến từ laptop CPU thế hệ 12 mới nhất, Asus Gaming TUF Dash F15 FX517ZC i5 (HN077W) là lựa chọn xứng tầm cho mọi nhu cầu chiến game giải trí hay đồ hoạ - kỹ thuật của người dùng.', 'asus-tuf-gaming-fx517zc-i5-hn077w-ab-2.jpg', '2023-12-13', 'LSP06', 'TH003', 'TSKT043'),
-('SP000044', 'MSI Gaming GF63 Thin 11UD i7 11800H (648VN)', '29990000', '28990000', 10, 'Sở hữu một vẻ ngoài độc đáo, mạnh mẽ phù hợp với mọi game thủ, chiếc laptop MSI Gaming GF63 Thin 11UD i7 11800H (648VN) được trang bị dòng chip Intel thế hệ 11 hiệu năng mạnh mẽ vượt trội khi đi cùng card rời RTX 30 series sẵn sàng chiến mượt bất kì tựa game phổ biến hay thiết kế đồ họa chuyên sâu.', 'msi-gaming-gf63-thin-11ud-i7-648vn-2.jpg', '2023-12-13', 'LSP06', 'TH016', 'TSKT044'),
-('SP000045', 'Asus Vivobook 14 X1402ZA i3 1220P (EK249W)', '12990000', '0', 8, 'sở hữu cấu hình vượt trội từ bộ vi xử lý Intel Gen 12 cùng kiểu dáng thiết kế thời thượng, xứng danh người cộng sự lý tưởng, sẵn sàng đồng hành cùng bạn mọi lúc mọi nơi, trong cả công việc hay giải trí.', 'asus-vivobook-14-x1402za-i3-ek249w-2-1.jpg', '2023-12-13', 'LSP06', 'TH003', 'TSKT045'),
-('SP000046', 'MacBook Air M1 2020 7-core GPU', '24990000', '0', 6, 'laptop cao cấp sang trọng có cấu hình mạnh mẽ, chinh phục được các tính năng văn phòng lẫn đồ hoạ mà bạn mong muốn, thời lượng pin dài, thiết kế mỏng nhẹ sẽ đáp ứng tốt các nhu cầu làm việc của bạn.', 'macbook-air-m1-2020-silver-01-org.jpg', '2023-12-13', 'LSP06', 'TH006', 'TSKT046'),
-('SP000047', 'MacBook Air M2 2022 8-core GPU', '30990000', '0', 8, 'thiết kế hoàn toàn mới, độ dày không thay đổi tương tự như MacBook Pro, đánh bật mọi rào cản với con chip Apple M2 đầy mạnh mẽ.', 'apple-macbook-air-m2-2022-02-2.jpg', '2023-12-13', 'LSP06', 'TH006', 'TSKT047'),
-('SP000048', 'MacBook Air M1 2020 8-core GPU', '29990000', '0', 1, 'vẻ ngoài hiện đại cùng cấu hình mạnh mẽ vượt trội đến từ con chip M1 được sản xuất trên quy trình tân tiến, là người bạn đồng hành lý tưởng cho bất kỳ ai trong cả những công việc văn phòng hay thiết kế đồ họa.', 'apple-macbook-air-m1-2020-8-core-gpu-xam-01.jpg', '2023-12-13', 'LSP06', 'TH006', 'TSKT048'),
-('SP000049', 'MacBook Air M2 2022 10-core GPU', '35990000', '0', 5, 'khẳng định vị thế hàng đầu của Apple trong phân khúc laptop cao cấp - sang trọng vào giữa năm 2022 khi sở hữu phong cách thiết kế thời thượng, đẳng cấp cùng sức mạnh bộc phá đến từ bộ vi xử lý Apple M2 mạnh mẽ.', 'apple-macbook-air-m2-2022-16gb-2.jpg', '2023-12-13', 'LSP06', 'TH006', 'TSKT049'),
-('SP000050', 'iPad Pro M1 12.9 inch 5G', '30000000', '0', 2, 'Bạn có đang mong chờ những sản phẩm chất lượng đến từ Apple? Sau hàng loạt các sản phẩm đình đám như iPhone 12 series thì hãng đã tung ra chiếc iPad Pro M1 12.9 inch Wifi Cellular 128GB (2021) trang bị những tính năng ngày càng vượt trội và thời thượng.', 'ipad-pro-m1-129-inch-wifi-cellular--1.jpg', '2023-12-13', 'LSP08', 'TH006', 'TSKT050'),
-('SP000051', 'Samsung Galaxy Tab A8 (2022)', '6000000', '0', 10, 'Samsung Galaxy Tab A8 (2022) là 1 phiên bản tuyệt vời trong Galaxy Tab A Series, sản phẩm này chắc chắn sẽ trở thành công cụ liên lạc online trong thời hiện đại mà bạn chắc chắn sẽ rất hài lòng khi sở hữu.', 'samsung-galaxy-tab-a8-1-1 (1).jpg', '2023-12-13', 'LSP08', 'TH005', 'TSKT051'),
-('SP000052', 'Samsung Galaxy Tab A7 Lite', '4000000', '0', 1, 'Máy tính bảng Samsung Galaxy Tab A7 Lite là phiên bản rút gọn của dòng tablet \"ăn khách\" Galaxy Tab A7 thuộc thương hiệu Samsung, đáp ứng nhu cầu giải trí của khách hàng thuộc phân khúc bình dân với màn hình lớn nhưng vẫn gọn nhẹ hợp túi tiền.', 'samsung-galaxy-tab-a7-lite-gray-600x600.jpg', '2023-12-13', 'LSP08', 'TH005', 'TSKT052'),
-('SP000053', 'Samsung Galaxy Tab S8 Ultra 5G', '20000000', '0', 8, 'Samsung Galaxy Tab S8 Ultra ra mắt với kích thước màn hình siêu to cùng một cấu hình mạnh mẽ, được xem là thiết bị phù hợp đối với những ai thường xuyên làm các công việc thiết kế hay thao tác trên trình duyệt web, bên cạnh đó Tab S8 Ultra còn mang đến những trải nghiệm tương tự một chiếc laptop khi sử dụng kèm với bàn phím.', 'samsung-tab-s8-ultra-thumb-600x600.jpg', '2023-12-13', 'LSP08', 'TH005', 'TSKT053'),
-('SP000054', 'Samsung Galaxy Tab S7 FE 4G', '15000000', '0', 6, 'Samsung chính thức trình làng mẫu máy tính bảng có tên Galaxy Tab S7 FE, máy trang bị cấu hình mạnh mẽ, màn hình giải trí siêu lớn và điểm ấn tượng nhất là viên pin siêu khủng được tích hợp bên trong, giúp tăng hiệu suất làm việc nhưng vẫn có tính di động cực cao.', 'samsung-galaxy-tab-s7-fe-black-600x600.jpg', '2023-12-13', 'LSP08', 'TH005', 'TSKT054'),
-('SP000055', 'iPad Pro M1 11 inch WiFi Cellular 2TB (2021)', '41000000', '0', 1, 'Máy tính bảng iPad Pro M1 11 inch WiFi Cellular 2TB (2021) mang vẻ ngoài sang trọng, chắc chắn của lớp vỏ kim loại nguyên khối hoàn thiện tinh tế, thiết kế vuông vức hiện đại, kích thước màn hình 11 inch sử dụng thuận tiện như 1 chiếc laptop mini dùng cho cá nhân.', 'pad-pro-m1-11-inch-wifi-cellular-1tb-2021-xam-thumb-600x600.jpg', '2023-12-13', 'LSP08', 'TH006', 'TSKT055'),
-('SP000056', 'iPad Pro M1 12.9 inch WiFi', '25000000', '0', 2, 'iPad Pro M1 12.9 inch WiFi 512GB (2021) chiếc máy tính bảng với thiết kế sang trọng đẳng cấp, màn hình mini-LED tuyệt hảo 12.9 inch, sức mạnh tương đương máy tính để bàn nhờ bộ vi xử lý Apple M1 và hệ thống camera chất lượng rất đáng để đầu tư và nâng cấp.', 'ipad-pro-m1-129-inch-wifi-sliver-thumb-600x600.jpg', '2023-12-13', 'LSP08', 'TH006', 'TSKT056'),
-('SP000057', 'iPad Pro M2 11 inch WiFi', '35000000', '0', 4, 'Cơn sốt của iPhone 14 series chưa kịp lắng xuống thì mới đây nhà Apple lại vừa tung ra bộ sản phẩm tablet cho năm 2022 với nhiều điểm thu hút. Con chip Apple M2 từng khuấy đảo thị trường laptop bây giờ đã được xuất hiện trên iPad Pro M2 11 inch WiFi 128GB, nó quả thực là một tin chấn động trong giới công nghệ bởi đây có thể là chiếc máy tính bảng có hiệu năng vô đối trên thị trường (10/2022).', 'ipad-pro-m2-11-wifi-xam-thumb-600x600.jpg', '2023-12-13', 'LSP08', 'TH006', 'TSKT057'),
-('SP000058', 'iPad mini 6 WiFi Cellular 64GB', '14000000', '0', 2, 'iPad mini 6 WiFi Cellular 64GB đánh dấu sự trở lại mạnh mẽ của Apple trên dòng sản phẩm iPad mini, thiết bị mới được người dùng yêu thích bởi thiết kế trẻ trung, hiệu suất đỉnh cao với con chip A15 Bionic và hỗ trợ bút cảm ứng Apple Pencil 2 tiện lợi.', 'ipad-mini-6-wifi-cellular-pink-1-600x600.jpg', '2023-12-13', 'LSP08', 'TH006', 'TSKT058'),
-('SP000059', 'iPad Air 5 M1 Wifi 64GB', '16000000', '0', 3, 'iPad Air 5 M1 Wifi 64 GB đã được công bố tại sự kiện Peek Performance diễn ra hôm 9/3 (theo giờ Việt Nam). Năm nay Apple đã có những thay đổi lớn về cả hiệu năng và bổ sung màu sắc mới cho thiết bị.', 'ipad-air-5-wifi-grey-thumb-600x600.jpg', '2023-12-13', 'LSP08', 'TH006', 'TSKT059'),
-('SP000060', 'a', '100', '0', 2, 'abc                                                                                ', 'anh_Tao.jpg', '2023-12-22', 'LSP07', 'TH001', 'TSKT060'),
-('SP000061', 'aa', '100000', '90000', 5, '              aaaa                          ', 'tải xuống.jpg', '2023-12-25', 'LSP07', 'TH006', 'TSKT061');
+('SP000001', 'iPhone 13', 27990000, 26000000, 7, 'iPhone 13: Màn hình OLED 6,1 inch, camera kép 12MP, hỗ trợ 5G. Trải nghiệm chụp ảnh, xem video chất lượng cao và truy cập các ứng dụng mới nhất.', 'iphone-13-bh-org.jpg', '2023-11-29', 'LSP07', 'TH006', 'TSKT002'),
+('SP000002', 'Samsung Galaxy S21', 19990000, 19000000, 2, 'Samsung Galaxy S21: Màn hình Dynamic AMOLED 6,2 inch, camera chính 64MP, hỗ trợ 5G, pin 4000mAh. Trải nghiệm chụp ảnh và quay video chất lượng cao, xem video và chơi game mượt mà', 'samsung-galaxy-s21-trang-bbh-org.jpg', '2023-12-13', 'LSP07', 'TH005', 'TSKT001'),
+('SP000003', 'OnePlus 9 Pro', 19990000, 0, 2, 'Màn hình Fluid AMOLED 6,7 inch, camera chính 48MP, hỗ trợ 5G, pin 4500mAh. Trải nghiệm chụp ảnh và quay video chất lượng cao, xem video và chơi game mượt mà, hỗ trợ sạc nhanh Warp Charge 65T.', 'oneplus-9-pro-600x600-1-600x600.jpg', '2023-12-13', 'LSP07', 'TH011', 'TSKT003'),
+('SP000004', 'Xiaomi Mi 11', 18990000, 18090000, 1, 'Xiaomi Mi 11 là một sản phẩm cao cấp của Xiaomi với nhiều tính năng hiện đại. Màn hình AMOLED 6,81 inch cho trải nghiệm xem video và chơi game đỉnh cao, với độ phân giải 2K+ và tốc độ làm mới 120Hz', 'xiaomi-mi-11-xanhduong-1-org.jpg', '2023-12-13', 'LSP07', 'TH011', 'TSKT004'),
+('SP000005', 'Google Pixel 6', 6999000, 0, 5, 'Trải nghiệm chụp ảnh và quay video chất lượng cao, xem video và chơi game mượt mà, hỗ trợ sạc nhanh.', 'google-pixel-6-600x600.jpg', '2023-12-13', 'LSP07', 'TH009', 'TSKT006'),
+('SP000006', 'Sony Xperia 1 III', 14990000, 14090000, 8, 'Màn hình OLED 6,5 inch, chip Snapdragon 888, camera chính 12MP, hỗ trợ 5G, pin 4500mAh. Trải nghiệm chụp ảnh và quay video chất lượng cao, xem video và chơi game mượt mà, hỗ trợ sạc nhanh.', 'sony-xperia-1-iii-1-600x600.jpg', '2023-12-13', 'LSP07', 'TH017', 'TSKT007'),
+('SP000007', 'Huawei P50 Pro', 19990000, 0, 4, ' Màn hình OLED 6,6 inch, chip Kirin 9000, camera chính 50MP, hỗ trợ 5G, pin 4360mAh. Trải nghiệm chụp ảnh và quay video chất lượng cao, xem video và chơi game mượt mà, hỗ trợ sạc nhanh.', 'huawei-p50-pro-600x600.jpg', '2023-12-13', 'LSP07', 'TH002', 'TSKT008'),
+('SP000008', 'Oppo Find X3 Pro', 17990000, 0, 5, 'Màn hình AMOLED 6,7 inch, chip Snapdragon 888,camera chính 50MP, hỗ trợ 5G, pin 4500mAh. Trải nghiệm chụp ảnh và quay video chất lượng cao, xem video và chơi game mượt mà, hỗ trợ sạc nhanh.', 'oppo-find-x3-pro-bh-org-1-org.jpg', '2023-12-03', 'LSP07', 'TH012', 'TSKT009'),
+('SP000009', 'Realme Q3 Pro', 3999000, 0, 8, 'Màn hình IPS 6,43 inch, chip Dimensity 1100, camera chính 64MP, hỗ trợ 5G, pin 4500mAh. Trải nghiệm chụp ảnh và quay video chất lượng cao, xem video và chơi game mượt mà, hỗ trợ sạc nhanh.', 'realme-q3-pro-1-600x600.jpg', '2023-12-05', 'LSP07', 'TH010', 'TSKT005'),
+('SP000010', 'Nokia X50', 14990000, 0, 5, 'Nokia X50: Màn hình AMOLED 6,67 inch, camera 108MP, pin 4470mAh, hỗ trợ 5G. Trải nghiệm chụp ảnh, xem video trực tiếp và sử dụng các ứng dụng mới nhất.', 'nokia-x50-600x600.jpg', '2023-12-13', 'LSP07', 'TH013', 'TSKT010'),
+('SP000011', 'Dell XPS 13', 29990000, 0, 8, 'Dell XPS 13: Màn hình 13 inch, Intel Core i7, RAM 16GB. Thiết kế siêu mỏng và nhẹ, thời lượng pin lâu, xử lý tốt các tác vụ đa nhiệm.', 'dell-xps-13-plus_1280x720-800-resize.jpg', '2023-12-04', 'LSP06', 'TH004', 'TSKT011'),
+('SP000012', 'HP Spectre x360', 26990000, 26090000, 6, 'HP Spectre x360: Màn hình 13,3 inch, Intel Core i7, RAM 16GB. Thiết kế 2 trong 1, xoay màn hình dễ dàng, thời lượng pin lâu, âm thanh tốt.', 'hp-spectre-x360-13-ac028tu-i7-7500u-nau-1-org.jpg', '2023-12-13', 'LSP06', 'TH009', 'TSKT013'),
+('SP000013', 'Lenovo ThinkPad X1 Carbon', 35990000, 0, 5, 'Lenovo ThinkPad X1 Carbon: Màn hình 14 inch, Intel Core i7, RAM16GB. Thiết kế bền bỉ và chắc chắn, kết nối internet nhanh chóng, xử lý tốt các tác vụ đa nhiệm.', 'lenovo-thinkpad-x1-carbon-gen-10-i7-21cb00a8vn-2-1.jpg', '2023-12-09', 'LSP06', 'TH007', 'TSKT014'),
+('SP000014', 'Asus ZenBook UX425', 22990000, 21990000, 9, 'Asus ZenBook UX425: Màn hình 14 inch, Intel Core i7, RAM 16GB. Thiết kế sang trọng và tinh tế, thời lượng pin lâu, xử lý tốt các tác vụ đa nhiệm.', 'asus-zenbook-ux425ea-i5-bm069t-2-org.jpg', '2023-12-13', 'LSP06', 'TH003', 'TSKT015'),
+('SP000015', 'MacBook Pro 16-inch', 52990000, 50990000, 6, 'MacBook Pro 16-inch: Màn hình Retina 16 inch, Intel Core i9, RAM 64GB. Thiết kế tinh tế, màn hình đẹp mắt, thời lượng pin lâu, xử lý tốt các tác vụ đa nhiệm.', 'apple-macbook-pro-16-m1-pro-2021-10-core-cpu-2.jpg', '2023-12-13', 'LSP06', 'TH006', 'TSKT012'),
+('SP000016', 'Acer Swift 5', 20990000, 0, 1, 'Acer Swift 5: Màn hình 14 inch, Intel Core i7, RAM 16GB. Thiết kế siêu mỏng và nhẹ, khả năng xử lý tốt các tác vụ thông thường.', 'acer-swift-sf5-i7-8565u-8gb-256gb-win10-xanh-duong-2-org.jpg', '2023-12-09', 'LSP06', 'TH001', 'TSKT016'),
+('SP000017', 'Dell VOSTRO 3558', 9990000, 0, 6, 'Dell VOSTRO 3558: Màn hình 15,6 inch, Intel Core i3, RAM 4GB. Thiết kế đơn giản, xử lý tốt cáctác vụ thông thường, phù hợp cho học tập và làm việc văn phòng.', 'dell-vostro-3558-i3-4005u-4gb-500gb-win81-org-1.jpg', '2023-12-13', 'LSP06', 'TH004', 'TSKT017'),
+('SP000018', 'Razer Blade Stealth 13', 39990000, 0, 8, 'Razer Blade Stealth 13: Màn hình 13,3 inch, Intel Core i7, RAM 16GB. Thiết kế đẹp mắt, khả năng xử lý tốt các tác vụ đa nhiệm và đồ họa, phù hợp cho chơi game máy tính.', 'gturqbjdmvvqbmfc7jczm-1366-80-_1366x768-800-resize.jpg', '2023-12-04', 'LSP06', 'TH002', 'TSKT018'),
+('SP000019', 'MSI Prestige 14', 31990000, 0, 1, 'MSI Prestige 14: Màn hình 14 inch, Intel Core i7, RAM 16GB. Thiết kế đẹp mắt, màn hình đẹp, khả năng xử lý tốt các tác vụ đa nhiệm và đồ họa, phù hợp cho làm việc và sáng tạo.', 'msi-prestige-14-a11sc-i7-202vn-2-2.jpg', '2023-12-02', 'LSP06', 'TH003', 'TSKT019'),
+('SP000020', 'LG Gram 17', 39990000, 0, 6, 'LG Gram 17: Màn hình 17 inch, Intel Core i7, RAM 16GB. Thiết kế siêu mỏng và nhẹ, thời lượng pin lâu, khả năng xử lý tốt các tác vụ đa nhiệm. Trải nghiệm làm việc và giải trí tuyệt vời.', 'lg-gram-2023-i7-14z90rgah75a5-1.jpg', '2023-12-03', 'LSP06', 'TH008', 'TSKT020'),
+('SP000021', 'Samsung Galaxy Tab S7', 14990000, 0, 3, 'Màn hình 11 inch, RAM 6GB, bút S Pen đi kèm. Khả năng xử lý tốt các tác vụ đa nhiệm, chơi game và làm việc trên màn hình lớn, hỗ trợ bút S Pen cho trải nghiệm viết và vẽ tuyệt vời.', 'samsung-galaxy-tab-s7-vang-dong-1-org.jpg', '2023-12-01', 'LSP08', 'TH005', 'TSKT021'),
+('SP000022', 'Apple iPad Pro (2021)', 23990000, 0, 7, 'Thiết kế tinh tế, khả năng xử lý tốt các tác vụ đa nhiệm, trải nghiệm viết, vẽ và gõ phím tuyệt vời với bút Apple Pencil và bàn phím Magic Keyboard.', 'ipad-pro-m1-11-inch-wifi-2-1.jpg', '2023-12-05', 'LSP08', 'TH006', 'TSKT022'),
+('SP000023', 'Microsoft Surface Pro 7', 29990000, 0, 3, 'Thiết kế 2 trong 1, xoay màn hình dễ dàng, khả năng xử lý tốt các tác vụ đa nhiệm và đồ họa, hỗ trợ bút Surface Pen cho trải nghiệm viết và vẽ tuyệt vời.', 'surface-pro-7-i5-puv00001-den-1.jpg', '2023-12-04', 'LSP08', 'TH015', 'TSKT023'),
+('SP000024', 'Lenovo Tab P11 Pro', 11990000, 0, 9, 'bút Lenovo Precision Pen đi kèm. Thiết kế đẹp mắt, khả năng xử lý tốt các tác vụ đa nhiệm, hỗ trợ bút Lenovo Precision Pen cho trải nghiệm viết và vẽ tuyệt vời.', 'lenovo-tab-p11-pro-073820-043835-600x600.jpg', '2023-12-13', 'LSP08', 'TH007', 'TSKT024'),
+('SP000025', 'iPad 10', 3490000, 0, 7, 'Thiết kế đơn giản và dễ sử dụng, khả năng xử lý tốt các tác vụ đa nhiệm, trải nghiệm viết, vẽ và gõ phím tuyệt vời với bút Apple Pencil và bàn phím Smart Keyboard.', 'ipad-10-vang-glr-1.jpg', '2023-12-05', 'LSP08', 'TH016', 'TSKT025'),
+('SP000026', 'Huawei MatePad Pro 12.6', 25990000, 0, 7, 'hỗ trợ M-Pencil và bàn phím thông minh. Thiết kế đẹp mắt, khả năng xử lý tốt các tác vụ đa nhiệm, trải nghiệm viết, vẽ và gõ phím tuyệt vời với bút M-Pencil và bàn phím thông minh.', 'huawei-matepad-pro-129-2021-600x600.jpg', '2023-12-13', 'LSP08', 'TH012', 'TSKT026'),
+('SP000027', 'ASUS ZenPad 3S 10', 8990000, 0, 2, ' Màn hình IPS 9,7 inch, chip MediaTek MT8176, RAM 4GB. Thiết kế đẹp mắt và nhẹ, khả năng xử lý tốt các tác vụ thông thường, phù hợp cho giải trí và làm việc văn phòng.', 'asus-zenpad-3s-10-z500kl_m-1-300x300.jpg', '2023-12-13', 'LSP08', 'TH003', 'TSKT027'),
+('SP000028', 'Samsung Galaxy Tab A8', 27990000, 26990000, 10, 'Màn hình 8 inch, RAM 2GB. Thiết kế đơn giản và dễ sử dụng, khả năng xử lý tốt các tác vụ thông thường, phùhợp cho giải trí và đọc sách, trải nghiệm xem video và chơi game cơ bản.', 'samsung-galaxy-tab-a8-1-1.jpg', '2023-12-13', 'LSP08', 'TH015', 'TSKT028'),
+('SP000029', 'Xiaomi Mi Pad 5 Pro', 9990000, 0, 5, 'Màn hình 11 inch, RAM 8GB, hỗ trợ bút điện tử Xiaomi. Thiết kế đẹp mắt, khả năng xử lý tốt các tác vụ đa nhiệm và đồ họa, hỗ trợ bút điện tử Xiaomi cho trải nghiệm viết và vẽ tuyệt vời.', 'xiaomi-mi-pad-5-pro-600x600.jpg', '2023-12-13', 'LSP08', 'TH011', 'TSKT029'),
+('SP000030', 'LG G Pad 5 10.1', 6990000, 0, 10, 'Màn hình IPS 10,1 inch, chip Snapdragon 821, RAM 4GB. Thiết kế đẹp mắt và nhẹ, khả năng xử lý tốt các tác vụ thông thường, phù hợp cho giải trí và làm việc văn phòng.', 'lg4_800x450.jpg', '2023-12-13', 'LSP08', 'TH008', 'TSKT030'),
+('SP000031', 'Samsung Galaxy Note 20 Ultra', 27790000, 0, 3, 'Samsung Galaxy Note 20 Ultra: Một trong những chiếc điện thoại cao cấp nhất của Samsung, với màn hình Dynamic AMOLED 2X 6.9 inch, camera sau 108 MP và hỗ trợ bút S Pen.', 'samsung-galaxy-s21-ultra-bac-1-org.jpg', '2023-12-13', 'LSP07', 'TH005', 'TSKT031'),
+('SP000032', 'Apple iPhone 12 Mini', 25990000, 0, 10, 'Apple iPhone 12 Mini: Phiên bản nhỏ gọn nhất của iPhone 12, với màn hình Super Retina XDR 5.4 inch, camera sau kép 12 MP và hỗ trợ sạc nhanh MagSafe.', 'iphone-12-mini-tim-gc-1-org.jpg', '2023-12-13', 'LSP07', 'TH006', 'TSKT032'),
+('SP000033', 'Google Pixel 5a', 16190000, 0, 9, 'Google Pixel 5a: Chiếc điện thoại mới nhất của Google, được trang bị chip Snapdragon 765G, camera sau kép 12.2 MP và hỗ trợ 5G.', 'google-pixel-5a-040921-051453-600x600.jpg', '2023-12-13', 'LSP07', 'TH014', 'TSKT033'),
+('SP000034', 'OnePlus Nord 2', 22590000, 0, 9, 'OnePlus Nord 2: Chiếc điện thoại tầm trung của OnePlus, với màn hình Fluid AMOLED 6.43 inch, camera sau 50 MP và hỗ trợ sạc nhanh Warp Charge 65.', 'oneplus-nord-2-5g-600x600.jpg', '2023-12-13', 'LSP07', 'TH011', 'TSKT034'),
+('SP000035', 'Xiaomi Poco X3 Pro', 18990000, 0, 2, 'Xiaomi Poco X3 Pro: Chiếc điện thoại tầm trung của Xiaomi, với màn hình IPS LCD 6.67 inch, camera sau 48 MP và hỗ trợ sạc nhanh 33W.', 'xiaomi-poco-x3-pro-600x600-1-600x600.jpg', '2023-12-13', 'LSP07', 'TH011', 'TSKT035'),
+('SP000036', 'Sony Xperia 5 II', 31990000, 0, 9, 'Sony Xperia 5 II: Một trong những chiếc điện thoại cao cấp nhất của Sony, với màn hình OLED 6.1 inch, camera sau 12 MP và hỗ trợ chụp ảnh RAW.', 'sony-xperia-5-ii-215020-015023-600x600.jpg', '2023-12-13', 'LSP07', 'TH016', 'TSKT036'),
+('SP000037', 'Huawei P40 Pro Plus', 25990000, 0, 9, 'Huawei P40 Pro Plus: Chiếc điện thoại cao cấp của Huawei, với màn hình OLED 6.58 inch, camera sau 50 MP và hỗ trợ sạc nhanh 40W.', 'huawei-p40-pro-plus-600x600-1-600x600.jpg', '2023-12-13', 'LSP07', 'TH017', 'TSKT037'),
+('SP000038', 'Oppo Reno 6 Pro+', 24490000, 0, 3, 'Oppo Reno 6 Pro+: Chiếc điện thoại cao cấp của Oppo, với màn hình AMOLED 6.55 inch, camera sau 50 MP và hỗ trợ sạc nhanh 65W.', 'oppo-reno6-pro-plus-600x600.jpg', '2023-12-13', 'LSP07', 'TH012', 'TSKT038'),
+('SP000039', 'Motorola Moto G Power (2021)', 23990000, 0, 9, 'Motorola Moto G Power (2021): Chiếc điện thoại tầm trung của Motorola, với màn hình IPS LCD 6.6 inch, camera sau 48 MP và pin dung lượng lớn 5000 mAh.', 'motorola-moto-g8-power-600x600-600x600.jpg', '2023-12-13', 'LSP07', 'TH011', 'TSKT039'),
+('SP000040', 'LG Wing 5G', 12990000, 0, 7, 'LG Wing 5G: Chiếc điện thoại độc đáo của LG, với màn hình OLED 6.8 inch, camera sau kép 64 MP và màn hình phụ OLED 3.9 inch xoay dọc, cho phép sử dụng 2 ứng dụng cùng lúc và trải nghiệm độc đáo.', '600-lg-wing-600x600.jpg', '2023-12-13', 'LSP07', 'TH008', 'TSKT040'),
+('SP000041', 'itel ABLE 1S N4020 (71006300027)', 6990000, 0, 9, 'laptop học tập - văn phòng sử dụng hiệu quả cho các tác vụ cơ bản, thiết kế thanh lịch, gọn nhẹ, đáp ứng nhu cầu về hiệu năng và giá thành cho các khách hàng trong phân khúc.', 'itel-able-1s-n4020-71006300027-2-2.jpg', '2023-12-13', 'LSP06', 'TH014', 'TSKT041'),
+('SP000042', 'Lenovo Ideapad 5 Pro 14ITL6 i5 1155G7 (82L300M9VN)', 24490000, 0, 7, 'Ngoại hình hiện đại, thanh lịch, hiệu năng mạnh mẽ cùng màn hình 2.2K sắc nét sẽ là những ưu điểm mà bạn nên lựa chọn laptop Lenovo Ideapad 5 Pro 14ITL6 i5 (82L300M9VN) làm trợ thủ đắc lực trong phân khúc laptop học tập - văn phòng.', 'lenovo-ideapad-5-pro-14itl6-i5-82l300m9vn-xy-2.jpg', '2023-12-13', 'LSP06', 'TH007', 'TSKT042'),
+('SP000043', 'Asus Gaming TUF Dash F15 FX517ZC i5 12450H (HN077W)', 31990000, 0, 7, 'Sở hữu ngoại hình ấn tượng thu hút mọi ánh nhìn cùng hiệu năng mạnh mẽ đến từ laptop CPU thế hệ 12 mới nhất, Asus Gaming TUF Dash F15 FX517ZC i5 (HN077W) là lựa chọn xứng tầm cho mọi nhu cầu chiến game giải trí hay đồ hoạ - kỹ thuật của người dùng.', 'asus-tuf-gaming-fx517zc-i5-hn077w-ab-2.jpg', '2023-12-13', 'LSP06', 'TH003', 'TSKT043'),
+('SP000044', 'MSI Gaming GF63 Thin 11UD i7 11800H (648VN)', 29990000, 28990000, 10, 'Sở hữu một vẻ ngoài độc đáo, mạnh mẽ phù hợp với mọi game thủ, chiếc laptop MSI Gaming GF63 Thin 11UD i7 11800H (648VN) được trang bị dòng chip Intel thế hệ 11 hiệu năng mạnh mẽ vượt trội khi đi cùng card rời RTX 30 series sẵn sàng chiến mượt bất kì tựa game phổ biến hay thiết kế đồ họa chuyên sâu.', 'msi-gaming-gf63-thin-11ud-i7-648vn-2.jpg', '2023-12-13', 'LSP06', 'TH016', 'TSKT044'),
+('SP000045', 'Asus Vivobook 14 X1402ZA i3 1220P (EK249W)', 12990000, 0, 8, 'sở hữu cấu hình vượt trội từ bộ vi xử lý Intel Gen 12 cùng kiểu dáng thiết kế thời thượng, xứng danh người cộng sự lý tưởng, sẵn sàng đồng hành cùng bạn mọi lúc mọi nơi, trong cả công việc hay giải trí.', 'asus-vivobook-14-x1402za-i3-ek249w-2-1.jpg', '2023-12-13', 'LSP06', 'TH003', 'TSKT045'),
+('SP000046', 'MacBook Air M1 2020 7-core GPU', 24990000, 0, 6, 'laptop cao cấp sang trọng có cấu hình mạnh mẽ, chinh phục được các tính năng văn phòng lẫn đồ hoạ mà bạn mong muốn, thời lượng pin dài, thiết kế mỏng nhẹ sẽ đáp ứng tốt các nhu cầu làm việc của bạn.', 'macbook-air-m1-2020-silver-01-org.jpg', '2023-12-13', 'LSP06', 'TH006', 'TSKT046'),
+('SP000047', 'MacBook Air M2 2022 8-core GPU', 30990000, 0, 8, 'thiết kế hoàn toàn mới, độ dày không thay đổi tương tự như MacBook Pro, đánh bật mọi rào cản với con chip Apple M2 đầy mạnh mẽ.', 'apple-macbook-air-m2-2022-02-2.jpg', '2023-12-13', 'LSP06', 'TH006', 'TSKT047'),
+('SP000048', 'MacBook Air M1 2020 8-core GPU', 29990000, 0, 1, 'vẻ ngoài hiện đại cùng cấu hình mạnh mẽ vượt trội đến từ con chip M1 được sản xuất trên quy trình tân tiến, là người bạn đồng hành lý tưởng cho bất kỳ ai trong cả những công việc văn phòng hay thiết kế đồ họa.', 'apple-macbook-air-m1-2020-8-core-gpu-xam-01.jpg', '2023-12-13', 'LSP06', 'TH006', 'TSKT048'),
+('SP000049', 'MacBook Air M2 2022 10-core GPU', 35990000, 0, 5, 'khẳng định vị thế hàng đầu của Apple trong phân khúc laptop cao cấp - sang trọng vào giữa năm 2022 khi sở hữu phong cách thiết kế thời thượng, đẳng cấp cùng sức mạnh bộc phá đến từ bộ vi xử lý Apple M2 mạnh mẽ.', 'apple-macbook-air-m2-2022-16gb-2.jpg', '2023-12-13', 'LSP06', 'TH006', 'TSKT049'),
+('SP000050', 'iPad Pro M1 12.9 inch 5G', 30000000, 0, 2, 'Bạn có đang mong chờ những sản phẩm chất lượng đến từ Apple? Sau hàng loạt các sản phẩm đình đám như iPhone 12 series thì hãng đã tung ra chiếc iPad Pro M1 12.9 inch Wifi Cellular 128GB (2021) trang bị những tính năng ngày càng vượt trội và thời thượng.', 'ipad-pro-m1-129-inch-wifi-cellular--1.jpg', '2023-12-13', 'LSP08', 'TH006', 'TSKT050'),
+('SP000051', 'Samsung Galaxy Tab A8 (2022)', 6000000, 0, 10, 'Samsung Galaxy Tab A8 (2022) là 1 phiên bản tuyệt vời trong Galaxy Tab A Series, sản phẩm này chắc chắn sẽ trở thành công cụ liên lạc online trong thời hiện đại mà bạn chắc chắn sẽ rất hài lòng khi sở hữu.', 'samsung-galaxy-tab-a8-1-1 (1).jpg', '2023-12-13', 'LSP08', 'TH005', 'TSKT051'),
+('SP000052', 'Samsung Galaxy Tab A7 Lite', 4000000, 0, 1, 'Máy tính bảng Samsung Galaxy Tab A7 Lite là phiên bản rút gọn của dòng tablet \"ăn khách\" Galaxy Tab A7 thuộc thương hiệu Samsung, đáp ứng nhu cầu giải trí của khách hàng thuộc phân khúc bình dân với màn hình lớn nhưng vẫn gọn nhẹ hợp túi tiền.', 'samsung-galaxy-tab-a7-lite-gray-600x600.jpg', '2023-12-13', 'LSP08', 'TH005', 'TSKT052'),
+('SP000053', 'Samsung Galaxy Tab S8 Ultra 5G', 20000000, 0, 8, 'Samsung Galaxy Tab S8 Ultra ra mắt với kích thước màn hình siêu to cùng một cấu hình mạnh mẽ, được xem là thiết bị phù hợp đối với những ai thường xuyên làm các công việc thiết kế hay thao tác trên trình duyệt web, bên cạnh đó Tab S8 Ultra còn mang đến những trải nghiệm tương tự một chiếc laptop khi sử dụng kèm với bàn phím.', 'samsung-tab-s8-ultra-thumb-600x600.jpg', '2023-12-13', 'LSP08', 'TH005', 'TSKT053'),
+('SP000054', 'Samsung Galaxy Tab S7 FE 4G', 15000000, 0, 6, 'Samsung chính thức trình làng mẫu máy tính bảng có tên Galaxy Tab S7 FE, máy trang bị cấu hình mạnh mẽ, màn hình giải trí siêu lớn và điểm ấn tượng nhất là viên pin siêu khủng được tích hợp bên trong, giúp tăng hiệu suất làm việc nhưng vẫn có tính di động cực cao.', 'samsung-galaxy-tab-s7-fe-black-600x600.jpg', '2023-12-13', 'LSP08', 'TH005', 'TSKT054'),
+('SP000055', 'iPad Pro M1 11 inch WiFi Cellular 2TB (2021)', 41000000, 0, 1, 'Máy tính bảng iPad Pro M1 11 inch WiFi Cellular 2TB (2021) mang vẻ ngoài sang trọng, chắc chắn của lớp vỏ kim loại nguyên khối hoàn thiện tinh tế, thiết kế vuông vức hiện đại, kích thước màn hình 11 inch sử dụng thuận tiện như 1 chiếc laptop mini dùng cho cá nhân.', 'pad-pro-m1-11-inch-wifi-cellular-1tb-2021-xam-thumb-600x600.jpg', '2023-12-13', 'LSP08', 'TH006', 'TSKT055'),
+('SP000056', 'iPad Pro M1 12.9 inch WiFi', 25000000, 0, 2, 'iPad Pro M1 12.9 inch WiFi 512GB (2021) chiếc máy tính bảng với thiết kế sang trọng đẳng cấp, màn hình mini-LED tuyệt hảo 12.9 inch, sức mạnh tương đương máy tính để bàn nhờ bộ vi xử lý Apple M1 và hệ thống camera chất lượng rất đáng để đầu tư và nâng cấp.', 'ipad-pro-m1-129-inch-wifi-sliver-thumb-600x600.jpg', '2023-12-13', 'LSP08', 'TH006', 'TSKT056'),
+('SP000057', 'iPad Pro M2 11 inch WiFi', 35000000, 0, 4, 'Cơn sốt của iPhone 14 series chưa kịp lắng xuống thì mới đây nhà Apple lại vừa tung ra bộ sản phẩm tablet cho năm 2022 với nhiều điểm thu hút. Con chip Apple M2 từng khuấy đảo thị trường laptop bây giờ đã được xuất hiện trên iPad Pro M2 11 inch WiFi 128GB, nó quả thực là một tin chấn động trong giới công nghệ bởi đây có thể là chiếc máy tính bảng có hiệu năng vô đối trên thị trường (10/2022).', 'ipad-pro-m2-11-wifi-xam-thumb-600x600.jpg', '2023-12-13', 'LSP08', 'TH006', 'TSKT057'),
+('SP000058', 'iPad mini 6 WiFi Cellular 64GB', 14000000, 0, 2, 'iPad mini 6 WiFi Cellular 64GB đánh dấu sự trở lại mạnh mẽ của Apple trên dòng sản phẩm iPad mini, thiết bị mới được người dùng yêu thích bởi thiết kế trẻ trung, hiệu suất đỉnh cao với con chip A15 Bionic và hỗ trợ bút cảm ứng Apple Pencil 2 tiện lợi.', 'ipad-mini-6-wifi-cellular-pink-1-600x600.jpg', '2023-12-13', 'LSP08', 'TH006', 'TSKT058'),
+('SP000059', 'iPad Air 5 M1 Wifi 64GB', 16000000, 0, 3, 'iPad Air 5 M1 Wifi 64 GB đã được công bố tại sự kiện Peek Performance diễn ra hôm 9/3 (theo giờ Việt Nam). Năm nay Apple đã có những thay đổi lớn về cả hiệu năng và bổ sung màu sắc mới cho thiết bị.', 'ipad-air-5-wifi-grey-thumb-600x600.jpg', '2023-12-13', 'LSP08', 'TH006', 'TSKT059'),
+('SP000060', 'a', 100, 0, 2, 'abc                                                                                ', 'anh_Tao.jpg', '2023-12-22', 'LSP07', 'TH001', 'TSKT060'),
+('SP000061', 'aa', 100000, 90000, 5, '              aaaa                          ', 'tải xuống.jpg', '2023-12-25', 'LSP07', 'TH006', 'TSKT061');
 
 -- --------------------------------------------------------
 
@@ -11905,7 +11908,7 @@ ALTER TABLE `xa`
 -- AUTO_INCREMENT cho bảng `danhgia`
 --
 ALTER TABLE `danhgia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
