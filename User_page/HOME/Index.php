@@ -127,14 +127,14 @@
                             </a>
                             <?php if ($rows['SALE'] > 0) { ?>
                                 <div class="price mt-1">
-                                    <span class="sale-price" style="color: red;"><?= number_format($rows['SALE']) ?></span>
+                                    <span class="sale-price" style="color: red;"><?= number_format($rows['SALE']) . '₫'?></span>
                                     <span class="h6 original-price"><del style="color:gray;">
-                                        <?= number_format($rows['DONGIA']) ?></del></span>
+                                        <?= number_format($rows['DONGIA']) . '₫'?></del></span>
                                     
                                 </div>
                             <?php } else { ?>
                                 <div class="price mt-1">
-                                    <?= $rows['DONGIA'] ?>
+                                    <?= $rows['DONGIA'] . '₫'?>
                                 </div>
                             <?php } ?>
                         </figcaption>
@@ -292,8 +292,8 @@
         </header>
 
         <div class="row row-sm">
-            <?php
-            $result = mysqli_query($conn, "SELECT sp.MASP, sp.ANH, sp.TENSP, sp.DONGIA
+        <?php
+            $result = mysqli_query($conn, "SELECT sp.MASP, sp.ANH, sp.TENSP, sp.DONGIA, sp.SALE
             FROM sanpham sp
             JOIN (
                 SELECT MASP, AVG(rating) AS avg_rating
@@ -305,19 +305,38 @@
 
             if (mysqli_num_rows($result) <> 0) {
                 while ($rows = mysqli_fetch_assoc($result)) {
+                    if($rows['SALE'] > 0){
+                        $phangiamgia = round((($rows['DONGIA'] - $rows['SALE']) / $rows['DONGIA']) * 100);                      
+                    }
+                    else echo " ";
                     ?>
                     <div class="col-xl-2 col-lg-3 col-md-4 col-6">
                         <div class="card card-sm card-product-grid">
                             <a href="../SANPHAM/Detail.php?id=<?php echo $rows['MASP']?>" class="img-wrap">
+                            <?php 
+                        if ($rows['SALE'] > 0) {
+                            $phangiamgia = round((($rows['DONGIA'] - $rows['SALE']) / $rows['DONGIA']) * 100);
+                            echo '<span class="badge badge-danger discount-badge">-' . $phangiamgia . '% </span>';
+                                }                                  
+                            ?>                             
                                 <img src="../../views/Images/<?= $rows['ANH'] ?>">
                             </a>
                             <figcaption class="info-wrap">
                                 <a href="../SANPHAM/Detail.php?id=<?php echo $rows['MASP']?>" class="title">
                                     <?= $rows['TENSP'] ?>
                                 </a>
+                                <?php if ($rows['SALE'] > 0) { ?>
                                 <div class="price mt-1">
-                                    <?= number_format($rows['DONGIA']) . '₫' ?>
+                                    <span class="sale-price" style="color: red;"><?= number_format($rows['SALE']) . '₫'?></span>
+                                    <span class="h6 original-price"><del style="color:gray;">
+                                        <?= number_format($rows['DONGIA']). '₫' ?></del></span>
+                                    
                                 </div>
+                            <?php } else { ?>
+                                <div class="price mt-1">
+                                    <?= $rows['DONGIA'] . '₫'?>
+                                </div>
+                            <?php } ?>
                             </figcaption>
                         </div>
                     </div>
