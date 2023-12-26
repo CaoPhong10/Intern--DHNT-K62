@@ -37,86 +37,93 @@ if (isset($_SESSION['tongtien'])) {
     include '../Shared_Layout/header.php';
     ?>   
                 
-    <div class="container" style="align-center">
-        <div class="header clearfix">
-            <h3 class="text-muted">VNPAY</h3>
-        </div>
-        <h3>Tạo hóa đơn</h3>
-        <div class="col-md-4">
-            <form action="vnpay_create_payment.php" id="create_form" method="post">       
-
-                <div class="form-group">
-                    <label for="language">Loại hàng hóa </label>
-                    <select name="order_type" id="order_type" class="form-control">
-                        <option value="billpayment">Thanh toán hóa đơn</option>
-                        <option value="topup">Nạp tiền điện thoại</option>
-                        <option value="fashion">Thời trang</option>
-                        <option value="other">Khác - Xem thêm tại VNPAY</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="order_id">Mã hóa đơn</label>
-                    <input class="form-control" id="order_id" name="order_id" type="text" value="<?php echo date("YmdHis") ?>" readonly/>
-                </div>
-                <div class="form-group">
-                    <label for="amount">Số tiền</label>
-                    <input class="form-control" id="amount" name="amount" type="number" value="<?php echo $tongtien ?>" readonly/>
-                </div>
-                <div class="form-group">
-                    <label for="order_desc">Nội dung thanh toán</label>
-                    <textarea class="form-control" cols="20" id="order_desc" name="order_desc" rows="2">Noi dung thanh toan</textarea>
-                </div>
-                <div class="form-group">
-                    <label for="bank_code">Ngân hàng</label>
-                    <select name="bank_code" id="bank_code" class="form-control">
-                        <option value="">Không chọn</option>
-                        <option value="NCB"> Ngân hàng NCB</option>
-                        <option value="AGRIBANK"> Ngân hàng Agribank</option>
-                        <option value="SCB"> Ngân hàng SCB</option>
-                        <option value="SACOMBANK">Ngân hàng SacomBank</option>
-                        <option value="EXIMBANK"> Ngân hàng EximBank</option>
-                        <option value="MSBANK"> Ngân hàng MSBANK</option>
-                        <option value="NAMABANK"> Ngân hàng NamABank</option>
-                        <option value="VNMART"> Vi dien tu VnMart</option>
-                        <option value="VIETINBANK">Ngân hàng Vietinbank</option>
-                        <option value="VIETCOMBANK"> Ngân hàng VCB</option>
-                        <option value="HDBANK">Ngân hàng HDBank</option>
-                        <option value="DONGABANK"> Ngân hàng Dong A</option>
-                        <option value="TPBANK"> Ngân hàng TPBank</option>
-                        <option value="OJB"> Ngân hàng OceanBank</option>
-                        <option value="BIDV"> Ngân hàng BIDV</option>
-                        <option value="TECHCOMBANK"> Ngân hàng Techcombank</option>
-                        <option value="VPBANK"> Ngân hàng VPBank</option>
-                        <option value="MBBANK"> Ngân hàng MBBank</option>
-                        <option value="ACB"> Ngân hàng ACB</option>
-                        <option value="OCB"> Ngân hàng OCB</option>
-                        <option value="IVB"> Ngân hàng IVB</option>
-                        <option value="VISA"> Thanh toan qua VISA/MASTER</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="language">Ngôn ngữ</label>
-                    <select name="language" id="language" class="form-control">
-                        <option value="vn">Tiếng Việt</option>
-                        <option value="en">English</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label >Thời hạn thanh toán</label>
-                    <input class="form-control" id="txtexpire"
-                            name="txtexpire" type="text" value="<?php echo $expire; ?>" readonly/>
-                </div>
-                <button type="submit" name="redirect" id="redirect" class="btn btn-primary">Thanh toán</button>
-
-            </form>
-        </div>
-        <p>
-            &nbsp;
-        </p>
-        <footer class="footer">
-            <p>&copy; VNPAY <?php echo date('Y')?></p>
-        </footer>
-    </div>  
+                <div class="row justify-content-md-center mt-5 mb-5">               
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            <h3 class="text-muted">VNPAY</h3>
+                            <h3>Tạo hóa đơn</h3>
+                        </div>
+                        
+                        <div class="card-body">
+                            <form action="vnpay_create_payment.php" id="create_form" method="post">       
+        
+                                <div class="form-group">
+                                    <label for="language">Loại hàng hóa </label>
+                                    <select name="order_type" id="order_type" class="form-control">
+                                        <option value="billpayment">Thanh toán hóa đơn</option>
+                                        <option value="topup">Nạp tiền điện thoại</option>
+                                        <option value="fashion">Thời trang</option>
+                                        <option value="other">Khác - Xem thêm tại VNPAY</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="order_id">Mã hóa đơn</label>
+                                    <input class="form-control" id="order_id" name="order_id" type="text" value="<?php echo date("YmdHis") ?>" readonly/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="amount">Số tiền</label>
+                                    <input class="form-control" id="amount" name="amount" type="number" value="<?php echo $tongtien ?>" readonly/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="order_desc">Nội dung thanh toán</label>
+                                    <textarea class="form-control" cols="20" id="order_desc" name="order_desc" rows="2">Noi dung thanh toan</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bank_code">Ngân hàng</label>
+                                    <select name="bank_code" id="bank_code" class="form-control">
+                                        <option value="">Không chọn</option>
+                                        <option value="NCB"> Ngân hàng NCB</option>
+                                        <option value="AGRIBANK"> Ngân hàng Agribank</option>
+                                        <option value="SCB"> Ngân hàng SCB</option>
+                                        <option value="SACOMBANK">Ngân hàng SacomBank</option>
+                                        <option value="EXIMBANK"> Ngân hàng EximBank</option>
+                                        <option value="MSBANK"> Ngân hàng MSBANK</option>
+                                        <option value="NAMABANK"> Ngân hàng NamABank</option>
+                                        <option value="VNMART"> Vi dien tu VnMart</option>
+                                        <option value="VIETINBANK">Ngân hàng Vietinbank</option>
+                                        <option value="VIETCOMBANK"> Ngân hàng VCB</option>
+                                        <option value="HDBANK">Ngân hàng HDBank</option>
+                                        <option value="DONGABANK"> Ngân hàng Dong A</option>
+                                        <option value="TPBANK"> Ngân hàng TPBank</option>
+                                        <option value="OJB"> Ngân hàng OceanBank</option>
+                                        <option value="BIDV"> Ngân hàng BIDV</option>
+                                        <option value="TECHCOMBANK"> Ngân hàng Techcombank</option>
+                                        <option value="VPBANK"> Ngân hàng VPBank</option>
+                                        <option value="MBBANK"> Ngân hàng MBBank</option>
+                                        <option value="ACB"> Ngân hàng ACB</option>
+                                        <option value="OCB"> Ngân hàng OCB</option>
+                                        <option value="IVB"> Ngân hàng IVB</option>
+                                        <option value="VISA"> Thanh toan qua VISA/MASTER</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="language">Ngôn ngữ</label>
+                                    <select name="language" id="language" class="form-control">
+                                        <option value="vn">Tiếng Việt</option>
+                                        <option value="en">English</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label >Thời hạn thanh toán</label>
+                                    <input class="form-control" id="txtexpire"
+                                            name="txtexpire" type="text" value="<?php echo $expire; ?>" readonly/>
+                                </div>
+                                <div class="form-group text-center">
+                                    <button type="submit" name="redirect" id="redirect" class="btn btn-primary">Thanh toán</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <p>
+                        &nbsp;
+                    </p>
+                    <footer class="footer text-center">
+                        <p>&copy; VNPAY <?php echo date('Y')?></p>
+                    </footer>
+                </div>  
+        
+            </div>  
 </body>
     
 </html>
