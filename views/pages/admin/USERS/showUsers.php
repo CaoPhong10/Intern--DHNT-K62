@@ -5,7 +5,7 @@ if (!isset($_GET['page'])) {
 }
 $offset = ($_GET['page'] - 1) * $rowsPerPage;
 $sqlUser = 'SELECT MAND, TENND, SDT, EMAIL, GIOITINH, DIACHI, xa.tenXa, huyen.tenHuyen, tinh.tenTinh 
-FROM ((nguoidung INNER JOIN xa ON nguoidung.maXA = xa.maXa) INNER JOIN huyen ON xa.maHuyen = huyen.maHuyen) 
+FROM ((nguoidung INNER JOIN xa ON nguoidung.maXa = xa.maXa) INNER JOIN huyen ON xa.maHuyen = huyen.maHuyen) 
 JOIN tinh on huyen.maTinh = tinh.maTinh WHERE ISADMIN = 0 LIMIT '.$rowsPerPage.' OFFSET '.$offset.' ';
 
 

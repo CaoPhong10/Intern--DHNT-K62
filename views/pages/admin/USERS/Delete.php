@@ -7,7 +7,8 @@ $kq = mysqli_query($conn, $sql);
 $tenND = mysqli_fetch_assoc($kq);
 $tenND = $tenND['TENND'];
 if (isset($_POST["delete"])) {
-        $sql = "DELETE FROM nguoidung  WHERE MAND = '$maND'";
+        try {
+                $sql = "DELETE FROM nguoidung  WHERE MAND = '$maND'";
         mysqli_query($conn, $sql);
         echo "
     <div class='alert alert-success alert-dismissible'>
@@ -21,6 +22,15 @@ if (isset($_POST["delete"])) {
         }, 2000); // Chuyển hướng sau 2 giây
     </script>
     ";
+        }
+        catch (Exception $exception){
+                echo '<div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-warning"></i> Lỗi !</h4>
+            Đang có các hóa đơn liên kết với người dùng này
+        </div>';
+        }
+        
 }
 ?>
 <div class="container">

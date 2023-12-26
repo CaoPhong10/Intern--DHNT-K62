@@ -8,21 +8,30 @@ $tenLoaiSP = mysqli_fetch_assoc($kq);
 $tenLoaiSP = $tenLoaiSP['TENLOAISP'];
 
 if (isset($_POST['delete'])) {
-    $sql = "DELETE FROM loaisanpham WHERE MALOAISP = '$maLoaiSP'";
-    mysqli_query($conn, $sql);
-    echo "
-    <div class='alert alert-success alert-dismissible'>
-        <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-        <h4><i class='icon fa fa-check'></i> Thành công!</h4>
-        Xoá thành công
-    </div>
-    <script>
-        setTimeout(function() {
-            window.location.href = 'Index.php';
-        }, 2000); // Chuyển hướng sau 2 giây
-    </script>
-    ";
-}
+    try {
+        $sql = "DELETE FROM loaisanpham WHERE MALOAISP = '$maLoaiSP'";
+        mysqli_query($conn, $sql);
+        
+        echo "
+        <div class='alert alert-success alert-dismissible'>
+            <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+            <h4><i class='icon fa fa-check'></i> Thành công!</h4>
+            Xoá thành công
+        </div>
+        <script>
+            setTimeout(function() {
+                window.location.href = 'Index.php';
+            }, 2000); // Chuyển hướng sau 2 giây
+        </script>
+        ";
+    } catch (Exception $e) {
+        echo '<div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-warning"></i> Lỗi !</h4>
+            Đang có các sản phẩm liên kết với loại sản phẩm này
+        </div>';
+    }
+} 
 ?>
 <div class="container">
     <h2>BẠN CÓ MUỐN XÓA LOẠI SẢN PHẨM NÀY?</h2>
